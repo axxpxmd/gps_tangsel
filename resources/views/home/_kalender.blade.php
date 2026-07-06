@@ -1,14 +1,13 @@
 {{-- ============ KALENDER KEGIATAN SECTION ============ --}}
-<section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="kalender">
+<section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="kalender">
     {{-- Decorative background blobs --}}
-    <div class="absolute top-10 left-0 w-96 h-96 bg-primary-light/60 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-10 right-0 w-[28rem] h-[28rem] bg-gold/10 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full islamic-pattern-dark opacity-[0.02]"></div>
+    <div class="absolute top-10 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-0 w-[28rem] h-[28rem] bg-gold/5 rounded-full blur-3xl"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {{-- Section Header --}}
         <div class="max-w-3xl mx-auto text-center mb-14 lg:mb-20 reveal">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-200 shadow-sm mb-5">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-50 border border-gray-100 mb-5">
                 <span class="w-2 h-2 rounded-full bg-gradient-to-br from-primary to-gold animate-pulse"></span>
                 <span class="text-xs font-semibold text-primary uppercase tracking-wider">Agenda Kegiatan</span>
             </div>
@@ -23,26 +22,53 @@
 
         {{-- Calendar + Detail --}}
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-8 items-start">
-            {{-- Calendar Grid --}}
-            <div class="xl:col-span-7 reveal">
-                <div class="relative bg-white rounded-3xl border border-gray-200/80 p-5 lg:p-7 shadow-xl shadow-gray-200/50 h-full overflow-hidden">
-                    {{-- Soft top gradient accent --}}
-                    <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-primary via-gold to-primary"></div>
+            {{-- Event Detail Panel (wider) --}}
+            <div class="xl:col-span-7 reveal order-2 xl:order-1">
+                <div class="relative bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-100/50 overflow-hidden h-full min-h-[30rem]">
+                    {{-- Poster image (no overlay) --}}
+                    <div class="relative aspect-[16/9] sm:aspect-[2/1] overflow-hidden bg-gray-50">
+                        <img src="{{ asset('poster.webp') }}" alt="GPS TangSel" class="w-full h-full object-contain" id="cal-detail-image">
+                    </div>
 
+                    {{-- Detail content --}}
+                    <div class="relative px-6 sm:px-8 py-6 sm:py-7">
+                        <div class="flex items-center justify-between mb-5">
+                            <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Detail Kegiatan</p>
+                            <div class="w-9 h-9 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div id="cal-detail" class="min-h-[12rem]">
+                            {{-- Populated by JS --}}
+                        </div>
+
+                        <p class="text-center text-xs text-gray-400 mt-5 pt-5 border-t border-gray-100" id="cal-detail-hint">
+                            Klik tanggal berwarna pada kalender untuk melihat detail
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Calendar Grid (compact) --}}
+            <div class="xl:col-span-5 reveal order-1 xl:order-2" style="transition-delay: 100ms">
+                <div class="relative bg-gray-50 rounded-3xl border border-gray-100 p-5 lg:p-6 h-full overflow-hidden">
                     {{-- Month navigation --}}
-                    <div class="flex items-center justify-between mb-6">
-                        <button type="button" id="cal-prev" class="group w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan sebelumnya">
-                            <svg class="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                    <div class="flex items-center justify-between mb-5">
+                        <button type="button" id="cal-prev" class="group w-9 h-9 rounded-lg bg-white border border-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan sebelumnya">
+                            <svg class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                         </button>
                         <div class="text-center">
-                            <h3 class="text-lg font-bold text-gray-900" id="cal-month-label">Juli 2026</h3>
-                            <p class="text-[11px] text-gray-400 mt-1 flex items-center justify-center gap-1">
-                                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            <h3 class="text-base font-bold text-gray-900" id="cal-month-label">Juli 2026</h3>
+                            <p class="text-[11px] text-gray-400 mt-0.5 flex items-center justify-center gap-1">
+                                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                 <span id="cal-event-count">0 kegiatan</span>
                             </p>
                         </div>
-                        <button type="button" id="cal-next" class="group w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white hover:border-primary hover:shadow-lg hover:shadow-primary/20 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan berikutnya">
-                            <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                        <button type="button" id="cal-next" class="group w-9 h-9 rounded-lg bg-white border border-gray-100 flex items-center justify-center text-gray-500 hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan berikutnya">
+                            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                         </button>
                     </div>
 
@@ -54,61 +80,25 @@
                     </div>
 
                     {{-- Day cells (rendered by JS) --}}
-                    <div class="grid grid-cols-7 gap-1.5" id="cal-grid"></div>
+                    <div class="grid grid-cols-7 gap-1" id="cal-grid"></div>
 
                     {{-- Legend --}}
-                    <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 mt-6 pt-5 border-t border-gray-100">
-                        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-                            <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-gold to-amber-500"></span>
-                            <span class="text-[11px] text-gray-600 font-semibold">Safari Subuh</span>
+                    <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mt-5 pt-4 border-t border-gray-100">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-gradient-to-br from-gold to-amber-500"></span>
+                            <span class="text-[11px] text-gray-500 font-medium">Safari Subuh</span>
                         </div>
-                        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                            <span class="text-[11px] text-gray-600 font-semibold">Pasar Bahagia</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <span class="text-[11px] text-gray-500 font-medium">Pasar Bahagia</span>
                         </div>
-                        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-                            <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
-                            <span class="text-[11px] text-gray-600 font-semibold">Puskesmas</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-primary"></span>
+                            <span class="text-[11px] text-gray-500 font-medium">Puskesmas</span>
                         </div>
-                        <div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                            <span class="text-[11px] text-gray-600 font-semibold">Thibbun Nabawi</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Event Detail Panel --}}
-            <div class="xl:col-span-5 reveal" style="transition-delay: 100ms">
-                <div class="relative bg-gradient-to-br from-dawn-night via-dawn-deep to-primary-dark rounded-3xl shadow-2xl shadow-primary/20 overflow-hidden h-full min-h-[28rem]">
-                    <div class="absolute inset-0 islamic-pattern opacity-[0.06]"></div>
-                    <div class="absolute -top-20 -right-20 w-64 h-64 bg-gold/15 rounded-full blur-3xl"></div>
-                    <div class="absolute bottom-0 left-0 w-56 h-56 bg-primary/25 rounded-full blur-3xl"></div>
-
-                    {{-- Featured image header --}}
-                    <div class="relative h-44 sm:h-52 overflow-hidden">
-                        <img src="{{ asset('logo-gps.png') }}" alt="GPS TangSel" class="absolute inset-0 w-full h-full object-cover opacity-90" id="cal-detail-image">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dawn-night via-dawn-deep/70 to-transparent"></div>
-                        <div class="absolute inset-0 bg-gradient-to-br from-primary/40 via-transparent to-gold/20"></div>
-                        <div class="absolute top-4 left-5 right-5 flex items-center justify-between">
-                            <p class="text-[11px] font-semibold text-gold-light uppercase tracking-widest drop-shadow-md">Detail Kegiatan</p>
-                            <div class="w-9 h-9 rounded-xl glass flex items-center justify-center">
-                                <svg class="w-4 h-4 text-gold-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="relative px-5 pb-6 lg:px-7 lg:pb-7 -mt-10">
-                        <div class="relative bg-dawn-night/40 backdrop-blur-sm rounded-2xl border border-white/10 p-5 lg:p-6">
-                            <div id="cal-detail" class="min-h-[12rem]">
-                                {{-- Populated by JS --}}
-                            </div>
-
-                            <p class="text-center text-[10px] text-white/30 mt-5 pt-4 border-t border-white/10" id="cal-detail-hint">
-                                Klik tanggal berwarna pada kalender untuk melihat detail
-                            </p>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            <span class="text-[11px] text-gray-500 font-medium">Thibbun</span>
                         </div>
                     </div>
                 </div>
@@ -135,25 +125,19 @@
             const calNextBtn = document.getElementById('cal-next');
             const calDetailImage = document.getElementById('cal-detail-image');
             const calDetailHint = document.getElementById('cal-detail-hint');
-            const defaultDetailImage = '{{ asset('logo-gps.png') }}';
+            const defaultDetailImage = '{{ asset('poster.webp') }}';
 
-            const calColorClasses = {
+            const calDotClasses = {
                 gold: 'bg-gradient-to-br from-gold to-amber-500',
                 emerald: 'bg-emerald-500',
                 primary: 'bg-primary',
                 amber: 'bg-amber-500',
             };
             const calBadgeClasses = {
-                gold: 'bg-amber-500/20 text-gold-light border-amber-400/30',
-                emerald: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/30',
-                primary: 'bg-primary/40 text-primary-light border-primary/40',
-                amber: 'bg-amber-500/20 text-amber-300 border-amber-400/30',
-            };
-            const calDotClasses = {
-                gold: 'bg-gradient-to-br from-gold to-amber-500',
-                emerald: 'bg-emerald-400',
-                primary: 'bg-primary-light',
-                amber: 'bg-amber-400',
+                gold: 'bg-amber-50 text-amber-700 border-amber-200',
+                emerald: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                primary: 'bg-blue-50 text-primary border-blue-200',
+                amber: 'bg-amber-50 text-amber-700 border-amber-200',
             };
             const calIconSvg = {
                 mosque: '<path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6M9 11h.01M15 11h.01"/>',
@@ -200,31 +184,31 @@
                     const isSelected = calSelectedDay === d;
                     const past = isThisMonth && d < todayDay;
 
-                    let classes = 'aspect-square flex flex-col items-center justify-center rounded-xl text-sm transition-all duration-200 relative ';
+                    let classes = 'aspect-square flex flex-col items-center justify-center rounded-lg text-sm transition-all duration-200 relative ';
                     if (hasEvent) {
-                        classes += 'cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-primary/10 ';
+                        classes += 'cursor-pointer hover:scale-105 ';
                         if (isSelected) {
-                            classes += 'bg-gradient-to-br from-primary to-primary-dark text-white shadow-lg shadow-primary/25 ring-2 ring-primary/30 ';
+                            classes += 'bg-primary text-white shadow-md shadow-primary/20 ring-2 ring-primary/20 ';
                         } else if (isToday) {
-                            classes += 'bg-gradient-to-br from-primary-light to-white text-primary font-bold ring-2 ring-primary/40 shadow-md ';
+                            classes += 'bg-white text-primary font-bold ring-2 ring-primary/30 ';
                         } else {
-                            classes += 'bg-gray-50 text-gray-700 hover:bg-primary-light/60 font-semibold ';
+                            classes += 'bg-white text-gray-700 hover:bg-primary hover:text-white font-medium ';
                         }
                     } else {
                         classes += 'text-gray-300 ';
                         if (isToday) {
-                            classes += 'ring-1 ring-gray-200 font-semibold text-gray-500 bg-gray-50 ';
+                            classes += 'ring-1 ring-gray-200 font-semibold text-gray-500 ';
                         }
                     }
                     if (past && hasEvent && !isSelected) {
-                        classes += 'opacity-60 ';
+                        classes += 'opacity-50 ';
                     }
 
                     let dots = '';
                     if (hasEvent) {
-                        dots = '<div class="absolute bottom-1.5 flex gap-1">';
+                        dots = '<div class="absolute bottom-1 flex gap-0.5">';
                         dayEvents.forEach(function (e) {
-                            dots += '<span class="w-1.5 h-1.5 rounded-full ' + (calDotClasses[e.color] || 'bg-gold') + '"></span>';
+                            dots += '<span class="w-1 h-1 rounded-full ' + (calDotClasses[e.color] || 'bg-gold') + '"></span>';
                         });
                         dots += '</div>';
                     }
@@ -282,7 +266,7 @@
                     if (calDetailImage) {
                         calDetailImage.src = defaultDetailImage;
                     }
-                    calDetail.innerHTML = '<div class="text-center py-10"><div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/5 flex items-center justify-center"><svg class="w-7 h-7 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><p class="text-sm text-white/50">Belum ada kegiatan terjadwalkan.</p></div>';
+                    calDetail.innerHTML = '<div class="text-center py-12"><div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gray-50 flex items-center justify-center"><svg class="w-7 h-7 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><p class="text-sm text-gray-400">Belum ada kegiatan terjadwalkan.</p></div>';
                     if (calDetailHint) { calDetailHint.classList.remove('hidden'); }
                     return;
                 }
@@ -296,30 +280,30 @@
 
                 let html = '';
                 events.forEach(function (e, idx) {
-                    html += '<div class="' + (idx > 0 ? 'pt-5 mt-5 border-t border-white/10 ' : '') + '">';
+                    html += '<div class="' + (idx > 0 ? 'pt-5 mt-5 border-t border-gray-100 ' : '') + '">';
                     html += '<div class="flex flex-wrap items-center gap-2 mb-3">';
                     html += '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ' + (calBadgeClasses[e.color] || calBadgeClasses.gold) + '">';
                     html += '<span class="w-1.5 h-1.5 rounded-full ' + (calDotClasses[e.color] || 'bg-gold') + '"></span>';
                     html += e.program;
                     html += '</span>';
                     if (events.length > 1) {
-                        html += '<span class="text-[10px] text-white/40 font-medium">Kegiatan ' + (idx + 1) + ' dari ' + events.length + '</span>';
+                        html += '<span class="text-[10px] text-gray-400 font-medium">Kegiatan ' + (idx + 1) + ' dari ' + events.length + '</span>';
                     }
                     html += '</div>';
-                    html += '<h4 class="text-xl font-bold text-white mb-3 leading-snug">' + e.title + '</h4>';
-                    html += '<div class="space-y-2.5 mb-4">';
-                    html += '<div class="flex items-center gap-2.5 text-sm text-gold-light/90">';
-                    html += '<div class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0"><svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
+                    html += '<h4 class="text-xl font-bold text-gray-900 mb-4 leading-snug">' + e.title + '</h4>';
+                    html += '<div class="space-y-3 mb-4">';
+                    html += '<div class="flex items-center gap-3 text-sm text-gray-600">';
+                    html += '<div class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
                     html += '<span>' + e.weekday + ', ' + calDateStr(year, month, e.day) + ' · ' + e.time + '</span>';
                     html += '</div>';
-                    html += '<div class="flex items-start gap-2.5 text-sm text-white/80">';
-                    html += '<div class="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0"><svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
-                    html += '<span class="mt-0.5">' + e.location + '</span>';
+                    html += '<div class="flex items-start gap-3 text-sm text-gray-600">';
+                    html += '<div class="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
+                    html += '<span class="mt-1">' + e.location + '</span>';
                     html += '</div>';
                     html += '</div>';
-                    html += '<div class="flex items-start gap-3 p-3.5 rounded-xl bg-white/5 border border-white/10">';
-                    html += '<svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gold-light/80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">' + (calIconSvg[e.icon] || '') + '</svg>';
-                    html += '<p class="text-[13px] text-white/70 leading-relaxed">' + e.description + '</p>';
+                    html += '<div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-100">';
+                    html += '<svg class="w-5 h-5 flex-shrink-0 mt-0.5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">' + (calIconSvg[e.icon] || '') + '</svg>';
+                    html += '<p class="text-[13px] text-gray-600 leading-relaxed">' + e.description + '</p>';
                     html += '</div>';
                     html += '</div>';
                 });

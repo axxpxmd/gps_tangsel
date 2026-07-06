@@ -9,7 +9,9 @@ use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {
-    public function __construct(public PrayerTimesService $prayerTimes) {}
+    public function __construct(public PrayerTimesService $prayerTimes)
+    {
+    }
 
     /**
      * Render the landing page with live prayer schedule and activity calendar.
@@ -78,7 +80,7 @@ class WelcomeController extends Controller
                     'description' => 'Safari pekanan berpindah masjid setiap Sabtu. Shalat subuh berjamaah dilanjutkan tausiyah singkat dan sarapan bersama warga.',
                     'color' => 'gold',
                     'icon' => 'mosque',
-                    'image' => asset('logo-gps.png'),
+                    'image' => asset('poster.webp'),
                 ];
             }
 
@@ -95,7 +97,7 @@ class WelcomeController extends Controller
                     'description' => 'Distribusi sayuran gratis untuk masyarakat. Pembayaran cukup dengan doa — karena kebahagiaan itu berbagi.',
                     'color' => 'emerald',
                     'icon' => 'cart',
-                    'image' => asset('logo-gps.png'),
+                    'image' => asset('poster.webp'),
                 ];
             }
 
@@ -112,7 +114,7 @@ class WelcomeController extends Controller
                     'description' => 'Pelayanan cek kesehatan gratis bekerja sama dengan Dinkes TangSel. Cek tekanan darah, gula darah, dan konsultasi gizi.',
                     'color' => 'primary',
                     'icon' => 'heart',
-                    'image' => asset('logo-gps.png'),
+                    'image' => asset('poster.webp'),
                 ];
             }
 
@@ -129,7 +131,7 @@ class WelcomeController extends Controller
                     'description' => 'Layanan pengobatan ala Nabi oleh praktisi bersertifikat. Bekam, ruqyah, dan konsultasi kesehatan. Infaq seikhlasnya.',
                     'color' => 'amber',
                     'icon' => 'flask',
-                    'image' => asset('logo-gps.png'),
+                    'image' => asset('poster.webp'),
                 ];
             }
         }

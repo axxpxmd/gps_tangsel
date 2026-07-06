@@ -479,81 +479,78 @@
             </div>
 
             {{-- Calendar + Detail --}}
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                 {{-- Calendar Grid --}}
-                <div class="lg:col-span-3 reveal">
-                    <div class="relative bg-white rounded-3xl border border-gray-200 p-6 lg:p-7 shadow-sm">
+                <div class="reveal">
+                    <div class="relative bg-white rounded-3xl border border-gray-200 p-5 lg:p-6 shadow-sm h-full">
                         {{-- Month navigation --}}
-                        <div class="flex items-center justify-between mb-6">
-                            <button type="button" id="cal-prev" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-primary hover:border-primary/30 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan sebelumnya">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                        <div class="flex items-center justify-between mb-4">
+                            <button type="button" id="cal-prev" class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-primary hover:border-primary/30 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan sebelumnya">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                             </button>
                             <div class="text-center">
-                                <h3 class="text-lg font-bold text-gray-900" id="cal-month-label">Juli 2026</h3>
-                                <p class="text-[11px] text-gray-400 mt-0.5" id="cal-event-count">0 kegiatan</p>
+                                <h3 class="text-base font-bold text-gray-900" id="cal-month-label">Juli 2026</h3>
+                                <p class="text-[10px] text-gray-400 mt-0.5" id="cal-event-count">0 kegiatan</p>
                             </div>
-                            <button type="button" id="cal-next" class="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-primary hover:border-primary/30 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan berikutnya">
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            <button type="button" id="cal-next" class="w-8 h-8 rounded-lg border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:text-primary hover:border-primary/30 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan berikutnya">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
                             </button>
                         </div>
 
                         {{-- Weekday headers --}}
-                        <div class="grid grid-cols-7 gap-1 mb-2">
+                        <div class="grid grid-cols-7 gap-0.5 mb-1.5">
                             @foreach (['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'] as $wd)
-                                <div class="text-center text-[10px] font-bold text-gray-400 uppercase tracking-wide py-1">{{ $wd }}</div>
+                                <div class="text-center text-[9px] font-bold text-gray-400 uppercase tracking-wide py-0.5">{{ $wd }}</div>
                             @endforeach
                         </div>
 
                         {{-- Day cells (rendered by JS) --}}
-                        <div class="grid grid-cols-7 gap-1" id="cal-grid"></div>
+                        <div class="grid grid-cols-7 gap-0.5" id="cal-grid"></div>
 
                         {{-- Legend --}}
-                        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-6 pt-5 border-t border-gray-100">
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-br from-gold to-amber-500"></span>
-                                <span class="text-[11px] text-gray-500 font-medium">Safari Subuh</span>
+                        <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 mt-5 pt-4 border-t border-gray-100">
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-gradient-to-br from-gold to-amber-500"></span>
+                                <span class="text-[10px] text-gray-500 font-medium">Safari Subuh</span>
                             </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                                <span class="text-[11px] text-gray-500 font-medium">Pasar Bahagia</span>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                <span class="text-[10px] text-gray-500 font-medium">Pasar Bahagia</span>
                             </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
-                                <span class="text-[11px] text-gray-500 font-medium">Puskesmas</span>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-primary"></span>
+                                <span class="text-[10px] text-gray-500 font-medium">Puskesmas</span>
                             </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                                <span class="text-[11px] text-gray-500 font-medium">Thibbun Nabawi</span>
+                            <div class="flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                <span class="text-[10px] text-gray-500 font-medium">Thibbun Nabawi</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {{-- Event Detail Panel --}}
-                <div class="lg:col-span-2 reveal" style="transition-delay: 100ms">
-                    <div class="lg:sticky lg:top-24">
-                        <div class="relative bg-gradient-to-br from-dawn-night via-dawn-deep to-primary-dark rounded-3xl p-6 lg:p-7 overflow-hidden">
-                            <div class="absolute inset-0 islamic-pattern opacity-[0.06]"></div>
-                            <div class="absolute -top-16 -right-16 w-48 h-48 bg-gold/15 rounded-full blur-3xl"></div>
+                <div class="reveal" style="transition-delay: 100ms">
+                    <div class="relative bg-gradient-to-br from-dawn-night via-dawn-deep to-primary-dark rounded-3xl p-5 lg:p-6 shadow-xl shadow-primary/10 overflow-hidden h-full">
+                        <div class="absolute inset-0 islamic-pattern opacity-[0.06]"></div>
+                        <div class="absolute -top-16 -right-16 w-48 h-48 bg-gold/15 rounded-full blur-3xl"></div>
 
-                            <div class="relative">
-                                <div class="flex items-center justify-between mb-5">
-                                    <p class="text-xs font-semibold text-gold-light uppercase tracking-widest">Detail Kegiatan</p>
-                                    <svg class="w-5 h-5 text-gold-light/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-
-                                <div id="cal-detail">
-                                    {{-- Populated by JS --}}
-                                </div>
+                        <div class="relative flex flex-col h-full">
+                            <div class="flex items-center justify-between mb-4">
+                                <p class="text-[11px] font-semibold text-gold-light uppercase tracking-widest">Detail Kegiatan</p>
+                                <svg class="w-4 h-4 text-gold-light/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
                             </div>
-                        </div>
 
-                        {{-- Help text --}}
-                        <p class="text-center text-[11px] text-gray-400 mt-4">
-                            Klik tanggal berwarna pada kalender untuk melihat detail kegiatan
-                        </p>
+                            <div id="cal-detail" class="flex-1">
+                                {{-- Populated by JS --}}
+                            </div>
+
+                            <p class="text-center text-[10px] text-white/30 mt-4 pt-4 border-t border-white/10">
+                                Klik tanggal berwarna pada kalender untuk melihat detail
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -778,7 +775,7 @@
                     const isSelected = calSelectedDay === d;
                     const past = isThisMonth && d < todayDay;
 
-                    let classes = 'aspect-square flex flex-col items-center justify-center rounded-xl text-sm transition-all duration-150 relative ';
+                    let classes = 'aspect-square flex flex-col items-center justify-center rounded-lg text-xs transition-all duration-150 relative ';
                     if (hasEvent) {
                         classes += 'cursor-pointer hover:scale-105 hover:shadow-md ';
                         if (isSelected) {
@@ -800,9 +797,9 @@
 
                     let dots = '';
                     if (hasEvent) {
-                        dots = '<div class="absolute bottom-1.5 flex gap-0.5">';
+                        dots = '<div class="absolute bottom-1 flex gap-px">';
                         dayEvents.forEach(function (e) {
-                            dots += '<span class="w-1.5 h-1.5 rounded-full ' + (calDotClasses[e.color] || 'bg-gold') + '"></span>';
+                            dots += '<span class="w-1 h-1 rounded-full ' + (calDotClasses[e.color] || 'bg-gold') + '"></span>';
                         });
                         dots += '</div>';
                     }

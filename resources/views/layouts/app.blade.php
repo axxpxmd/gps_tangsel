@@ -145,7 +145,7 @@
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5 group" id="logo">
                     <img src="{{ asset('logo-gps.png') }}" alt="Logo GPS TangSel" class="w-11 h-11 lg:w-12 lg:h-12 rounded-xl object-cover transition-all duration-300 group-hover:scale-105">
-                    <span class="text-xl lg:text-2xl font-extrabold tracking-tight transition-colors duration-300 navbar-brand text-white">GPS TangSel</span>
+                    <span class="text-xl lg:text-2xl font-extrabold tracking-tight transition-colors duration-300 navbar-brand text-white">GPS TANGSEL</span>
                 </a>
 
                 {{-- Desktop Navigation --}}

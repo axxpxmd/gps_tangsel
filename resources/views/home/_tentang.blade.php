@@ -1,5 +1,5 @@
 {{-- ============ TENTANG SECTION ============ --}}
-<section class="relative py-20 lg:py-28 bg-gradient-to-b from-[#F5F5F5] to-white overflow-hidden" id="tentang">
+<section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="tentang">
     <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
     <div class="absolute bottom-0 left-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,13 +23,6 @@
             <div class="relative rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-8 sm:p-10 lg:p-12 overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
                 <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4"></div>
-                <div class="absolute top-6 right-6 sm:top-8 sm:right-8 flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-2">
-                    <svg class="w-4 h-4 text-gold-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                    <span class="text-xs font-semibold text-white/90">Terdaftar Kemenkumham RI</span>
-                    <span class="text-[10px] font-mono text-gold-light bg-white/10 px-2 py-0.5 rounded-full">AHU-0017966.AH.01.04</span>
-                </div>
                 <div class="relative max-w-3xl">
                     <div class="flex items-center gap-3 mb-5">
                         <div class="w-10 h-0.5 bg-gold"></div>

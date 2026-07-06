@@ -139,13 +139,13 @@
 <body class="font-sans text-gray-800 bg-white antialiased">
 
     {{-- Navbar: floating glass pill --}}
-    <header class="fixed top-0 left-0 right-0 z-50 pt-3 lg:pt-4 px-3 sm:px-5 lg:px-8 transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto">
-            <div class="relative rounded-2xl border border-white/15 glass transition-all duration-300 overflow-hidden" id="navbar-pill">
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div>
+            <div class="relative border border-white/15 glass transition-all duration-300 overflow-hidden" id="navbar-pill">
                 {{-- Subtle gradient accent line on top --}}
                 <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent"></div>
 
-                <div class="flex items-center justify-between h-16 lg:h-20 px-4 sm:px-5 lg:px-6 transition-all duration-300" id="navbar-inner">
+                <div class="flex items-center justify-between h-16 lg:h-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300" id="navbar-inner">
                     {{-- Logo --}}
                     <a href="{{ route('home') }}" class="flex items-center gap-2.5 group" id="logo">
                         <div class="relative">
@@ -160,11 +160,11 @@
 
                     {{-- Desktop Navigation --}}
                     <nav class="hidden lg:flex items-center gap-0.5" id="desktop-nav">
-                        <a href="{{ route('home') }}" class="nav-link navbar-link navbar-active relative group px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 {{ request()->routeIs('home') ? 'text-white' : 'text-white/80 hover:text-white' }}">
+                        <a href="{{ route('home') }}" wire:navigate class="nav-link navbar-link navbar-active relative group px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 {{ request()->routeIs('home') ? 'text-white' : 'text-white/80 hover:text-white' }}">
                             <span>Beranda</span>
                             <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300 {{ request()->routeIs('home') ? 'w-5' : 'w-0 group-hover:w-5' }}"></span>
                         </a>
-                        <a href="#tentang" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link text-white/80 hover:text-white transition-colors duration-200">
+                        <a href="{{ route('tentang') }}" wire:navigate class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link text-white/80 hover:text-white transition-colors duration-200">
                             <span>Tentang</span>
                             <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300"></span>
                         </a>
@@ -192,7 +192,7 @@
 
                     {{-- CTA Desktop --}}
                     <div class="hidden lg:block">
-                        <a href="#kontak" class="group/cta inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-dawn-night bg-gradient-to-r from-gold-light to-gold rounded-xl border border-gold/50 hover:-translate-y-0.5 transition-all duration-200" id="cta-nav">
+                        <a href="#kontak" class="group/cta inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-dawn-night bg-gold rounded-xl border border-gold/50 hover:-translate-y-0.5 transition-all duration-200" id="cta-nav">
                             <span>Hubungi Kami</span>
                             <svg class="w-4 h-4 group-hover/cta:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -214,10 +214,10 @@
                 {{-- Mobile Menu --}}
                 <div class="lg:hidden hidden border-t border-white/10" id="mobile-menu">
                     <div class="px-4 py-4 space-y-1">
-                        <a href="{{ route('home') }}" class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('home') ? 'text-white bg-white/10' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors duration-200">
+                        <a href="{{ route('home') }}" wire:navigate class="block px-4 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('home') ? 'text-white bg-white/10' : 'text-white/80 hover:text-white hover:bg-white/10' }} transition-colors duration-200">
                             Beranda
                         </a>
-                        <a href="#tentang" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200">
+                        <a href="{{ route('tentang') }}" wire:navigate class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200">
                             Tentang
                         </a>
                         <a href="#program" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200">
@@ -249,7 +249,7 @@
 
     {{-- Main Content --}}
     <main>
-        @yield('content')
+        @yield('content', $slot ?? '')
     </main>
 
     {{-- Footer --}}
@@ -275,8 +275,8 @@
                 <div>
                     <h4 class="text-sm font-semibold uppercase tracking-wider mb-4 text-gold-light">Navigasi</h4>
                     <ul class="space-y-2.5">
-                        <li><a href="{{ route('home') }}" class="text-sm text-white/60 hover:text-gold-light transition-colors duration-200">Beranda</a></li>
-                        <li><a href="#tentang" class="text-sm text-white/60 hover:text-gold-light transition-colors duration-200">Tentang Kami</a></li>
+                        <li><a href="{{ route('home') }}" wire:navigate class="text-sm text-white/60 hover:text-gold-light transition-colors duration-200">Beranda</a></li>
+                        <li><a href="{{ route('tentang') }}" wire:navigate class="text-sm text-white/60 hover:text-gold-light transition-colors duration-200">Tentang Kami</a></li>
                         <li><a href="#program" class="text-sm text-white/60 hover:text-gold-light transition-colors duration-200">Program Kerja</a></li>
                         <li><a href="#berita" class="text-sm text-white/60 hover:text-gold-light transition-colors duration-200">Berita & Artikel</a></li>
                         <li><a href="#galeri" class="text-sm text-white/60 hover:text-gold-light transition-colors duration-200">Galeri</a></li>
@@ -362,7 +362,7 @@
                 if (scrolled) {
                     navbarPill.classList.remove('glass', 'border-white/15');
                     navbarPill.classList.add('bg-white/95', 'backdrop-blur-md', 'border-gray-200/80');
-                    navbarInner.classList.add('h-14', 'lg:h-16');
+                    navbarInner.classList.add('h-20', 'lg:h-20');
                     navbarInner.classList.remove('h-16', 'lg:h-20');
                     if (brand) {
                         brand.classList.remove('text-white');
@@ -383,7 +383,7 @@
                 } else {
                     navbarPill.classList.add('glass', 'border-white/15');
                     navbarPill.classList.remove('bg-white/95', 'backdrop-blur-md', 'border-gray-200/80');
-                    navbarInner.classList.remove('h-14', 'lg:h-16');
+                    navbarInner.classList.remove('h-20', 'lg:h-20');
                     navbarInner.classList.add('h-16', 'lg:h-20');
                     if (brand) {
                         brand.classList.add('text-white');

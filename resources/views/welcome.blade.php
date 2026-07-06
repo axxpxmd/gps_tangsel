@@ -6,7 +6,6 @@
 @section('content')
     @include('home._hero')
     @include('home._hadits')
-    @include('home._tentang')
     @include('home._program')
     @include('home._statistik')
     @include('home._kalender')

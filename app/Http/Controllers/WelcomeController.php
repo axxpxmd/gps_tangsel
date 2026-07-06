@@ -27,7 +27,8 @@ class WelcomeController extends Controller
      *
      * @return array<string, array<int, array{
      *   date: string, day: int, weekday: string, program: string, title: string,
-     *   location: string, time: string, description: string, color: string, icon: string
+     *   location: string, time: string, description: string, color: string, icon: string,
+     *   image: string
      * }>>
      */
     protected function generateCalendarEvents(): array
@@ -77,6 +78,7 @@ class WelcomeController extends Controller
                     'description' => 'Safari pekanan berpindah masjid setiap Sabtu. Shalat subuh berjamaah dilanjutkan tausiyah singkat dan sarapan bersama warga.',
                     'color' => 'gold',
                     'icon' => 'mosque',
+                    'image' => asset('logo-gps.png'),
                 ];
             }
 
@@ -93,6 +95,7 @@ class WelcomeController extends Controller
                     'description' => 'Distribusi sayuran gratis untuk masyarakat. Pembayaran cukup dengan doa — karena kebahagiaan itu berbagi.',
                     'color' => 'emerald',
                     'icon' => 'cart',
+                    'image' => asset('logo-gps.png'),
                 ];
             }
 
@@ -109,6 +112,7 @@ class WelcomeController extends Controller
                     'description' => 'Pelayanan cek kesehatan gratis bekerja sama dengan Dinkes TangSel. Cek tekanan darah, gula darah, dan konsultasi gizi.',
                     'color' => 'primary',
                     'icon' => 'heart',
+                    'image' => asset('logo-gps.png'),
                 ];
             }
 
@@ -125,6 +129,7 @@ class WelcomeController extends Controller
                     'description' => 'Layanan pengobatan ala Nabi oleh praktisi bersertifikat. Bekam, ruqyah, dan konsultasi kesehatan. Infaq seikhlasnya.',
                     'color' => 'amber',
                     'icon' => 'flask',
+                    'image' => asset('logo-gps.png'),
                 ];
             }
         }

@@ -35,4 +35,14 @@ return [
         ],
     ],
 
+    'aladhan' => [
+        'base_url' => env('ALADHAN_BASE_URL', 'https://api.aladhan.com/v1'),
+        'city' => env('ALADHAN_CITY', 'Tangerang Selatan'),
+        'latitude' => env('ALADHAN_LATITUDE', -6.2376),
+        'longitude' => env('ALADHAN_LONGITUDE', 106.6489),
+        'method' => (int) env('ALADHAN_METHOD', 20),
+        'timeout' => (int) env('ALADHAN_TIMEOUT', 8),
+        'verify_ssl' => filter_var(env('ALADHAN_VERIFY_SSL', true), FILTER_VALIDATE_BOOLEAN),
+    ],
+
 ];

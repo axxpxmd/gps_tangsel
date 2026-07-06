@@ -7,7 +7,7 @@
 
     <title>@yield('title', 'Beranda') — GPS TangSel</title>
 
-    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="{{ asset('logo-gps.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -141,20 +141,16 @@
     {{-- Navbar --}}
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16 lg:h-18 transition-all duration-300" id="navbar-inner">
+            <div class="flex items-center justify-between h-20 lg:h-24 transition-all duration-300" id="navbar-inner">
                 {{-- Logo --}}
-                <a href="{{ route('home') }}" class="flex items-center gap-2 group" id="logo">
-                    <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-105">
-                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-13.07l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.95 7.95l-.71-.71M4.76 4.76l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                    </div>
-                    <span class="text-lg font-bold tracking-tight transition-colors duration-300 navbar-brand text-white">GPS TangSel</span>
+                <a href="{{ route('home') }}" class="flex items-center gap-2.5 group" id="logo">
+                    <img src="{{ asset('logo-gps.png') }}" alt="Logo GPS TangSel" class="w-11 h-11 lg:w-12 lg:h-12 rounded-xl object-cover transition-all duration-300 group-hover:scale-105">
+                    <span class="text-xl lg:text-2xl font-extrabold tracking-tight transition-colors duration-300 navbar-brand text-white">GPS TangSel</span>
                 </a>
 
                 {{-- Desktop Navigation --}}
                 <nav class="hidden lg:flex items-center gap-1" id="desktop-nav">
-                    <a href="{{ route('home') }}" class="nav-link px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 {{ request()->routeIs('home') ? 'text-white bg-white/10' : 'navbar-link text-white/80 hover:text-white hover:bg-white/10' }}">
+                    <a href="{{ route('home') }}" class="nav-link navbar-link navbar-active px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 {{ request()->routeIs('home') ? 'text-white bg-white/10' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
                         Beranda
                     </a>
                     <a href="#tentang" class="nav-link px-4 py-2 text-sm font-medium rounded-lg navbar-link text-white/80 hover:text-white hover:bg-white/10 transition-colors duration-200">
@@ -237,13 +233,9 @@
             <div class="py-12 lg:py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 {{-- Brand --}}
                 <div class="lg:col-span-1">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-9 h-9 bg-gradient-to-br from-gold-light to-gold rounded-lg flex items-center justify-center">
-                            <svg class="w-5 h-5 text-dawn-night" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-13.07l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.95 7.95l-.71-.71M4.76 4.76l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                            </svg>
-                        </div>
-                        <span class="text-lg font-bold tracking-tight">GPS TangSel</span>
+                    <div class="flex items-center gap-2.5 mb-4">
+                        <img src="{{ asset('logo-gps.png') }}" alt="Logo GPS TangSel" class="w-11 h-11 rounded-xl object-cover">
+                        <span class="text-xl font-extrabold tracking-tight">GPS TangSel</span>
                     </div>
                     <p class="text-sm text-white/60 leading-relaxed mb-5">
                         Gerakan Pejuang Subuh Tangerang Selatan — Mengajak masyarakat istiqomah shalat subuh berjamaah di masjid.
@@ -334,12 +326,13 @@
             const navbarInner = document.getElementById('navbar-inner');
             const brand = document.querySelector('.navbar-brand');
             const navLinks = document.querySelectorAll('.navbar-link');
+            const activeLink = document.querySelector('.navbar-active');
 
             function applyNavbarState(scrolled) {
                 if (scrolled) {
                     navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-gray-100');
-                    navbarInner.classList.add('h-14');
-                    navbarInner.classList.remove('h-16', 'lg:h-18');
+                    navbarInner.classList.add('h-16', 'lg:h-18');
+                    navbarInner.classList.remove('h-20', 'lg:h-24');
                     if (brand) {
                         brand.classList.remove('text-white');
                         brand.classList.add('text-primary');
@@ -348,10 +341,14 @@
                         link.classList.remove('text-white/80', 'hover:text-white', 'hover:bg-white/10');
                         link.classList.add('text-gray-600', 'hover:text-primary', 'hover:bg-gray-50');
                     });
+                    if (activeLink) {
+                        activeLink.classList.remove('text-white', 'bg-white/10', 'hover:text-primary', 'hover:bg-gray-50');
+                        activeLink.classList.add('text-primary', 'bg-primary-light', 'font-semibold');
+                    }
                 } else {
                     navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-gray-100');
-                    navbarInner.classList.remove('h-14');
-                    navbarInner.classList.add('h-16', 'lg:h-18');
+                    navbarInner.classList.remove('h-16', 'lg:h-18');
+                    navbarInner.classList.add('h-20', 'lg:h-24');
                     if (brand) {
                         brand.classList.add('text-white');
                         brand.classList.remove('text-primary');
@@ -360,6 +357,10 @@
                         link.classList.add('text-white/80', 'hover:text-white', 'hover:bg-white/10');
                         link.classList.remove('text-gray-600', 'hover:text-primary', 'hover:bg-gray-50');
                     });
+                    if (activeLink) {
+                        activeLink.classList.remove('text-primary', 'bg-primary-light', 'font-semibold', 'text-gray-600');
+                        activeLink.classList.add('text-white', 'bg-white/10');
+                    }
                 }
             }
 

@@ -20,18 +20,43 @@
 
         {{-- Latar Belakang --}}
         <div class="reveal mb-16 lg:mb-20">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                <div class="lg:col-span-4">
-                    <h3 class="text-sm font-bold text-primary uppercase tracking-wider mb-1">Latar Belakang</h3>
-                    <div class="w-8 h-0.5 bg-gradient-to-r from-primary to-primary-dark mb-4"></div>
+            <div class="relative rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-8 sm:p-10 lg:p-12 overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
+                <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4"></div>
+                <div class="absolute top-6 right-6 sm:top-8 sm:right-8 flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-2">
+                    <svg class="w-4 h-4 text-gold-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <span class="text-xs font-semibold text-white/90">Terdaftar Kemenkumham RI</span>
+                    <span class="text-[10px] font-mono text-gold-light bg-white/10 px-2 py-0.5 rounded-full">AHU-0017966.AH.01.04</span>
                 </div>
-                <div class="lg:col-span-8">
-                    <p class="text-gray-600 leading-relaxed mb-5 text-base lg:text-lg">
-                        Gerakan Pejuang Subuh Tangerang Selatan lahir dari keprihatinan terhadap kondisi masjid yang sepi jemaah pada waktu subuh. Sebagai gerakan yang dinamis, GPS TangSel aktif bergerak setiap pekan (hari Sabtu) dari masjid ke masjid di <strong class="text-primary font-semibold">7 kecamatan</strong> dan <strong class="text-primary font-semibold">54 kelurahan</strong> se-Tangerang Selatan.
+                <div class="relative max-w-3xl">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-0.5 bg-gold"></div>
+                        <h3 class="text-sm font-bold text-gold-light uppercase tracking-wider">Latar Belakang</h3>
+                    </div>
+                    <p class="text-white/80 leading-relaxed mb-5 text-base lg:text-lg">
+                        Gerakan Pejuang Subuh Tangerang Selatan lahir dari keprihatinan terhadap kondisi masjid yang sepi jemaah pada waktu subuh. Sebagai gerakan yang dinamis, GPS TangSel aktif bergerak setiap pekan (hari Sabtu) dari masjid ke masjid di seluruh Tangerang Selatan.
                     </p>
-                    <p class="text-gray-600 leading-relaxed text-base lg:text-lg">
+                    <p class="text-white/80 leading-relaxed mb-8 text-base lg:text-lg">
                         Selain berfokus pada ibadah spiritual, GPS TangSel juga memiliki berbagai program sosial kemasyarakatan seperti pelayanan kesehatan gratis, distribusi bahan pangan, dan pengobatan Thibbun Nabawi.
                     </p>
+                    <div class="flex flex-wrap gap-4 sm:gap-6">
+                        <div class="flex items-center gap-3 bg-white/10 border border-white/10 rounded-xl px-5 py-3">
+                            <span class="text-2xl lg:text-3xl font-extrabold text-gold-light">7</span>
+                            <span class="text-xs text-white/70 leading-tight">Kecamatan<br>dijangkau</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/10 border border-white/10 rounded-xl px-5 py-3">
+                            <span class="text-2xl lg:text-3xl font-extrabold text-gold-light">54</span>
+                            <span class="text-xs text-white/70 leading-tight">Kelurahan<br>tersebar</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white/10 border border-white/10 rounded-xl px-5 py-3">
+                            <svg class="w-6 h-6 text-gold-light flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                            </svg>
+                            <span class="text-xs text-white/70 leading-tight">Safari Subuh<br>setiap Sabtu</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,24 +138,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        {{-- Legalitas --}}
-        <div class="reveal">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-2xl bg-primary/5 border border-primary/10 px-6 py-5">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-900">Legalitas Resmi</p>
-                        <p class="text-xs text-gray-400">Yayasan terdaftar di Kemenkumham RI</p>
-                    </div>
-                </div>
-                <span class="text-xs font-mono text-primary bg-white px-3 py-1.5 rounded-full border border-primary/15">AHU-0017966.AH.01.04</span>
             </div>
         </div>
     </div>

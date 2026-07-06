@@ -6,7 +6,7 @@
 @section('content')
 
     {{-- ============ HERO SECTION ============ --}}
-    <section class="relative overflow-hidden pt-36 pb-40 lg:pt-52 lg:pb-48" id="hero">
+    <section class="relative overflow-hidden pt-32 pb-40 lg:pt-44 lg:pb-48" id="hero">
         {{-- Dawn gradient background: night -> pre-dawn -> warm glow --}}
         <div class="absolute inset-0 bg-gradient-to-b from-dawn-night via-dawn-deep to-dawn-glow"></div>
         <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-amber-500/35 via-amber-500/10 to-transparent"></div>
@@ -212,7 +212,7 @@
     </section>
 
     {{-- ============ TENTANG SECTION ============ --}}
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="tentang">
+    <section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="tentang">
         <div class="absolute top-0 right-0 w-1/3 h-full islamic-pattern-dark opacity-[0.03]"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {{-- Section Header --}}
@@ -328,7 +328,7 @@
     </section>
 
     {{-- ============ PROGRAM SECTION ============ --}}
-    <section class="relative py-20 lg:py-28 bg-gray-50 overflow-hidden" id="program">
+    <section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="program">
         <div class="absolute inset-0 islamic-pattern-dark opacity-[0.02]"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {{-- Section Header --}}
@@ -459,7 +459,7 @@
     </section>
 
     {{-- ============ KALENDER KEGIATAN SECTION ============ --}}
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="kalender">
+    <section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="kalender">
         <div class="absolute top-10 left-0 w-72 h-72 bg-primary-light/50 rounded-full blur-3xl"></div>
         <div class="absolute bottom-10 right-0 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

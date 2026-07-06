@@ -249,7 +249,8 @@
 
     {{-- Main Content --}}
     <main>
-        @yield('content', $slot ?? '')
+        @yield('content')
+        {!! $slot ?? '' !!}
     </main>
 
     {{-- Footer --}}
@@ -327,30 +328,31 @@
 
     {{-- Mobile Menu & Interactions Script --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        function initPage() {
             const btn = document.getElementById('mobile-menu-btn');
             const menu = document.getElementById('mobile-menu');
             const iconOpen = document.getElementById('menu-icon-open');
             const iconClose = document.getElementById('menu-icon-close');
 
-            btn.addEventListener('click', function () {
-                const isOpen = !menu.classList.contains('hidden');
-                menu.classList.toggle('hidden');
-                iconOpen.classList.toggle('hidden');
-                iconClose.classList.toggle('hidden');
-            });
+            if (btn) {
+                btn.addEventListener('click', function () {
+                    const isOpen = !menu.classList.contains('hidden');
+                    menu.classList.toggle('hidden');
+                    iconOpen.classList.toggle('hidden');
+                    iconClose.classList.toggle('hidden');
+                });
+            }
 
             // Close mobile menu when clicking on anchor links
             document.querySelectorAll('.mobile-nav-link').forEach(function (link) {
                 link.addEventListener('click', function () {
-                    menu.classList.add('hidden');
-                    iconOpen.classList.remove('hidden');
-                    iconClose.classList.add('hidden');
+                    if (menu) menu.classList.add('hidden');
+                    if (iconOpen) iconOpen.classList.remove('hidden');
+                    if (iconClose) iconClose.classList.add('hidden');
                 });
             });
 
             // Navbar scroll effect: transparent glass pill over hero -> solid white pill on scroll
-            const navbar = document.getElementById('navbar');
             const navbarPill = document.getElementById('navbar-pill');
             const navbarInner = document.getElementById('navbar-inner');
             const brand = document.querySelector('.navbar-brand');
@@ -359,6 +361,7 @@
             const activeLink = document.querySelector('.navbar-active');
 
             function applyNavbarState(scrolled) {
+                if (!navbarPill || !navbarInner) return;
                 if (scrolled) {
                     navbarPill.classList.remove('glass', 'border-white/15');
                     navbarPill.classList.add('bg-white/95', 'backdrop-blur-md', 'border-gray-200/80');
@@ -405,7 +408,7 @@
             }
 
             let ticking = false;
-            window.addEventListener('scroll', function () {
+            window.onScrollNavbar = function () {
                 if (!ticking) {
                     window.requestAnimationFrame(function () {
                         applyNavbarState(window.scrollY > 24);
@@ -413,7 +416,9 @@
                     });
                     ticking = true;
                 }
-            });
+            };
+            window.removeEventListener('scroll', window.onScrollNavbar);
+            window.addEventListener('scroll', window.onScrollNavbar);
             applyNavbarState(window.scrollY > 24);
 
             // Scroll reveal via IntersectionObserver
@@ -461,7 +466,10 @@
             } else {
                 countEls.forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
             }
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', initPage);
+        document.addEventListener('livewire:navigated', initPage);
     </script>
 
     @stack('scripts')

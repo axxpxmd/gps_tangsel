@@ -8,13 +8,14 @@
     @include('home._hadits')
     @include('home._program')
     @include('home._statistik')
+    @include('home._pengurus')
     @include('home._kalender')
     @include('home._cta')
 @endsection
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        function initPrayerCountdown() {
             {{-- Read prayer times from server-rendered DOM (data-prayer + data-time) --}}
             const prayers = Array.from(document.querySelectorAll('.prayer-slot')).map(function (slot) {
                 return {
@@ -23,6 +24,8 @@
                     time: slot.dataset.time,
                 };
             });
+
+            if (prayers.length === 0) return;
 
             function timeToMinutes(t) {
                 const parts = t.split(':');
@@ -103,7 +106,11 @@
             }
 
             updateCountdown();
-            setInterval(updateCountdown, 1000);
-        });
+            if (window.prayerInterval) clearInterval(window.prayerInterval);
+            window.prayerInterval = setInterval(updateCountdown, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', initPrayerCountdown);
+        document.addEventListener('livewire:navigated', initPrayerCountdown);
     </script>
 @endpush

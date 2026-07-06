@@ -119,15 +119,15 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        function initCalendar() {
             {{-- ============ ACTIVITY CALENDAR ============ --}}
+            const calGrid = document.getElementById('cal-grid');
+            if (!calGrid) return;
             const calEvents = @json($calendarEvents);
             const calMonthNames = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
             const calMonthKeys = Object.keys(calEvents).sort();
             let calCurrentIdx = 0;
             let calSelectedDay = null;
-
-            const calGrid = document.getElementById('cal-grid');
             const calMonthLabel = document.getElementById('cal-month-label');
             const calEventCount = document.getElementById('cal-event-count');
             const calDetail = document.getElementById('cal-detail');
@@ -347,6 +347,9 @@
                 renderCalendar();
                 renderDetail();
             }
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', initCalendar);
+        document.addEventListener('livewire:navigated', initCalendar);
     </script>
 @endpush

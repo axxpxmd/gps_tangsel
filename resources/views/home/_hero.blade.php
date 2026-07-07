@@ -122,7 +122,7 @@
                                         </defs>
                                     </svg>
                                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span class="text-base font-extrabold text-white tabular-nums" id="countdown-text">00:00:00</span>
+                                        <span class="text-[10px] font-extrabold text-white tabular-nums" id="countdown-text">00:00:00</span>
                                     </div>
                                 </div>
                             </div>

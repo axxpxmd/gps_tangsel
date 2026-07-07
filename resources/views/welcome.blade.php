@@ -11,6 +11,7 @@
     @include('home._statistik')
     @include('home._pengurus')
     @include('home._kalender')
+    @include('home._kolaborasi')
     @include('home._cta')
 @endsection
 

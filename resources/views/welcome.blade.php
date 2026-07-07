@@ -7,6 +7,7 @@
     @include('home._hero')
     @include('home._hadits')
     @include('home._program')
+    @include('home._berita')
     @include('home._statistik')
     @include('home._pengurus')
     @include('home._kalender')

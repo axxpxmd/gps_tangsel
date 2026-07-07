@@ -25,7 +25,7 @@
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-8 items-start">
             {{-- Event Detail Panel (wider) --}}
             <div class="xl:col-span-7 reveal order-2 xl:order-1">
-                <div class="relative bg-white rounded-3xl border border-gray-100 overflow-hidden h-full min-h-[30rem]">
+                <div class="relative bg-white rounded-3xl border border-gray-100 overflow-hidden h-full min-h-[18rem] sm:min-h-[30rem]">
                     {{-- Poster image (no overlay) --}}
                     <div class="relative aspect-[16/9] sm:aspect-[2/1] overflow-hidden bg-gray-50 cursor-pointer group/img" id="cal-image-wrapper">
                         <img src="{{ asset('poster.webp') }}" alt="GPS TangSel" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" id="cal-detail-image">

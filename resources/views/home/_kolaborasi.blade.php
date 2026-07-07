@@ -22,7 +22,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {{-- Left: Form --}}
             <div class="reveal">
-                <form class="bg-white rounded-2xl border border-gray-100 p-7 sm:p-9 space-y-5">
+                <form class="bg-white rounded-2xl border border-gray-100 p-5 sm:p-7 lg:p-9 space-y-4 sm:space-y-5">
                     {{-- Nama --}}
                     <div>
                         <label for="kolab-nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>

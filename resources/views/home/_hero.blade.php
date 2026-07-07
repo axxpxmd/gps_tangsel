@@ -1,5 +1,5 @@
 {{-- ============ HERO SECTION ============ --}}
-<section class="relative overflow-hidden pt-32 pb-40 lg:pt-44 lg:pb-48" id="hero">
+<section class="relative overflow-hidden pt-24 sm:pt-32 pb-32 sm:pb-40 lg:pt-44 lg:pb-48" id="hero">
     {{-- Dawn gradient background: night -> pre-dawn -> warm glow --}}
     <div class="absolute inset-0 bg-gradient-to-b from-dawn-night via-dawn-deep to-dawn-glow"></div>
     <div class="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-amber-500/35 via-amber-500/10 to-transparent"></div>

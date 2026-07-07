@@ -1,5 +1,5 @@
 {{-- ============ KALENDER KEGIATAN SECTION ============ --}}
-<section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="kalender">
+<section class="relative py-20 lg:py-28 bg-gradient-to-r from-primary via-primary-dark to-dawn-deep overflow-hidden" id="kalender">
     {{-- Decorative background blobs --}}
     <div class="absolute top-10 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
     <div class="absolute bottom-10 right-0 w-[28rem] h-[28rem] bg-gold/5 rounded-full blur-3xl"></div>
@@ -7,15 +7,15 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {{-- Section Header --}}
         <div class="max-w-3xl mx-auto text-center mb-14 lg:mb-20 reveal">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-50 border border-gray-100 mb-5">
-                <span class="w-2 h-2 rounded-full bg-gradient-to-br from-primary to-gold animate-pulse"></span>
-                <span class="text-xs font-semibold text-primary uppercase tracking-wider">Agenda Kegiatan</span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 mb-5">
+                <span class="w-2 h-2 rounded-full bg-gold-light animate-pulse"></span>
+                <span class="text-xs font-semibold text-gold-light uppercase tracking-wider">Agenda Kegiatan</span>
             </div>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5">
                 Kalender Kegiatan<br>
-                <span class="text-gradient-primary">GPS TangSel</span>
+                <span class="text-gradient-gold">GPS TangSel</span>
             </h2>
-            <p class="text-gray-500 leading-relaxed max-w-2xl mx-auto">
+            <p class="text-white/70 leading-relaxed max-w-2xl mx-auto">
                 Pantau jadwal GPS TangSel sepanjang bulan. Klik tanggal bertanda untuk melihat detail lengkap kegiatan — dari Safari Subuh pekanan hingga program sosial kemasyarakatan.
             </p>
         </div>
@@ -24,7 +24,7 @@
         <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-8 items-start">
             {{-- Event Detail Panel (wider) --}}
             <div class="xl:col-span-7 reveal order-2 xl:order-1">
-                <div class="relative bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-100/50 overflow-hidden h-full min-h-[30rem]">
+                <div class="relative bg-white rounded-3xl border border-gray-100 overflow-hidden h-full min-h-[30rem]">
                     {{-- Poster image (no overlay) --}}
                     <div class="relative aspect-[16/9] sm:aspect-[2/1] overflow-hidden bg-gray-50">
                         <img src="{{ asset('poster.webp') }}" alt="GPS TangSel" class="w-full h-full object-contain" id="cal-detail-image">
@@ -185,22 +185,19 @@
                     const past = isThisMonth && d < todayDay;
 
                     let classes = 'aspect-square flex flex-col items-center justify-center rounded-lg text-sm transition-all duration-200 relative ';
-                    if (hasEvent) {
+                    if (isToday) {
+                        classes += 'bg-primary text-white font-bold ';
+                    } else if (hasEvent) {
                         classes += 'cursor-pointer hover:scale-105 ';
                         if (isSelected) {
-                            classes += 'bg-primary text-white shadow-md shadow-primary/20 ring-2 ring-primary/20 ';
-                        } else if (isToday) {
-                            classes += 'bg-white text-primary font-bold ring-2 ring-primary/30 ';
+                            classes += 'bg-red-500 text-white ring-2 ring-red-300 ';
                         } else {
-                            classes += 'bg-white text-gray-700 hover:bg-primary hover:text-white font-medium ';
+                            classes += 'bg-red-50 text-red-600 hover:bg-red-500 hover:text-white font-medium ';
                         }
                     } else {
                         classes += 'text-gray-300 ';
-                        if (isToday) {
-                            classes += 'ring-1 ring-gray-200 font-semibold text-gray-500 ';
-                        }
                     }
-                    if (past && hasEvent && !isSelected) {
+                    if (past && hasEvent && !isSelected && !isToday) {
                         classes += 'opacity-50 ';
                     }
 

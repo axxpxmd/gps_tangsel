@@ -97,9 +97,14 @@ class ArticleSeeder extends Seeder
             ],
         ];
 
-        foreach ($rows as $row) {
+        foreach ($rows as $idx => $row) {
             $date = $base->subDays($row['days_ago']);
             $label = urlencode($row['category']);
+
+            $images = [];
+            for ($i = 1; $i <= 3; $i++) {
+                $images[] = 'https://placehold.co/800x500/'.$row['color'].'/F5E6B8?text='.$label.'+'.$i;
+            }
 
             Article::create([
                 'title' => $row['title'],
@@ -108,6 +113,7 @@ class ArticleSeeder extends Seeder
                 'excerpt' => $row['excerpt'],
                 'content' => '<p>'.$row['excerpt'].'</p><p>Kegiatan ini merupakan bagian dari program rutin GPS TangSel dalam rangka memakmurkan masjid dan memperkuat ukhuwah islamiyah di Tangerang Selatan. Seluruh kegiatan terbuka untuk umum dan tidak dipungut biaya.</p><p>Bagi masyarakat yang ingin berpartisipasi atau membutuhkan informasi lebih lanjut, dapat menghubungi sekretariat GPS TangSel melalui kanal resmi yang tersedia.</p>',
                 'image' => 'https://placehold.co/600x400/'.$row['color'].'/F5E6B8?text='.$label,
+                'images' => $images,
                 'author' => $row['author'],
                 'read_time' => $row['read_time'],
                 'published_at' => $date,

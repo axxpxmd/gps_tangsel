@@ -18,6 +18,7 @@ class Article extends Model
         'excerpt',
         'content',
         'image',
+        'images',
         'author',
         'read_time',
         'published_at',
@@ -28,6 +29,7 @@ class Article extends Model
         return [
             'published_at' => 'datetime',
             'read_time' => 'integer',
+            'images' => 'array',
         ];
     }
 

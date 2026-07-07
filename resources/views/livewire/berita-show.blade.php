@@ -60,6 +60,37 @@
         </div>
     </section>
 
+    {{-- Image Gallery --}}
+    @if ($article->images && count($article->images) > 0)
+        <section class="relative py-12 bg-gray-50 border-b border-gray-100">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="reveal">
+                    @if (count($article->images) === 1)
+                        <div class="rounded-2xl overflow-hidden shadow-lg cursor-pointer" onclick="openLightbox(0)">
+                            <img src="{{ $article->images[0] }}" alt="{{ $article->title }}" class="w-full aspect-[16/9] object-cover hover:scale-[1.02] transition-transform duration-500">
+                        </div>
+                    @else
+                        <div class="grid grid-cols-1 sm:grid-cols-{{ min(count($article->images), 3) }} gap-4">
+                            @foreach ($article->images as $index => $img)
+                                <div class="relative rounded-xl overflow-hidden shadow-md cursor-pointer group" onclick="openLightbox({{ $index }})">
+                                    <img src="{{ $img }}" alt="{{ $article->title }} - {{ $index + 1 }}" class="w-full aspect-[16/9] object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                                        <svg class="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6"/>
+                                        </svg>
+                                    </div>
+                                    <span class="absolute bottom-3 right-3 bg-black/60 text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                                        {{ $index + 1 }}/{{ count($article->images) }}
+                                    </span>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- Content --}}
     <section class="relative py-16 lg:py-24 bg-white overflow-hidden">
         <div class="absolute top-0 right-0 w-80 h-80 bg-primary/3 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
@@ -139,4 +170,82 @@
             </div>
         </section>
     @endif
+
+    {{-- Lightbox Modal --}}
+    @if ($article->images && count($article->images) > 0)
+        <div id="lightbox" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/90 backdrop-blur-sm" onclick="if(event.target===this)closeLightbox()">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 p-2 text-white/80 hover:text-white bg-black/30 rounded-full transition-colors duration-200">
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            @if (count($article->images) > 1)
+                <button onclick="prevImage()" class="absolute left-4 z-10 p-3 text-white/80 hover:text-white bg-black/30 rounded-full transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <button onclick="nextImage()" class="absolute right-4 z-10 p-3 text-white/80 hover:text-white bg-black/30 rounded-full transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </button>
+            @endif
+
+            <div class="max-w-5xl max-h-[85vh] mx-4">
+                <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl">
+            </div>
+
+            <div id="lightbox-counter" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 text-sm font-medium bg-black/40 px-4 py-1.5 rounded-full"></div>
+        </div>
+    @endif
 </div>
+
+@if ($article->images && count($article->images) > 0)
+    @push('scripts')
+    <script>
+        const galleryImages = @json($article->images);
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightboxImage();
+            document.getElementById('lightbox').classList.remove('hidden');
+            document.getElementById('lightbox').classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+            document.getElementById('lightbox').classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightboxImage();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            document.getElementById('lightbox-img').src = galleryImages[currentIndex];
+            if (galleryImages.length > 1) {
+                document.getElementById('lightbox-counter').textContent = (currentIndex + 1) + ' / ' + galleryImages.length;
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            const lb = document.getElementById('lightbox');
+            if (!lb || lb.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'ArrowRight') nextImage();
+        });
+    </script>
+    @endpush
+@endif

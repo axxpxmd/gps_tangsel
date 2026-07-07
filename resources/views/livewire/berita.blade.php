@@ -67,7 +67,7 @@
             @if ($articles->count() > 0)
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     @foreach ($articles as $article)
-                        <article class="group relative flex flex-col bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-transparent hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 reveal" style="transition-delay: {{ $loop->index * 80 }}ms">
+                        <a href="{{ route('berita.show', $article->slug) }}" wire:navigate class="group relative flex flex-col bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-transparent hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 reveal" style="transition-delay: {{ $loop->index * 80 }}ms">
                             {{-- Thumbnail --}}
                             <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
                                 <img src="{{ $article->image }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
@@ -106,7 +106,7 @@
                                     </span>
                                 </div>
                             </div>
-                        </article>
+                        </a>
                     @endforeach
                 </div>
 

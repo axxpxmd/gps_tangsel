@@ -1,5 +1,6 @@
 {{-- ============ KALENDER KEGIATAN SECTION ============ --}}
 <section class="relative py-20 lg:py-28 bg-gradient-to-r from-primary via-primary-dark to-dawn-deep overflow-hidden" id="kalender">
+    <div class="absolute inset-0 islamic-pattern opacity-[0.08]"></div>
     {{-- Decorative background blobs --}}
     <div class="absolute top-10 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
     <div class="absolute bottom-10 right-0 w-[28rem] h-[28rem] bg-gold/5 rounded-full blur-3xl"></div>
@@ -26,8 +27,14 @@
             <div class="xl:col-span-7 reveal order-2 xl:order-1">
                 <div class="relative bg-white rounded-3xl border border-gray-100 overflow-hidden h-full min-h-[30rem]">
                     {{-- Poster image (no overlay) --}}
-                    <div class="relative aspect-[16/9] sm:aspect-[2/1] overflow-hidden bg-gray-50">
-                        <img src="{{ asset('poster.webp') }}" alt="GPS TangSel" class="w-full h-full object-contain" id="cal-detail-image">
+                    <div class="relative aspect-[16/9] sm:aspect-[2/1] overflow-hidden bg-gray-50 cursor-pointer group/img" id="cal-image-wrapper">
+                        <img src="{{ asset('poster.webp') }}" alt="GPS TangSel" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" id="cal-detail-image">
+                        <div class="absolute inset-0 bg-black/0 group-hover/img:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                            <span class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1.5 text-xs font-semibold text-gray-700 flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                                Lihat Gambar
+                            </span>
+                        </div>
                     </div>
 
                     {{-- Detail content --}}
@@ -86,6 +93,17 @@
         </div>
     </div>
 </section>
+
+{{-- Image Modal --}}
+<div id="cal-image-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="cal-modal-overlay"></div>
+    <div class="relative max-w-4xl w-full max-h-[90vh] flex items-center justify-center">
+        <button type="button" id="cal-modal-close" class="absolute -top-10 right-0 text-white/80 hover:text-white transition-colors z-10">
+            <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <img src="" alt="Gambar Kegiatan" class="w-full h-auto max-h-[90vh] object-contain rounded-xl shadow-2xl" id="cal-modal-image">
+    </div>
+</div>
 
 @push('scripts')
     <script>
@@ -207,33 +225,11 @@
                 let day = calSelectedDay;
                 let events = day !== null ? monthEvents.filter(function (e) { return e.day === day; }) : [];
 
-                {{-- Auto-select next upcoming event if nothing chosen --}}
                 if (day === null || events.length === 0) {
-                    const today = new Date();
-                    let found = null;
-                    for (let i = calCurrentIdx; i < calMonthKeys.length; i++) {
-                        const mk = calMonthKeys[i];
-                        const [y, mo] = mk.split('-').map(function (v) { return parseInt(v, 10); });
-                        const upcoming = (calEvents[mk] || []).filter(function (e) {
-                            const ed = new Date(y, mo - 1, e.day);
-                            return ed >= new Date(today.getFullYear(), today.getMonth(), today.getDate());
-                        }).sort(function (a, b) { return a.day - b.day; });
-                        if (upcoming.length > 0) {
-                            found = { monthIdx: i, day: upcoming[0].day, events: [upcoming[0]] };
-                            break;
-                        }
-                    }
-                    if (found) {
-                        calCurrentIdx = found.monthIdx;
-                        calSelectedDay = found.day;
-                        events = found.events;
-                        renderCalendar();
-                        return;
-                    }
                     if (calDetailImage) {
-                        calDetailImage.src = defaultDetailImage;
+                        calDetailImage.parentElement.classList.add('hidden');
                     }
-                    calDetail.innerHTML = '<div class="text-center py-12"><div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gray-50 flex items-center justify-center"><svg class="w-7 h-7 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><p class="text-sm text-gray-400">Belum ada kegiatan terjadwalkan.</p></div>';
+                    calDetail.innerHTML = '<div class="text-center py-12"><div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-gray-50 flex items-center justify-center"><svg class="w-7 h-7 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><p class="text-sm text-gray-400">Tidak ada kegiatan pada tanggal ini.</p></div>';
                     if (calDetailHint) { calDetailHint.classList.remove('hidden'); }
                     return;
                 }
@@ -242,6 +238,7 @@
 
                 {{-- Use the first event image for the header --}}
                 if (calDetailImage && events[0] && events[0].image) {
+                    calDetailImage.parentElement.classList.remove('hidden');
                     calDetailImage.src = events[0].image;
                 }
 
@@ -298,6 +295,32 @@
                 renderCalendar();
                 renderDetail();
             }
+
+            {{-- Image modal logic --}}
+            const calImageWrapper = document.getElementById('cal-image-wrapper');
+            const calImageModal = document.getElementById('cal-image-modal');
+            const calModalImage = document.getElementById('cal-modal-image');
+            const calModalOverlay = document.getElementById('cal-modal-overlay');
+            const calModalClose = document.getElementById('cal-modal-close');
+
+            function openCalModal() {
+                if (calDetailImage && calModalImage) {
+                    calModalImage.src = calDetailImage.src;
+                    calImageModal.classList.remove('hidden');
+                    calImageModal.classList.add('flex');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+            function closeCalModal() {
+                calImageModal.classList.add('hidden');
+                calImageModal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+
+            if (calImageWrapper) { calImageWrapper.addEventListener('click', openCalModal); }
+            if (calModalOverlay) { calModalOverlay.addEventListener('click', closeCalModal); }
+            if (calModalClose) { calModalClose.addEventListener('click', closeCalModal); }
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCalModal(); });
         }
 
         document.addEventListener('DOMContentLoaded', initCalendar);

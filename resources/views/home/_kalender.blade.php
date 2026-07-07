@@ -81,26 +81,6 @@
 
                     {{-- Day cells (rendered by JS) --}}
                     <div class="grid grid-cols-7 gap-1" id="cal-grid"></div>
-
-                    {{-- Legend --}}
-                    <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 mt-5 pt-4 border-t border-gray-100">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-gradient-to-br from-gold to-amber-500"></span>
-                            <span class="text-[11px] text-gray-500 font-medium">Safari Subuh</span>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                            <span class="text-[11px] text-gray-500 font-medium">Pasar Bahagia</span>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-primary"></span>
-                            <span class="text-[11px] text-gray-500 font-medium">Puskesmas</span>
-                        </div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                            <span class="text-[11px] text-gray-500 font-medium">Thibbun</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -201,18 +181,8 @@
                         classes += 'opacity-50 ';
                     }
 
-                    let dots = '';
-                    if (hasEvent) {
-                        dots = '<div class="absolute bottom-1 flex gap-0.5">';
-                        dayEvents.forEach(function (e) {
-                            dots += '<span class="w-1 h-1 rounded-full ' + (calDotClasses[e.color] || 'bg-gold') + '"></span>';
-                        });
-                        dots += '</div>';
-                    }
-
                     html += '<button type="button" class="' + classes.trim() + '" data-day="' + d + '"' + (hasEvent ? '' : ' disabled') + '>';
                     html += '<span class="z-10">' + d + '</span>';
-                    html += dots;
                     html += '</button>';
                 }
                 calGrid.innerHTML = html;

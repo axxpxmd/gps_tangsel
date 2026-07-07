@@ -45,4 +45,9 @@ return [
         'verify_ssl' => filter_var(env('ALADHAN_VERIFY_SSL', true), FILTER_VALIDATE_BOOLEAN),
     ],
 
+    'youtube' => [
+        'api_key' => env('YOUTUBE_API_KEY'),
+        'channel_id' => env('YOUTUBE_CHANNEL_ID'),
+    ],
+
 ];

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Services\PrayerTimesService;
+use App\Services\YoutubeService;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {
-    public function __construct(public PrayerTimesService $prayerTimes) {}
+    public function __construct(public PrayerTimesService $prayerTimes, public YoutubeService $youtube) {}
 
     /**
      * Render the landing page with live prayer schedule and activity calendar.
@@ -20,6 +21,7 @@ class WelcomeController extends Controller
             'prayerSchedule' => $this->prayerTimes->today(),
             'calendarEvents' => $this->generateCalendarEvents(),
             'articles' => $this->generateArticles(),
+            'videos' => $this->youtube->latestVideos(12),
         ]);
     }
 

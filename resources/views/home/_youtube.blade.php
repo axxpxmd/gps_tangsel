@@ -45,7 +45,7 @@
                     <div class="flex transition-transform duration-500 ease-out" id="yt-track">
                         @foreach ($videos as $video)
                             <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-2 sm:px-3 self-stretch">
-                                <a href="https://www.youtube.com/watch?v={{ $video['videoId'] }}" target="_blank" rel="noopener noreferrer" class="group flex flex-col bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-gray-200 hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1 transition-all duration-300 h-full">
+                                <button type="button" data-video-id="{{ $video['videoId'] }}" class="group flex flex-col bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-gray-200 hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1 transition-all duration-300 h-full w-full text-left cursor-pointer yt-video-card">
                                     {{-- Thumbnail --}}
                                     <div class="relative aspect-video overflow-hidden bg-gray-100">
                                         @if (! empty($video['thumbnail']))
@@ -76,7 +76,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                </a>
+                                </button>
                             </div>
                         @endforeach
                     </div>
@@ -94,6 +94,17 @@
         @endif
     </div>
 </section>
+
+{{-- YouTube Video Modal --}}
+<div id="yt-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" id="yt-modal-overlay"></div>
+    <button type="button" id="yt-modal-close" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="relative w-full max-w-4xl aspect-video rounded-xl overflow-hidden shadow-2xl" id="yt-modal-player">
+        <iframe src="" allow="autoplay; encrypted-media" allowfullscreen class="w-full h-full" id="yt-iframe"></iframe>
+    </div>
+</div>
 
 @push('scripts')
     <script>
@@ -180,6 +191,36 @@
             }
 
             updateSlider();
+
+            {{-- Video Modal --}}
+            const ytModal = document.getElementById('yt-modal');
+            const ytIframe = document.getElementById('yt-iframe');
+            const ytModalOverlay = document.getElementById('yt-modal-overlay');
+            const ytModalClose = document.getElementById('yt-modal-close');
+
+            function openYtModal(videoId) {
+                ytIframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+                ytModal.classList.remove('hidden');
+                ytModal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeYtModal() {
+                ytIframe.src = '';
+                ytModal.classList.add('hidden');
+                ytModal.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.yt-video-card').forEach(function (card) {
+                card.addEventListener('click', function () {
+                    openYtModal(card.dataset.videoId);
+                });
+            });
+
+            if (ytModalOverlay) { ytModalOverlay.addEventListener('click', closeYtModal); }
+            if (ytModalClose) { ytModalClose.addEventListener('click', closeYtModal); }
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeYtModal(); });
         }
 
         document.addEventListener('DOMContentLoaded', initYoutubeSlider);

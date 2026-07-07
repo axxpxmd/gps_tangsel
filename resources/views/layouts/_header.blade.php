@@ -36,9 +36,9 @@
                         <span>Kalender</span>
                         <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300"></span>
                     </a>
-                    <a href="#berita" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link text-white/80 hover:text-white transition-colors duration-200">
+                    <a href="{{ route('berita') }}" wire:navigate class="nav-link navbar-link navbar-active relative group px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 {{ request()->routeIs('berita') ? 'text-white' : 'text-white/80 hover:text-white' }}">
                         <span>Berita</span>
-                        <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300"></span>
+                        <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300 {{ request()->routeIs('berita') ? 'w-5' : 'w-0 group-hover:w-5' }}"></span>
                     </a>
                     <a href="#galeri" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link text-white/80 hover:text-white transition-colors duration-200">
                         <span>Galeri</span>
@@ -86,7 +86,7 @@
                     <a href="#kalender" class="mobile-nav-link navbar-link block px-4 py-2.5 text-sm font-medium rounded-lg text-white/80 hover:text-white hover:bg-gray-100 transition-colors duration-200">
                         Kalender
                     </a>
-                    <a href="#berita" class="mobile-nav-link navbar-link block px-4 py-2.5 text-sm font-medium rounded-lg text-white/80 hover:text-white hover:bg-gray-100 transition-colors duration-200">
+                    <a href="{{ route('berita') }}" wire:navigate class="mobile-nav-link navbar-link block px-4 py-2.5 text-sm font-medium rounded-lg text-white/80 hover:text-white hover:bg-gray-100 transition-colors duration-200">
                         Berita
                     </a>
                     <a href="#galeri" class="mobile-nav-link navbar-link block px-4 py-2.5 text-sm font-medium rounded-lg text-white/80 hover:text-white hover:bg-gray-100 transition-colors duration-200">

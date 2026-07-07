@@ -36,9 +36,6 @@
                     </svg>
                     Hubungi via WhatsApp
                 </a>
-                <a href="#program" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-dawn-night bg-gradient-to-r from-gold-light to-gold rounded-lg border border-gold/50 hover:-translate-y-0.5 transition-all duration-200" id="cta-ajukan">
-                    Ajukan Masjid untuk S4
-                </a>
             </div>
         </div>
     </div>

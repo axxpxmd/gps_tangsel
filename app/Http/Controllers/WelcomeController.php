@@ -87,25 +87,17 @@ class WelcomeController extends Controller
         ];
 
         $base = CarbonImmutable::now()->startOfDay();
-        $categories = [
-            'Safari Subuh' => '2F5FA3',
-            'Sosial' => '10B981',
-            'Kesehatan' => '2F5FA3',
-            'Pengumuman' => 'D4A437',
-        ];
 
-        return collect($rows)->map(function (array $row, int $idx) use ($base, $categories) {
+        return collect($rows)->map(function (array $row, int $idx) use ($base) {
             $date = $base->subDays($row['days_ago']);
-            $color = $categories[$row['category']] ?? '2F5FA3';
             $slug = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $row['title']));
-            $label = urlencode($row['category']);
 
             return [
                 'id' => $idx + 1,
                 'title' => $row['title'],
                 'category' => $row['category'],
                 'excerpt' => $row['excerpt'],
-                'image' => 'https://placehold.co/600x400/'.$color.'/F5E6B8?text='.$label,
+                'image' => '/berita/gambar1.webp',
                 'date' => $date->format('d M Y'),
                 'author' => $row['author'],
                 'read_time' => $row['read_time'],

@@ -10,7 +10,7 @@
                 <div class="w-10 h-0.5 bg-gradient-to-l from-primary to-gold"></div>
             </div>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5">
-                Pengurus <span class="text-gradient-gold">Inti</span>
+                Pengurus Inti</span>
             </h2>
             <p class="text-gray-500 leading-relaxed text-base lg:text-lg">
                 Tim inti yang menggerakkan dakwah GPS TangSel.

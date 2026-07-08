@@ -57,7 +57,7 @@
                                         @endif
                                         {{-- Play button overlay --}}
                                         <div class="absolute inset-0 flex items-center justify-center">
-                                            <div class="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:bg-primary group-hover:scale-110 transition-all duration-300 shadow-lg shadow-primary/30">
+                                            <div class="w-14 h-14 rounded-full bg-red-600/90 flex items-center justify-center group-hover:bg-red-600 group-hover:scale-110 transition-all duration-300">
                                                 <svg class="w-6 h-6 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                             </div>
                                         </div>

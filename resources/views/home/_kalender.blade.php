@@ -14,7 +14,7 @@
             </div>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5">
                 Kalender Kegiatan<br>
-                <span class="text-gradient-gold">GPS TangSel</span>
+                <span class="text-gradient-gold">GPS TANGSEL</span>
             </h2>
             <p class="text-white/70 leading-relaxed max-w-2xl mx-auto">
                 Pantau jadwal GPS TangSel sepanjang bulan. Klik tanggal bertanda untuk melihat detail lengkap kegiatan — dari Safari Subuh pekanan hingga program sosial kemasyarakatan.

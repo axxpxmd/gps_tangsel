@@ -34,7 +34,7 @@
 
             {{-- Track --}}
             <div class="overflow-hidden">
-                <div class="flex transition-transform duration-500 ease-out" id="partner-track">
+                <div class="flex transition-transform duration-500 mt-4 ease-out" id="partner-track">
                     @php
                         $partners = [
                             ['name' => 'Dinkes TangSel', 'desc' => 'Dinas Kesehatan'],
@@ -61,23 +61,8 @@
                 </div>
             </div>
 
-            {{-- Dots --}}
-            <div class="flex items-center justify-center gap-2 mt-8" id="partner-dots">
-                @foreach ($partners as $idx => $p)
-                    <button type="button" class="w-2 h-2 rounded-full bg-gray-300 transition-all duration-300 {{ $loop->first ? '!bg-primary !w-6' : '' }}" data-index="{{ $idx }}" aria-label="Partner {{ $idx + 1 }}"></button>
-                @endforeach
-            </div>
-        </div>
-
-        {{-- CTA --}}
-        <div class="mt-14 lg:mt-20 text-center reveal">
-            <p class="text-gray-500 mb-6">Tertarik berkolaborasi bersama kami?</p>
-            <a href="#kolaborasi" class="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-full hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300">
-                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>
-                </svg>
-                Jadi Partner Kami
-            </a>
+            {{-- Dots (generated dynamically by JS) --}}
+            <div class="flex items-center justify-center gap-2 mt-6" id="partner-dots"></div>
         </div>
     </div>
 </section>
@@ -91,7 +76,6 @@
             const prevBtn = document.getElementById('partner-prev');
             const nextBtn = document.getElementById('partner-next');
             const dotsContainer = document.getElementById('partner-dots');
-            const dots = dotsContainer ? dotsContainer.querySelectorAll('button') : [];
             let currentSlide = 0;
             let slidesPerView = 5;
             let totalSlides;
@@ -102,10 +86,29 @@
                 slidesPerView = width >= 1024 ? 5 : (width >= 640 ? 3 : 2);
             }
 
+            function renderDots() {
+                if (!dotsContainer) return;
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+                    dot.dataset.index = i;
+                    dot.className = 'h-2 rounded-full transition-all duration-300 ' + (i === currentSlide ? 'bg-primary w-8' : 'bg-gray-300 w-2 hover:bg-gray-400');
+                    dot.addEventListener('click', function () {
+                        currentSlide = parseInt(this.dataset.index, 10);
+                        updateSlider();
+                        stopAutoPlay();
+                        startAutoPlay();
+                    });
+                    dotsContainer.appendChild(dot);
+                }
+            }
+
             function updateSlider() {
                 updateSlidesPerView();
                 const slideElements = track.querySelectorAll('.flex-shrink-0');
-                totalSlides = Math.max(1, Math.ceil(slideElements.length - slidesPerView + 1));
+                totalSlides = Math.max(1, slideElements.length - slidesPerView + 1);
 
                 if (currentSlide >= totalSlides) currentSlide = 0;
 
@@ -115,12 +118,7 @@
                 if (prevBtn) prevBtn.disabled = currentSlide === 0;
                 if (nextBtn) nextBtn.disabled = currentSlide >= totalSlides - 1;
 
-                dots.forEach(function (dot, i) {
-                    dot.classList.toggle('!bg-primary', i === currentSlide);
-                    dot.classList.toggle('!w-6', i === currentSlide);
-                    dot.classList.toggle('bg-gray-300', i !== currentSlide);
-                    dot.classList.toggle('w-2', i !== currentSlide);
-                });
+                renderDots();
             }
 
             function startAutoPlay() {
@@ -129,7 +127,7 @@
                     currentSlide++;
                     if (currentSlide >= totalSlides) currentSlide = 0;
                     updateSlider();
-                }, 3000);
+                }, 3500);
             }
 
             function stopAutoPlay() {
@@ -151,15 +149,6 @@
                     startAutoPlay();
                 });
             }
-
-            dots.forEach(function (dot) {
-                dot.addEventListener('click', function () {
-                    currentSlide = parseInt(dot.dataset.index, 10);
-                    updateSlider();
-                    stopAutoPlay();
-                    startAutoPlay();
-                });
-            });
 
             const wrapper = document.getElementById('partner-slider-wrapper');
             if (wrapper) {

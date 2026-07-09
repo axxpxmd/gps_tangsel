@@ -37,7 +37,7 @@
     <div class="lg:pl-64">
         @include('console._topbar')
 
-        <main class="p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-4rem)]">
+        <main class="p-4 sm:p-6 bg-[#F5F5F5] lg:p-8 min-h-[calc(100vh-4rem)]">
             @yield('content')
         </main>
     </div>

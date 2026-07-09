@@ -69,7 +69,7 @@ return [
             'url' => env('SFTP_SRC'),
             'port' => env('SFTP_PORT', 22),
             'timeout' => 30,
-            'throw' => false,
+            'throw' => true,
         ],
 
     ],

@@ -64,11 +64,11 @@ class ProgramController extends Controller
 
         $validated['is_active'] = $request->boolean('is_active');
 
-        if ($request->hasFile('thumbnail')) {
+        if ($request->hasFile('gambar')) {
             if ($program->gambar) {
                 Storage::disk('sftp')->delete($program->gambar);
             }
-            $validated['thumbnail'] = $request->file('thumbnail')->store('programs', 'sftp');
+            $validated['gambar'] = $request->file('gambar')->store('programs', 'sftp');
         }
 
         $program->update($validated);

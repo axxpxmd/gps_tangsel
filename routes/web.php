@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Console\DashboardController;
 use App\Http\Controllers\Console\LoginController;
+use App\Http\Controllers\Console\PartnerController;
 use App\Http\Controllers\Console\ProgramController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\Berita;
@@ -28,5 +29,6 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
         Route::resource('programs', ProgramController::class);
+        Route::resource('partners', PartnerController::class);
     });
 });

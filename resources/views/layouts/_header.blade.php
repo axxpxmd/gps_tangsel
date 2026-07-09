@@ -76,7 +76,7 @@
                     </div>
 
                     {{-- Program --}}
-                    <a href="#program" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ route('program') }}" wire:navigate class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         <span>Program</span>
                         <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300"></span>
                     </a>
@@ -146,7 +146,7 @@
                             </a>
                         </div>
                     </div>
-                    <a href="#program" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ route('program') }}" wire:navigate class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         Program
                     </a>
                     <a href="#kalender" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">

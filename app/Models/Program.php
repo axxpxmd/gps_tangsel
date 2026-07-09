@@ -16,7 +16,7 @@ class Program extends Model
         'title',
         'description',
         'penerima_manfaat',
-        'thumbnail',
+        'gambar',
         'is_active',
     ];
 
@@ -24,14 +24,14 @@ class Program extends Model
         'is_active' => 'boolean',
     ];
 
-    public function thumbnailUrl(): Attribute
+    public function gambarUrl(): Attribute
     {
         return Attribute::get(function () {
-            if (! $this->thumbnail) {
+            if (! $this->gambar) {
                 return null;
             }
 
-            return rtrim((string) config('filesystems.disks.sftp.url', ''), '/').'/'.$this->thumbnail;
+            return rtrim((string) config('filesystems.disks.sftp.url', ''), '/').'/'.$this->gambar;
         });
     }
 }

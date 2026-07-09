@@ -29,12 +29,12 @@ class ProgramController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'penerima_manfaat' => ['required', 'string'],
-            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['boolean'],
         ]);
 
-        if ($request->hasFile('thumbnail')) {
-            $validated['thumbnail'] = $request->file('thumbnail')->store('programs', 'sftp');
+        if ($request->hasFile('gambar')) {
+            $validated['gambar'] = $request->file('gambar')->store('programs', 'sftp');
         }
 
         Program::create($validated);
@@ -53,15 +53,15 @@ class ProgramController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'penerima_manfaat' => ['required', 'string'],
-            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['boolean'],
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('thumbnail')) {
-            if ($program->thumbnail) {
-                Storage::disk('sftp')->delete($program->thumbnail);
+            if ($program->gambar) {
+                Storage::disk('sftp')->delete($program->gambar);
             }
             $validated['thumbnail'] = $request->file('thumbnail')->store('programs', 'sftp');
         }
@@ -73,8 +73,8 @@ class ProgramController extends Controller
 
     public function destroy(Program $program): RedirectResponse
     {
-        if ($program->thumbnail) {
-            Storage::disk('sftp')->delete($program->thumbnail);
+        if ($program->gambar) {
+            Storage::disk('sftp')->delete($program->gambar);
         }
 
         $program->delete();

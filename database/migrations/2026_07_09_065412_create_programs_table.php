@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->text('penerima_manfaat');
-            $table->string('thumbnail')->nullable();
+            $table->string('gambar')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

@@ -174,19 +174,45 @@
                 });
             });
 
+            // Mobile profile submenu toggle
+            const mobileProfilToggle = document.getElementById('mobile-profil-toggle');
+            const mobileProfilSubmenu = document.getElementById('mobile-profil-submenu');
+            const mobileProfilIcon = document.getElementById('mobile-profil-icon');
+            if (mobileProfilToggle && mobileProfilSubmenu) {
+                mobileProfilToggle.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    mobileProfilSubmenu.classList.toggle('hidden');
+                    if (mobileProfilIcon) {
+                        mobileProfilIcon.classList.toggle('rotate-180');
+                    }
+                });
+                mobileProfilSubmenu.querySelectorAll('.mobile-nav-link').forEach(function (link) {
+                    link.addEventListener('click', function () {
+                        if (menu) menu.classList.add('hidden');
+                        if (iconOpen) iconOpen.classList.remove('hidden');
+                        if (iconClose) iconClose.classList.add('hidden');
+                    });
+                });
+            }
+
             // Navbar scroll effect: transparent glass pill over hero -> solid white pill on scroll
             const navbarPill = document.getElementById('navbar-pill');
             const navbarInner = document.getElementById('navbar-inner');
             const brand = document.querySelector('.navbar-brand');
             const tagline = document.querySelector('.navbar-tagline');
             const navLinks = document.querySelectorAll('.navbar-link');
-            const activeLinks = document.querySelectorAll('.navbar-active');
+            const mobileMenuPanel = document.querySelector('.mobile-menu-panel');
 
             function applyNavbarState(scrolled) {
                 if (!navbarPill || !navbarInner) return;
+
                 if (scrolled) {
                     navbarPill.classList.remove('glass', 'border-white/15');
                     navbarPill.classList.add('bg-white', 'border-gray-200');
+                    if (mobileMenuPanel) {
+                        mobileMenuPanel.classList.remove('border-white/10');
+                        mobileMenuPanel.classList.add('border-gray-200');
+                    }
                     if (brand) {
                         brand.classList.remove('text-white');
                         brand.classList.add('text-primary');
@@ -195,17 +221,13 @@
                         tagline.classList.remove('text-gold-light/70');
                         tagline.classList.add('text-gold/80');
                     }
-                    navLinks.forEach(function (link) {
-                        link.classList.remove('text-white/80', 'hover:text-white', 'text-white', 'bg-white/10');
-                        link.classList.add('text-gray-800', 'hover:text-primary');
-                    });
-                    activeLinks.forEach(function (link) {
-                        link.classList.remove('text-white', 'bg-white/10');
-                        link.classList.add('text-primary', 'font-semibold');
-                    });
                 } else {
                     navbarPill.classList.add('glass', 'border-white/15');
                     navbarPill.classList.remove('bg-white', 'border-gray-200');
+                    if (mobileMenuPanel) {
+                        mobileMenuPanel.classList.add('border-white/10');
+                        mobileMenuPanel.classList.remove('border-gray-200');
+                    }
                     if (brand) {
                         brand.classList.add('text-white');
                         brand.classList.remove('text-primary');
@@ -214,15 +236,20 @@
                         tagline.classList.add('text-gold-light/70');
                         tagline.classList.remove('text-gold/80');
                     }
-                    navLinks.forEach(function (link) {
-                        link.classList.add('text-white/80', 'hover:text-white');
-                        link.classList.remove('text-gray-800', 'hover:text-primary');
-                    });
-                    activeLinks.forEach(function (link) {
-                        link.classList.add('text-white');
-                        link.classList.remove('text-primary', 'font-semibold');
-                    });
                 }
+
+                navLinks.forEach(function (link) {
+                    link.classList.remove(
+                        'text-white/80', 'hover:text-white', 'text-white', 'bg-white/10',
+                        'text-gray-800', 'hover:text-primary', 'text-primary', 'font-semibold'
+                    );
+
+                    if (scrolled) {
+                        link.classList.add('text-gray-800', 'hover:text-primary');
+                    } else {
+                        link.classList.add('text-white/80', 'hover:text-white');
+                    }
+                });
             }
 
             let ticking = false;

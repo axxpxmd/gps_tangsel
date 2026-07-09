@@ -19,7 +19,7 @@
         </div>
 
         {{-- Latar Belakang --}}
-        <div class="reveal mb-16 lg:mb-20">
+        <div class="reveal mb-16 lg:mb-20" id="tentang-kami">
             <div class="relative rounded-2xl bg-gradient-to-br from-primary to-primary-dark p-8 sm:p-10 lg:p-12 overflow-hidden">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
                 <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/4"></div>
@@ -55,7 +55,7 @@
         </div>
 
         {{-- Visi & Misi --}}
-        <div class="reveal mb-16 lg:mb-20">
+        <div class="reveal mb-16 lg:mb-20" id="visi-misi">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="relative p-8 lg:p-10 rounded-2xl bg-primary/5 border border-primary/10 overflow-hidden">
                     <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
@@ -90,7 +90,7 @@
         </div>
 
         {{-- Pengurus Inti --}}
-        <div class="reveal mb-16 lg:mb-20">
+        <div class="reveal mb-16 lg:mb-20" id="pengurus">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                 <div class="lg:col-span-4">
                     <h3 class="text-sm font-bold text-gold uppercase tracking-wider mb-1">Pengurus Inti</h3>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\ProgramFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,4 +25,15 @@ class Program extends Model
         'is_active' => 'boolean',
         'sort_order' => 'integer',
     ];
+
+    public function thumbnailUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            if (! $this->thumbnail) {
+                return null;
+            }
+
+            return rtrim((string) config('filesystems.disks.sftp.url', ''), '/').'/'.$this->thumbnail;
+        });
+    }
 }

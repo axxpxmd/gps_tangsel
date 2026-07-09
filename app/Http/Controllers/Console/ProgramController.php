@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Program;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProgramController extends Controller
@@ -28,10 +29,14 @@ class ProgramController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'penerima_manfaat' => ['required', 'string'],
-            'thumbnail' => ['nullable', 'string', 'max:255'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['boolean'],
         ]);
+
+        if ($request->hasFile('thumbnail')) {
+            $validated['thumbnail'] = $request->file('thumbnail')->store('programs', 'sftp');
+        }
 
         Program::create($validated);
 
@@ -49,12 +54,19 @@ class ProgramController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'penerima_manfaat' => ['required', 'string'],
-            'thumbnail' => ['nullable', 'string', 'max:255'],
+            'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['boolean'],
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
+
+        if ($request->hasFile('thumbnail')) {
+            if ($program->thumbnail) {
+                Storage::disk('sftp')->delete($program->thumbnail);
+            }
+            $validated['thumbnail'] = $request->file('thumbnail')->store('programs', 'sftp');
+        }
 
         $program->update($validated);
 
@@ -63,6 +75,10 @@ class ProgramController extends Controller
 
     public function destroy(Program $program): RedirectResponse
     {
+        if ($program->thumbnail) {
+            Storage::disk('sftp')->delete($program->thumbnail);
+        }
+
         $program->delete();
 
         return redirect()->route('console.programs.index')->with('success', 'Program berhasil dihapus.');

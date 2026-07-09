@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="max-w-3xl mx-auto">
-    <form action="{{ route('console.programs.update', $program) }}" method="POST">
+    <form action="{{ route('console.programs.update', $program) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @include('console.programs._form')

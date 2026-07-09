@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="max-w-3xl mx-auto">
-    <form action="{{ route('console.programs.store') }}" method="POST">
+    <form action="{{ route('console.programs.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @include('console.programs._form')
 

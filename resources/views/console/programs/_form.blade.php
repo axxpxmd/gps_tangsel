@@ -32,13 +32,26 @@
 
         {{-- Thumbnail --}}
         <div>
-            <label for="thumbnail" class="block text-sm font-semibold text-gray-700 mb-1.5">
-                URL Thumbnail
-            </label>
-            <input type="text" id="thumbnail" name="thumbnail" value="{{ old('thumbnail', $program->thumbnail ?? '') }}"
-                class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all font-mono"
-                placeholder="https://placehold.co/600x375/2F5FA3/F5E6B8?text=Program">
-            <p class="text-[11px] text-gray-400 mt-1.5">Masukkan URL gambar untuk thumbnail program.</p>
+            <label class="block text-sm font-semibold text-gray-700 mb-1.5">Thumbnail</label>
+            <div class="flex items-start gap-4">
+                <div class="w-24 h-24 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
+                    @if (isset($program) && $program->thumbnail_url)
+                        <img src="{{ $program->thumbnail_url }}" alt="Preview" class="w-full h-full object-cover">
+                    @else
+                        <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
+                        </svg>
+                    @endif
+                </div>
+                <div class="flex-1">
+                    <input type="file" id="thumbnail" name="thumbnail" accept="image/jpeg,image/png,image/webp"
+                        class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 file:transition-colors file:cursor-pointer">
+                    <p class="text-[11px] text-gray-400 mt-2">JPG, PNG, atau WebP. Maksimal 2MB.</p>
+                    @if (isset($program) && $program->thumbnail)
+                        <p class="text-[11px] text-gray-400 mt-0.5">File saat ini: {{ $program->thumbnail }}</p>
+                    @endif
+                </div>
+            </div>
         </div>
 
         {{-- Sort Order & Status --}}

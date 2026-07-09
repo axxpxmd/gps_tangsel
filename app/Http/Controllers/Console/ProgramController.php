@@ -13,7 +13,7 @@ class ProgramController extends Controller
 {
     public function index(): View
     {
-        $programs = Program::orderBy('sort_order')->get();
+        $programs = Program::latest()->get();
 
         return view('console.programs.index', compact('programs'));
     }
@@ -30,7 +30,6 @@ class ProgramController extends Controller
             'description' => ['required', 'string'],
             'penerima_manfaat' => ['required', 'string'],
             'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['boolean'],
         ]);
 
@@ -55,7 +54,6 @@ class ProgramController extends Controller
             'description' => ['required', 'string'],
             'penerima_manfaat' => ['required', 'string'],
             'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['boolean'],
         ]);
 

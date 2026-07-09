@@ -17,13 +17,11 @@ class Program extends Model
         'description',
         'penerima_manfaat',
         'thumbnail',
-        'sort_order',
         'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'sort_order' => 'integer',
     ];
 
     public function thumbnailUrl(): Attribute

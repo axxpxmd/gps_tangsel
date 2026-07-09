@@ -12,7 +12,7 @@
                 <span class="text-xs font-semibold text-primary uppercase tracking-wider">Mitra Kolaborasi</span>
                 <div class="w-10 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
             </div>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-5">
                 Partner <span class="text-gradient-gold">GPS TANGSEL</span>
             </h2>
             <p class="text-gray-500 leading-relaxed text-base lg:text-lg">

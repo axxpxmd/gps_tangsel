@@ -9,7 +9,7 @@
                 <div class="w-10 h-0.5 bg-gradient-to-r from-primary to-gold"></div>
                 <span class="text-xs font-semibold text-primary uppercase tracking-wider">Tentang Kami</span>
             </div>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-5">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-5">
                 Memakmurkan Masjid,<br>
                 <span class="text-gradient-primary">Menguatkan Ukhuwah</span>
             </h2>

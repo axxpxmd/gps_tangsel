@@ -12,7 +12,7 @@
                 <span class="w-2 h-2 rounded-full bg-gold-light animate-pulse"></span>
                 <span class="text-xs font-semibold text-gold-light uppercase tracking-wider">Agenda Kegiatan</span>
             </div>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-5">
                 Kalender Kegiatan<br>
                 <span class="text-gradient-gold">GPS TANGSEL</span>
             </h2>

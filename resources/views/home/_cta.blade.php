@@ -22,7 +22,7 @@
                 <span class="text-xs font-semibold text-gold-light uppercase tracking-wider">Bergabung Bersama Kami</span>
                 <div class="w-10 h-0.5 bg-gradient-to-l from-transparent to-gold"></div>
             </div>
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
                 Mari Berjuang Bersama<br>
                 <span class="text-gradient-gold">di Shalat Subuh</span>
             </h2>

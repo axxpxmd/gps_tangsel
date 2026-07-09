@@ -82,7 +82,7 @@
                     </a>
 
                     {{-- Agenda --}}
-                    <a href="#kalender" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ url('/#kalender') }}" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         <span>Agenda</span>
                         <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300"></span>
                     </a>
@@ -94,7 +94,7 @@
                     </a>
 
                     {{-- Galeri --}}
-                    <a href="#galeri" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ url('/#galeri') }}" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         <span>Galeri</span>
                         <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300"></span>
                     </a>
@@ -102,7 +102,7 @@
 
                 {{-- CTA Desktop --}}
                 <div class="hidden lg:block">
-                    <a href="#kontak" class="group/cta inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-dawn-night bg-gold rounded-xl border border-gold/50 hover:-translate-y-0.5 transition-all duration-200" id="cta-nav">
+                    <a href="{{ url('/#kontak') }}" class="group/cta inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-dawn-night bg-gold rounded-xl border border-gold/50 hover:-translate-y-0.5 transition-all duration-200" id="cta-nav">
                         <span>Hubungi Kami</span>
                         <svg class="w-4 h-4 group-hover/cta:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -149,17 +149,17 @@
                     <a href="{{ route('program') }}" wire:navigate class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         Program
                     </a>
-                    <a href="#kalender" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ url('/#kalender') }}" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         Agenda
                     </a>
                     <a href="{{ route('berita') }}" wire:navigate class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         Berita
                     </a>
-                    <a href="#galeri" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ url('/#galeri') }}" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         Galeri
                     </a>
                     <div class="pt-2">
-                        <a href="#kontak" class="mobile-nav-link flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-dawn-night bg-gradient-to-r from-gold-light to-gold rounded-lg border border-gold/50 transition-colors duration-200">
+                        <a href="{{ url('/#kontak') }}" class="mobile-nav-link flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-dawn-night bg-gradient-to-r from-gold-light to-gold rounded-lg border border-gold/50 transition-colors duration-200">
                             Hubungi Kami
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>

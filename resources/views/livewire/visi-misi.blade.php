@@ -71,78 +71,80 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-                @php
-                    $misi = [
-                        [
-                            'icon' => 'sunrise',
-                            'color' => 'primary',
-                            'title' => 'Menghidupkan Subuh Berjamaah',
-                            'desc' => 'Menghidupkan semangat sholat subuh berjamaah di setiap masjid Tangerang Selatan.',
-                        ],
-                        [
-                            'icon' => 'handshake',
-                            'color' => 'gold',
-                            'title' => 'Menguatkan Ukhuwah',
-                            'desc' => 'Menguatkan ukhuwah Islamiyah lintas masyarakat tanpa memandang latar belakang.',
-                        ],
-                        [
-                            'icon' => 'heart',
-                            'color' => 'primary',
-                            'title' => 'Program Sosial Nyata',
-                            'desc' => 'Menghadirkan program sosial yang nyata dan bermanfaat bagi masyarakat luas.',
-                        ],
-                        [
-                            'icon' => 'users',
-                            'color' => 'gold',
-                            'title' => 'Merangkul Generasi Muda',
-                            'desc' => 'Mengajak generasi muda lebih dekat dengan masjid melalui pendekatan modern.',
-                        ],
-                        [
-                            'icon' => 'mosque',
-                            'color' => 'primary',
-                            'title' => 'Masjid Pusat Pelayanan',
-                            'desc' => 'Menjadikan masjid sebagai pusat pelayanan umat yang hidup dan berdaya.',
-                        ],
-                    ];
-                @endphp
-
-                @foreach ($misi as $item)
-                    <div class="group reveal bg-white rounded-2xl border border-gray-100 p-8 hover:border-{{ $item['color'] == 'gold' ? 'gold' : 'primary' }}/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-xl bg-{{ $item['color'] }}/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-{{ $item['color'] }} group-hover:scale-110 transition-all duration-300">
-                                @if ($item['icon'] === 'sunrise')
-                                    <svg class="w-5 h-5 text-{{ $item['color'] }} group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-13.07l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.95 7.95l-.71-.71M4.76 4.76l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                                    </svg>
-                                @elseif ($item['icon'] === 'handshake')
-                                    <svg class="w-5 h-5 text-{{ $item['color'] }} group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
-                                    </svg>
-                                @elseif ($item['icon'] === 'heart')
-                                    <svg class="w-5 h-5 text-{{ $item['color'] }} group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
-                                    </svg>
-                                @elseif ($item['icon'] === 'users')
-                                    <svg class="w-5 h-5 text-{{ $item['color'] }} group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
-                                    </svg>
-                                @else
-                                    <svg class="w-5 h-5 text-{{ $item['color'] }} group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/>
-                                    </svg>
-                                @endif
-                            </div>
-                            <div>
-                                <h3 class="text-base font-bold text-gray-900 mb-1.5 group-hover:text-{{ $item['color'] }} transition-colors duration-200">
-                                    {{ $item['title'] }}
-                                </h3>
-                                <p class="text-sm text-gray-500 leading-relaxed">
-                                    {{ $item['desc'] }}
-                                </p>
-                            </div>
+                {{-- Misi 1 --}}
+                <div class="group reveal bg-white rounded-2xl border border-gray-100 p-8 hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m8.66-13.07l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.95 7.95l-.71-.71M4.76 4.76l-.71-.71M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1.5 group-hover:text-primary transition-colors duration-200">Menghidupkan Subuh Berjamaah</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Menghidupkan semangat sholat subuh berjamaah di setiap masjid Tangerang Selatan.</p>
                         </div>
                     </div>
-                @endforeach
+                </div>
+
+                {{-- Misi 2 --}}
+                <div class="group reveal bg-white rounded-2xl border border-gray-100 p-8 hover:border-gold/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="transition-delay: 80ms">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-gold group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-5 h-5 text-gold group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1.5 group-hover:text-gold transition-colors duration-200">Menguatkan Ukhuwah</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Menguatkan ukhuwah Islamiyah lintas masyarakat tanpa memandang latar belakang.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Misi 3 --}}
+                <div class="group reveal bg-white rounded-2xl border border-gray-100 p-8 hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="transition-delay: 160ms">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1.5 group-hover:text-primary transition-colors duration-200">Program Sosial Nyata</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Menghadirkan program sosial yang nyata dan bermanfaat bagi masyarakat luas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Misi 4 --}}
+                <div class="group reveal bg-white rounded-2xl border border-gray-100 p-8 hover:border-gold/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style="transition-delay: 200ms">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-gold/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-gold group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-5 h-5 text-gold group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1.5 group-hover:text-gold transition-colors duration-200">Merangkul Generasi Muda</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Mengajak generasi muda lebih dekat dengan masjid melalui pendekatan modern.</p>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Misi 5 --}}
+                <div class="group reveal bg-white rounded-2xl border border-gray-100 p-8 hover:border-primary/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 md:col-span-2 lg:col-span-1" style="transition-delay: 240ms">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                            <svg class="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1.5 group-hover:text-primary transition-colors duration-200">Masjid Pusat Pelayanan</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Menjadikan masjid sebagai pusat pelayanan umat yang hidup dan berdaya.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

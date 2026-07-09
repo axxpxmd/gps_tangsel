@@ -4,7 +4,7 @@
 @section('page_title', 'Program Unggulan')
 
 @section('content')
-<div class="max-w-7xl mx-auto">
+<div>
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
             <h2 class="text-lg font-extrabold text-gray-900">Daftar Program</h2>
@@ -70,7 +70,7 @@
                                     </div>
                                 </td>
                                 <td class="px-5 py-4">
-                                    <p class="text-sm font-semibold text-gray-900">{{ $program->title }}</p>
+                                    <a href="{{ route('console.programs.show', $program) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200">{{ $program->title }}</a>
                                 </td>
                                 <td class="px-5 py-4 hidden lg:table-cell">
                                     <p class="text-xs text-gray-500 line-clamp-2 max-w-[280px]">{{ $program->description }}</p>

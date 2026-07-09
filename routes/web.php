@@ -27,6 +27,6 @@ Route::prefix('console')->name('console.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
-        Route::resource('programs', ProgramController::class)->except(['show']);
+        Route::resource('programs', ProgramController::class);
     });
 });

@@ -42,6 +42,11 @@ class ProgramController extends Controller
         return redirect()->route('console.programs.index')->with('success', 'Program berhasil ditambahkan.');
     }
 
+    public function show(Program $program): View
+    {
+        return view('console.programs.show', compact('program'));
+    }
+
     public function edit(Program $program): View
     {
         return view('console.programs.edit', compact('program'));

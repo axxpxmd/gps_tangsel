@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Console\DashboardController;
+use App\Http\Controllers\Console\LoginController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\Berita;
 use App\Livewire\BeritaShow;
@@ -16,3 +18,13 @@ Route::get('/pengurus', Pengurus::class)->name('pengurus');
 Route::get('/program', Program::class)->name('program');
 Route::get('/berita', Berita::class)->name('berita');
 Route::get('/berita/{slug}', BeritaShow::class)->name('berita.show');
+
+Route::prefix('console')->name('console.')->group(function () {
+    Route::get('/login', [LoginController::class, 'show'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    });
+});

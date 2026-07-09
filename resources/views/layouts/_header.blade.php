@@ -49,7 +49,7 @@
                                         <span class="block text-[11px] text-gray-400 font-normal">Mengenal GPS TangSel</span>
                                     </div>
                                 </a>
-                                <a href="{{ route('tentang') }}#visi-misi" wire:navigate class="flex items-center gap-3 px-5 py-3 text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 rounded-lg mx-1 transition-all duration-200">
+                                <a href="{{ route('visi-misi') }}" wire:navigate class="flex items-center gap-3 px-5 py-3 text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 rounded-lg mx-1 transition-all duration-200">
                                     <div class="w-8 h-8 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
                                         <svg class="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
@@ -138,7 +138,7 @@
                             <a href="{{ route('tentang') }}#tentang-kami" wire:navigate class="mobile-nav-link block px-4 py-2 text-sm rounded-lg navbar-link transition-colors duration-200">
                                 Tentang Kami
                             </a>
-                            <a href="{{ route('tentang') }}#visi-misi" wire:navigate class="mobile-nav-link block px-4 py-2 text-sm rounded-lg navbar-link transition-colors duration-200">
+                            <a href="{{ route('visi-misi') }}" wire:navigate class="mobile-nav-link block px-4 py-2 text-sm rounded-lg navbar-link transition-colors duration-200">
                                 Visi & Misi
                             </a>
                             <a href="{{ route('tentang') }}#pengurus" wire:navigate class="mobile-nav-link block px-4 py-2 text-sm rounded-lg navbar-link transition-colors duration-200">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Partner;
 use App\Models\Program;
 use App\Services\PrayerTimesService;
 use App\Services\YoutubeService;
@@ -24,6 +25,7 @@ class WelcomeController extends Controller
             'articles' => $this->generateArticles(),
             'videos' => $this->youtube->latestVideos(12),
             'programs' => Program::where('is_active', true)->latest()->get(),
+            'partners' => Partner::where('is_active', true)->latest()->get(),
         ]);
     }
 

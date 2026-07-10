@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Console\ActivityController;
+use App\Http\Controllers\Console\BoardMemberController;
 use App\Http\Controllers\Console\DashboardController;
 use App\Http\Controllers\Console\LoginController;
 use App\Http\Controllers\Console\PartnerController;
@@ -32,5 +33,6 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('programs', ProgramController::class);
         Route::resource('partners', PartnerController::class);
         Route::resource('activities', ActivityController::class);
+        Route::resource('board-members', BoardMemberController::class);
     });
 });

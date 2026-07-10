@@ -267,6 +267,16 @@
                 calNextBtn.addEventListener('click', function () {
                     if (calCurrentIdx < calMonthKeys.length - 1) { calCurrentIdx++; calSelectedDay = null; renderCalendar(); }
                 });
+
+                // Auto-select today if it has events
+                const todayMonth = calTodayKey();
+                if (calMonthKeys[calCurrentIdx] === todayMonth) {
+                    const todayEvents = (calEvents[todayMonth] || []).filter(e => e.day === calTodayDay());
+                    if (todayEvents.length > 0) {
+                        calSelectedDay = calTodayDay();
+                    }
+                }
+
                 renderCalendar();
             }
 

@@ -1,5 +1,5 @@
 {{-- ============ PENUTUP SECTION ============ --}}
-<section class="relative overflow-hidden py-14 lg:py-20" id="kontak">
+<section class="relative overflow-hidden py-14 lg:py-20" id="penutup">
     <div class="absolute inset-0 bg-gradient-to-br from-dawn-deep via-dawn-glow to-primary-dark"></div>
     <div class="absolute inset-0 islamic-pattern opacity-[0.07]"></div>
     <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[40rem] h-40 bg-gold/25 rounded-full blur-3xl"></div>

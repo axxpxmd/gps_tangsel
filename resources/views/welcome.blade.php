@@ -13,6 +13,7 @@
     @include('home._kalender')
     @include('home._youtube')
     @include('home._partner')
+    @include('home._kontribusi')
     @include('home._kolaborasi')
     @include('home._cta')
 @endsection

@@ -1,12 +1,12 @@
 {{-- ============ KALENDER KEGIATAN SECTION ============ --}}
-<section class="relative py-20 lg:py-28 bg-gradient-to-br from-dawn-night via-primary-dark to-dawn-deep overflow-hidden" id="kalender">
+<section class="relative py-16 lg:py-20 bg-gradient-to-br from-dawn-night via-primary-dark to-dawn-deep overflow-hidden" id="kalender">
     <div class="absolute inset-0 islamic-pattern opacity-[0.05]"></div>
     <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
     <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {{-- Section Header --}}
-        <div class="max-w-3xl mx-auto text-center mb-14 lg:mb-20 reveal">
+        <div class="max-w-3xl mx-auto text-center mb-10 lg:mb-14 reveal">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 mb-5">
                 <span class="w-2 h-2 rounded-full bg-gold animate-pulse"></span>
                 <span class="text-xs font-semibold text-gold-light uppercase tracking-wider">Agenda Kegiatan</span>
@@ -26,7 +26,7 @@
             <div class="lg:col-span-2 reveal">
                 <div class="bg-white rounded-3xl shadow-xl shadow-black/10 overflow-hidden">
                     {{-- Month Header --}}
-                    <div class="bg-gradient-to-r from-primary to-primary-dark px-6 py-5 flex items-center justify-between">
+                    <div class="bg-gradient-to-r from-primary to-primary-dark px-4 py-3 flex items-center justify-between">
                         <button type="button" id="cal-prev" class="w-9 h-9 rounded-xl bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed" aria-label="Bulan sebelumnya">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
                         </button>
@@ -42,7 +42,7 @@
                     {{-- Weekday Headers --}}
                     <div class="grid grid-cols-7 gap-px bg-gray-100">
                         @foreach (['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'] as $wd)
-                            <div class="bg-white text-center text-[10px] font-bold text-gray-400 uppercase tracking-wider py-3">{{ $wd }}</div>
+                            <div class="bg-white text-center text-[10px] font-bold text-gray-400 uppercase tracking-wider py-2">{{ $wd }}</div>
                         @endforeach
                     </div>
 
@@ -54,7 +54,7 @@
 
             {{-- Detail Panel --}}
             <div class="lg:col-span-3 reveal" style="transition-delay: 100ms">
-                <div class="bg-white rounded-3xl shadow-xl shadow-black/10 overflow-hidden min-h-[24rem]">
+                <div class="bg-white rounded-3xl shadow-xl shadow-black/10 overflow-hidden min-h-[22rem]">
                     {{-- Poster --}}
                     <div class="relative aspect-[16/9] overflow-hidden bg-gray-100 cursor-pointer group/img" id="cal-image-wrapper">
                         <img src="{{ asset('poster.webp') }}" alt="GPS TangSel" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500" id="cal-detail-image">
@@ -67,10 +67,10 @@
                     </div>
 
                     {{-- Content --}}
-                    <div class="p-6 sm:p-7" id="cal-detail">
-                        <div class="text-center py-16">
-                            <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gray-100 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <div class="p-4 sm:p-5" id="cal-detail">
+                        <div class="text-center py-10">
+                            <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gray-100 flex items-center justify-center">
+                                <svg class="w-6 h-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
@@ -201,7 +201,7 @@
             }
 
             function renderEmptyDetail() {
-                calDetail.innerHTML = '<div class="text-center py-16"><div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gray-100 flex items-center justify-center"><svg class="w-8 h-8 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><p class="text-sm text-gray-400 font-medium">Pilih tanggal bertanda pada kalender<br>untuk melihat detail kegiatan.</p></div>';
+                calDetail.innerHTML = '<div class="text-center py-10"><div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-gray-100 flex items-center justify-center"><svg class="w-6 h-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div><p class="text-sm text-gray-400 font-medium">Pilih tanggal bertanda pada kalender<br>untuk melihat detail kegiatan.</p></div>';
                 if (calDetailImage) calDetailImage.parentElement.classList.add('hidden');
             }
 
@@ -225,33 +225,33 @@
 
                 let html = '';
                 events.forEach((e, idx) => {
-                    html += '<div class="' + (idx > 0 ? 'pt-5 mt-5 border-t border-gray-100' : '') + '">';
+                    html += '<div class="' + (idx > 0 ? 'pt-4 mt-4 border-t border-gray-100' : '') + '">';
 
-                    html += '<div class="flex flex-wrap items-center gap-2 mb-3">';
-                    html += '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider border ' + (calBadgeBg[e.color] || calBadgeBg.gold) + '">';
-                    html += '<span class="w-1.5 h-1.5 rounded-full ' + (calDotColors[e.color] || 'bg-gold') + '"></span>';
+                    html += '<div class="flex flex-wrap items-center gap-2 mb-2">';
+                    html += '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ' + (calBadgeBg[e.color] || calBadgeBg.gold) + '">';
+                    html += '<span class="w-1 h-1 rounded-full ' + (calDotColors[e.color] || 'bg-gold') + '"></span>';
                     html += e.program;
                     html += '</span>';
                     if (events.length > 1) {
-                        html += '<span class="text-[10px] text-gray-400 font-medium">Kegiatan ' + (idx + 1) + '/' + events.length + '</span>';
+                        html += '<span class="text-[10px] text-gray-400 font-medium">' + (idx + 1) + '/' + events.length + '</span>';
                     }
                     html += '</div>';
 
-                    html += '<h4 class="text-xl font-extrabold text-gray-900 mb-4">' + e.title + '</h4>';
+                    html += '<h4 class="text-lg font-extrabold text-gray-900 mb-2">' + e.title + '</h4>';
 
-                    html += '<div class="space-y-3 mb-5">';
-                    html += '<div class="flex items-center gap-3 text-sm text-gray-600">';
-                    html += '<div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
+                    html += '<div class="space-y-2 mb-3">';
+                    html += '<div class="flex items-center gap-2 text-sm text-gray-600">';
+                    html += '<svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>';
                     html += '<span class="font-medium">' + calDateStr(year, month, e.day) + ' · ' + e.time + '</span>';
                     html += '</div>';
-                    html += '<div class="flex items-start gap-3 text-sm text-gray-600">';
-                    html += '<div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0"><svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
-                    html += '<span class="mt-1 font-medium">' + e.location + '</span>';
+                    html += '<div class="flex items-center gap-2 text-sm text-gray-600">';
+                    html += '<svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>';
+                    html += '<span class="font-medium">' + e.location + '</span>';
                     html += '</div>';
                     html += '</div>';
 
-                    html += '<div class="p-5 rounded-2xl bg-gray-50 border border-gray-100">';
-                    html += '<p class="text-sm text-gray-600 leading-relaxed">' + e.description + '</p>';
+                    html += '<div class="p-3 rounded-xl bg-gray-50 border border-gray-100">';
+                    html += '<p class="text-xs text-gray-600 leading-relaxed">' + e.description + '</p>';
                     html += '</div>';
 
                     html += '</div>';

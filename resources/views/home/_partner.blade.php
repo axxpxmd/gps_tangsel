@@ -60,9 +60,6 @@
                                         @endif
                                     </div>
                                     <h3 class="text-sm lg:text-base font-bold text-gray-900 text-center group-hover:text-primary transition-colors duration-200">{{ $partner->name }}</h3>
-                                    @if ($partner->url)
-                                        <a href="{{ $partner->url }}" target="_blank" rel="noopener" class="text-xs text-primary hover:underline mt-1">{{ parse_url($partner->url, PHP_URL_HOST) }}</a>
-                                    @endif
                                 </div>
                             </div>
                         @endforeach

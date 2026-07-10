@@ -27,20 +27,6 @@
             <p class="text-[11px] text-gray-400 mt-1">Nama institusi atau organisasi partner.</p>
         </div>
 
-        {{-- URL --}}
-        <div>
-            <label for="url" class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-1.5">
-                <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>
-                </svg>
-                URL Website
-            </label>
-            <input type="text" id="url" name="url" value="{{ old('url', $partner->url ?? '') }}"
-                class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all font-mono"
-                placeholder="https://dinkes.tangerangselatankota.go.id">
-            <p class="text-[11px] text-gray-400 mt-1">URL website partner (opsional).</p>
-        </div>
-
         {{-- Logo --}}
         <div>
             <label class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-2">

@@ -46,7 +46,6 @@
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-12">#</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-20">Logo</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Partner</th>
-                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden md:table-cell">URL</th>
                             <th class="text-center px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-24">Status</th>
                             <th class="text-right px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-28">Aksi</th>
                         </tr>
@@ -70,9 +69,6 @@
                                 </td>
                                 <td class="px-5 py-4">
                                     <a href="{{ route('console.partners.show', $partner) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200">{{ $partner->name }}</a>
-                                </td>
-                                <td class="px-5 py-4 hidden md:table-cell">
-                                    <p class="text-xs text-gray-500 line-clamp-1 max-w-[200px]">{{ $partner->url ?: '-' }}</p>
                                 </td>
                                 <td class="px-5 py-4 text-center">
                                     @if ($partner->is_active)

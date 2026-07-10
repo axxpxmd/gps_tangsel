@@ -3,6 +3,7 @@
 use App\Http\Controllers\Console\ActivityController;
 use App\Http\Controllers\Console\BoardMemberController;
 use App\Http\Controllers\Console\DashboardController;
+use App\Http\Controllers\Console\GalleryController;
 use App\Http\Controllers\Console\LoginController;
 use App\Http\Controllers\Console\PartnerController;
 use App\Http\Controllers\Console\ProgramController;
@@ -34,5 +35,7 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('partners', PartnerController::class);
         Route::resource('activities', ActivityController::class);
         Route::resource('board-members', BoardMemberController::class);
+        Route::resource('galleries', GalleryController::class);
+        Route::delete('galleries/{gallery}/images/{image}', [GalleryController::class, 'deleteImage'])->name('galleries.delete-image');
     });
 });

@@ -22,7 +22,7 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'username' => ['required', 'string'],
             'password' => ['required'],
         ]);
 
@@ -33,8 +33,8 @@ class LoginController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password tidak valid.',
-        ])->onlyInput('email');
+            'username' => 'Username atau password tidak valid.',
+        ])->onlyInput('username');
     }
 
     public function destroy(Request $request)

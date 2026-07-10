@@ -14,7 +14,7 @@ class Partner extends Model
 
     protected $fillable = [
         'name',
-        'description',
+        'url',
         'gambar',
         'is_active',
     ];

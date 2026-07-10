@@ -60,7 +60,7 @@
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-sm font-semibold text-white truncate">{{ auth()->user()->name }}</p>
-                <p class="text-[11px] text-white/40 truncate">{{ auth()->user()->email }}</p>
+                <p class="text-[11px] text-white/40 truncate">{{ auth()->user()->username }}</p>
             </div>
         </div>
         <form action="{{ route('console.logout') }}" method="POST" class="mt-3">
@@ -132,7 +132,7 @@
             </div>
             <div class="flex-1 min-w-0">
                 <p class="text-sm font-semibold text-white truncate">{{ auth()->user()->name }}</p>
-                <p class="text-[11px] text-white/40 truncate">{{ auth()->user()->email }}</p>
+                <p class="text-[11px] text-white/40 truncate">{{ auth()->user()->username }}</p>
             </div>
         </div>
         <form action="{{ route('console.logout') }}" method="POST" class="mt-3">

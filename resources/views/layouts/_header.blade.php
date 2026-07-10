@@ -135,7 +135,7 @@
                             </svg>
                         </button>
                         <div class="hidden pl-4 space-y-1 mt-1" id="mobile-profil-submenu">
-                            <a href="{{ route('tentang') }}#tentang-kami" wire:navigate class="mobile-nav-link block px-4 py-2 text-sm rounded-lg navbar-link transition-colors duration-200">
+                            <a href="{{ route('tentang') }}" wire:navigate class="mobile-nav-link block px-4 py-2 text-sm rounded-lg navbar-link transition-colors duration-200">
                                 Tentang Kami
                             </a>
                             <a href="{{ route('visi-misi') }}" wire:navigate class="mobile-nav-link block px-4 py-2 text-sm rounded-lg navbar-link transition-colors duration-200">

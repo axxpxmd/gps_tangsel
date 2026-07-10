@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Console\ActivityController;
 use App\Http\Controllers\Console\DashboardController;
 use App\Http\Controllers\Console\LoginController;
 use App\Http\Controllers\Console\PartnerController;
@@ -30,5 +31,6 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
         Route::resource('programs', ProgramController::class);
         Route::resource('partners', PartnerController::class);
+        Route::resource('activities', ActivityController::class);
     });
 });

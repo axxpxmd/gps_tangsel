@@ -50,6 +50,16 @@
                 <span class="ml-auto w-1.5 h-1.5 rounded-full bg-gold"></span>
             @endif
         </a>
+
+        <a href="{{ route('console.activities.index') }}" class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('console.activities.*') ? 'bg-white/10 text-white shadow-sm' : 'text-white/50 hover:text-white hover:bg-white/5' }}">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 {{ request()->routeIs('console.activities.*') ? 'bg-primary text-white shadow-sm' : 'bg-white/5 text-white/40 group-hover:bg-white/10 group-hover:text-white/70' }}">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            </span>
+            <span>Agenda</span>
+            @if (request()->routeIs('console.activities.*'))
+                <span class="ml-auto w-1.5 h-1.5 rounded-full bg-gold"></span>
+            @endif
+        </a>
     </nav>
 
     {{-- User Info --}}
@@ -122,6 +132,13 @@
                 </svg>
             </span>
             <span>Partner</span>
+        </a>
+
+        <a href="{{ route('console.activities.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
+            <span class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/40">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            </span>
+            <span>Agenda</span>
         </a>
     </nav>
 

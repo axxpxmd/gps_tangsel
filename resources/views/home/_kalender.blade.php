@@ -49,27 +49,6 @@
                     {{-- Day Grid --}}
                     <div class="grid grid-cols-7 gap-px bg-gray-100" id="cal-grid"></div>
 
-                    {{-- Legend --}}
-                    <div class="px-5 py-4 border-t border-gray-100 bg-gray-50/50">
-                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5">
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-gold"></span>
-                                <span class="text-[10px] font-medium text-gray-500">Safari Subuh</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                                <span class="text-[10px] font-medium text-gray-500">Pasar Bahagia</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                                <span class="text-[10px] font-medium text-gray-500">Puskesmas</span>
-                            </div>
-                            <div class="flex items-center gap-1.5">
-                                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-                                <span class="text-[10px] font-medium text-gray-500">Thibbun</span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -186,9 +165,9 @@
                     if (isToday) {
                         classes += '!bg-primary text-white shadow-inner ';
                     } else if (hasEvent) {
-                        classes += 'cursor-pointer hover:!bg-gray-100 ';
+                        classes += 'cursor-pointer !bg-rose-100 text-rose-700 hover:!bg-rose-200 font-semibold ';
                         if (isSelected) {
-                            classes += '!bg-gray-900 text-white ';
+                            classes += '!bg-rose-200 ring-2 ring-rose-300 ';
                         }
                     } else {
                         classes += 'cursor-pointer hover:!bg-gray-100 ';
@@ -203,15 +182,6 @@
                         html += '<span class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">' + d + '</span>';
                     } else {
                         html += '<span>' + d + '</span>';
-                    }
-
-                    if (hasEvent && !isSelected) {
-                        html += '<span class="flex items-center gap-0.5 mt-1">';
-                        const colors = [...new Set(dayEvents.map(e => e.color))].slice(0, 3);
-                        colors.forEach(c => {
-                            html += '<span class="w-1.5 h-1.5 rounded-full ' + (calDotColors[c] || 'bg-gold') + '"></span>';
-                        });
-                        html += '</span>';
                     }
 
                     html += '</button>';

@@ -37,6 +37,7 @@
                 <table class="w-full min-w-[800px]">
                     <thead>
                         <tr class="border-b border-gray-100 bg-gray-50/80">
+                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-20">Gambar</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Kegiatan</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Tanggal & Waktu</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden md:table-cell">Lokasi</th>
@@ -47,6 +48,15 @@
                     <tbody class="divide-y divide-gray-50">
                         @foreach ($activities as $activity)
                             <tr class="hover:bg-gray-50/50 transition-colors duration-150">
+                                <td class="px-5 py-4">
+                                    <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
+                                        @if ($activity->gambar_url)
+                                            <img src="{{ $activity->gambar_url }}" alt="{{ $activity->title }}" class="w-full h-full object-cover">
+                                        @else
+                                            <svg class="w-5 h-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+                                        @endif
+                                    </div>
+                                </td>
                                 <td class="px-5 py-4">
                                     <a href="{{ route('console.activities.show', $activity) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200">{{ $activity->title }}</a>
                                 </td>

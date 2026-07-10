@@ -1,11 +1,11 @@
 <div>
     {{-- Hero Section --}}
-    <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-dawn-night">
+    <section class="relative min-h-[35vh] sm:min-h-[45vh] flex items-center justify-center overflow-hidden bg-dawn-night">
         <div class="absolute inset-0 islamic-pattern opacity-[0.04]"></div>
         <div class="absolute -top-24 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-24 left-10 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
 
-        <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
+        <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 sm:py-16">
             <div class="flex items-center justify-center gap-3 mb-6">
                 <div class="w-10 h-0.5 bg-gradient-to-r from-primary to-gold"></div>
                 <span class="text-xs font-semibold text-gold-light uppercase tracking-wider">Program Unggulan</span>

@@ -227,31 +227,43 @@
                 events.forEach((e, idx) => {
                     html += '<div class="' + (idx > 0 ? 'pt-4 mt-4 border-t border-gray-100' : '') + '">';
 
-                    html += '<div class="flex flex-wrap items-center gap-2 mb-2">';
-                    html += '<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ' + (calBadgeBg[e.color] || calBadgeBg.gold) + '">';
-                    html += '<span class="w-1 h-1 rounded-full ' + (calDotColors[e.color] || 'bg-gold') + '"></span>';
-                    html += e.program;
+                    html += '<div class="flex flex-wrap items-center gap-2 mb-3">';
+                    html += '<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider border border-primary/20">';
+                    html += '<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>';
+                    html += 'Kegiatan';
                     html += '</span>';
                     if (events.length > 1) {
                         html += '<span class="text-[10px] text-gray-400 font-medium">' + (idx + 1) + '/' + events.length + '</span>';
                     }
                     html += '</div>';
 
-                    html += '<h4 class="text-lg font-extrabold text-gray-900 mb-2">' + e.title + '</h4>';
+                    html += '<h4 class="text-lg font-extrabold text-gray-900 mb-3">' + e.title + '</h4>';
 
-                    html += '<div class="space-y-2 mb-3">';
-                    html += '<div class="flex items-center gap-2 text-sm text-gray-600">';
-                    html += '<svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>';
-                    html += '<span class="font-medium">' + calDateStr(year, month, e.day) + ' · ' + e.time + '</span>';
-                    html += '</div>';
-                    html += '<div class="flex items-center gap-2 text-sm text-gray-600">';
-                    html += '<svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>';
-                    html += '<span class="font-medium">' + e.location + '</span>';
-                    html += '</div>';
+                    html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">';
+                    html += '<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-gray-50">';
+                    html += '<div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center flex-shrink-0 shadow-sm"><svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>';
+                    html += '<div>';
+                    html += '<p class="text-[10px] text-gray-400 uppercase font-semibold">Tanggal</p>';
+                    html += '<p class="text-xs font-bold text-gray-800">' + calDateStr(year, month, e.day) + '</p>';
+                    html += '<p class="text-xs text-gray-500 mt-0.5">' + e.time + '</p>';
+                    html += '</div></div>';
+
+                    html += '<div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-gray-50">';
+                    html += '<div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center flex-shrink-0 shadow-sm"><svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>';
+                    html += '<div>';
+                    html += '<p class="text-[10px] text-gray-400 uppercase font-semibold">Lokasi</p>';
+                    html += '<p class="text-xs font-bold text-gray-800">' + e.location + '</p>';
+                    if (e.latitude && e.longitude) {
+                        html += '<a href="https://www.google.com/maps?q=' + e.latitude + ',' + e.longitude + '" target="_blank" class="inline-flex items-center gap-1 text-[11px] text-primary hover:underline mt-1 font-medium">';
+                        html += '<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>';
+                        html += 'Buka di Google Maps';
+                        html += '</a>';
+                    }
+                    html += '</div></div>';
                     html += '</div>';
 
-                    html += '<div class="p-3 rounded-xl bg-gray-50 border border-gray-100">';
-                    html += '<p class="text-xs text-gray-600 leading-relaxed">' + e.description + '</p>';
+                    html += '<div class="p-4 rounded-2xl bg-gray-50 border border-gray-100">';
+                    html += '<p class="text-sm text-gray-600 leading-relaxed">' + e.description + '</p>';
                     html += '</div>';
 
                     html += '</div>';

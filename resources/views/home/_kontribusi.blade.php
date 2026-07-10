@@ -56,7 +56,7 @@
                         </div>
                         <div>
                             <p class="text-xs font-bold text-emerald-700">Konfirmasi Transfer</p>
-                            <p class="text-sm font-extrabold text-emerald-600">0877 9401 0968 <span class="text-xs font-normal text-emerald-500">(K)</span></p>
+                            <p class="text-sm font-extrabold text-emerald-600">0877 9401 0968</p>
                         </div>
                     </div>
                 </div>

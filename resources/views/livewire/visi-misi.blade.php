@@ -22,7 +22,7 @@
     </section>
 
     {{-- Visi Section --}}
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden">
+    <section class="relative py-14 lg:py-20 bg-white overflow-hidden">
         <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="reveal">
@@ -53,10 +53,10 @@
     </section>
 
     {{-- Misi Section --}}
-    <section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden">
+    <section class="relative py-14 lg:py-20 bg-[#F5F5F5] overflow-hidden">
         <div class="absolute bottom-0 left-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl mb-14 lg:mb-20 reveal">
+            <div class="max-w-2xl mb-10 lg:mb-14 reveal">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
                     <span class="text-xs font-semibold text-primary uppercase tracking-wider">Misi</span>
@@ -150,10 +150,10 @@
     </section>
 
     {{-- Legalitas Section --}}
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden">
+    <section class="relative py-14 lg:py-20 bg-white overflow-hidden">
         <div class="absolute top-0 right-0 w-80 h-80 bg-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl mb-14 lg:mb-20 reveal">
+            <div class="max-w-2xl mb-10 lg:mb-14 reveal">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
                     <span class="text-xs font-semibold text-primary uppercase tracking-wider">Legalitas</span>

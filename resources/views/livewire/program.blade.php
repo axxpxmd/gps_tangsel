@@ -22,7 +22,7 @@
     </section>
 
     {{-- All Programs Grid --}}
-    <section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden">
+    <section class="relative py-14 lg:py-20 bg-[#F5F5F5] overflow-hidden">
         <div class="absolute inset-0 islamic-pattern-dark opacity-[0.015]"></div>
         <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div class="absolute bottom-0 left-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
@@ -80,7 +80,7 @@
     </section>
 
     {{-- CTA --}}
-    <section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden">
+    <section class="relative py-14 lg:py-20 bg-[#F5F5F5] overflow-hidden">
         <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
             <div class="rounded-3xl bg-gradient-to-br from-primary to-dawn-deep p-10 lg:p-14">
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">

@@ -1,5 +1,5 @@
 {{-- ============ STATISTIK / IMPACT SECTION ============ --}}
-<section class="relative overflow-hidden py-20 lg:py-24" id="statistik">
+<section class="relative overflow-hidden py-14 lg:py-20" id="statistik">
     <div class="absolute inset-0 bg-gradient-to-br from-dawn-night via-dawn-deep to-primary-dark"></div>
     <div class="absolute inset-0 islamic-pattern opacity-[0.06]"></div>
     <div class="absolute -top-20 left-1/3 w-80 h-80 bg-gold/15 rounded-full blur-3xl"></div>

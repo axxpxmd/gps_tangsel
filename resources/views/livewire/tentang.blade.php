@@ -22,7 +22,7 @@
     </section>
 
     {{-- Tentang GPS Tangsel --}}
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="tentang-kami">
+    <section class="relative py-14 lg:py-20 bg-white overflow-hidden" id="tentang-kami">
         <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div class="absolute bottom-0 left-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,10 +79,10 @@
     </section>
 
     {{-- Mengapa Kami Bergerak --}}
-    <section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="visi-misi">
+    <section class="relative py-14 lg:py-20 bg-[#F5F5F5] overflow-hidden" id="visi-misi">
         <div class="absolute inset-0 islamic-pattern-dark opacity-[0.015]"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl mb-14 lg:mb-20 reveal">
+            <div class="max-w-2xl mb-10 lg:mb-14 reveal">
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-10 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
                     <span class="text-xs font-semibold text-primary uppercase tracking-wider">Misi Kami</span>
@@ -140,7 +140,7 @@
     </section>
 
     {{-- CTA --}}
-    <section class="relative py-20 lg:py-28 bg-white overflow-hidden">
+    <section class="relative py-14 lg:py-20 bg-white overflow-hidden">
         <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
             <div class="rounded-3xl bg-gradient-to-br from-primary to-dawn-deep p-10 lg:p-14">
                 <span class="text-xs font-semibold text-gold-light uppercase tracking-wider">Mari Bergabung</span>

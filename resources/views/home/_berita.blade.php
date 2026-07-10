@@ -1,5 +1,5 @@
 {{-- ============ BERITA & ARTIKEL SECTION ============ --}}
-<section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="berita">
+<section class="relative py-14 lg:py-20 bg-[#F5F5F5] overflow-hidden" id="berita">
     <div class="absolute inset-0 islamic-pattern-dark opacity-[0.02]"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

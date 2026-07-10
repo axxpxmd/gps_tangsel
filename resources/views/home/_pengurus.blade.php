@@ -1,9 +1,9 @@
 {{-- ============ PENGURUS INTI ============ --}}
-<section class="relative py-20 lg:py-28 bg-white overflow-hidden" id="pengurus">
+<section class="relative py-14 lg:py-20 bg-white overflow-hidden" id="pengurus">
     <div class="absolute top-0 right-0 w-80 h-80 bg-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
     <div class="absolute bottom-0 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-2xl mx-auto mb-14 lg:mb-20 text-center reveal">
+        <div class="max-w-2xl mx-auto mb-10 lg:mb-14 text-center reveal">
             <div class="flex items-center justify-center gap-3 mb-4">
                 <div class="w-10 h-0.5 bg-gradient-to-r from-primary to-gold"></div>
                 <span class="text-xs font-semibold text-primary uppercase tracking-wider">Tim Kami</span>

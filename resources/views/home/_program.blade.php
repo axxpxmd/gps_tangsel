@@ -1,9 +1,9 @@
 {{-- ============ PROGRAM SECTION ============ --}}
-<section class="relative py-20 lg:py-28 bg-[#F5F5F5] overflow-hidden" id="program">
+<section class="relative py-14 lg:py-20 bg-[#F5F5F5] overflow-hidden" id="program">
     <div class="absolute inset-0 islamic-pattern-dark opacity-[0.015]"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {{-- Section Header --}}
-        <div class="text-center max-w-2xl mx-auto mb-14 lg:mb-20 reveal">
+        <div class="text-center max-w-2xl mx-auto mb-10 lg:mb-14 reveal">
             <div class="flex items-center justify-center gap-3 mb-4">
                 <div class="w-10 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
                 <span class="text-xs font-semibold text-primary uppercase tracking-wider">Program Unggulan</span>

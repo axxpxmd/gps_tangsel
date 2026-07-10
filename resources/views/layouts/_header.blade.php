@@ -38,7 +38,7 @@
                         <div class="absolute top-full left-1/2 -translate-x-1/2 pt-3 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                             <div class="relative bg-white rounded-xl shadow-xl shadow-black/15 border border-gray-200 py-3 min-w-[280px]">
                                 <div class="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 bg-white border-l border-t border-gray-200"></div>
-                                <a href="{{ route('tentang') }}#tentang-kami" wire:navigate class="flex items-center gap-3 px-5 py-3 text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 rounded-lg mx-1 transition-all duration-200">
+                                <a href="{{ route('tentang') }}" wire:navigate class="flex items-center gap-3 px-5 py-3 text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 rounded-lg mx-1 transition-all duration-200">
                                     <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                                         <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>

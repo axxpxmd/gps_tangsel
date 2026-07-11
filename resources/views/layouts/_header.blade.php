@@ -94,7 +94,7 @@
                     </a>
 
                     {{-- Galeri --}}
-                    <a href="{{ url('/#galeri') }}" class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ route('galeri') }}" wire:navigate class="nav-link relative group px-4 py-2 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         <span>Galeri</span>
                         <span class="absolute bottom-0.5 left-1/2 -translate-x-1/2 h-0.5 w-0 group-hover:w-5 rounded-full bg-gradient-to-r from-gold-light to-gold transition-all duration-300"></span>
                     </a>
@@ -155,7 +155,7 @@
                     <a href="{{ route('berita') }}" wire:navigate class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         Berita
                     </a>
-                    <a href="{{ url('/#galeri') }}" class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
+                    <a href="{{ route('galeri') }}" wire:navigate class="mobile-nav-link block px-4 py-2.5 text-sm font-medium rounded-lg navbar-link transition-colors duration-200">
                         Galeri
                     </a>
                     <div class="pt-2">

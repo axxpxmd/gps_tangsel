@@ -1,6 +1,6 @@
 <div>
     {{-- Hero Section --}}
-    <section class="relative min-h-[35vh] sm:min-h-[45vh] flex items-center justify-center overflow-hidden bg-dawn-night">
+    <section class="relative min-h-[45vh] sm:min-h-[45vh] flex items-center justify-center overflow-hidden bg-dawn-night">
         <div class="absolute inset-0 islamic-pattern opacity-[0.04]"></div>
         <div class="absolute -top-24 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-24 left-10 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>

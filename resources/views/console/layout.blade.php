@@ -22,6 +22,7 @@
             --color-dawn-night: #0A1633;
             --color-dawn-deep: #1E2A5E;
             --font-sans: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+            --font-arabic: 'Amiri', 'Plus Jakarta Sans', serif;
         }
     </style>
     <style>

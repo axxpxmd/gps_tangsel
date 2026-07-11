@@ -37,6 +37,7 @@
                 <table class="w-full min-w-[700px]">
                     <thead>
                         <tr class="border-b border-gray-100 bg-gray-50/80">
+                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-12">#</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Teks Arab</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Terjemahan</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden md:table-cell">Sumber</th>
@@ -47,6 +48,7 @@
                     <tbody class="divide-y divide-gray-50">
                         @foreach ($hadits as $item)
                             <tr class="hover:bg-gray-50/50 transition-colors duration-150">
+                                <td class="px-5 py-4"><span class="text-xs font-medium text-gray-400">{{ $loop->iteration }}</span></td>
                                 <td class="px-5 py-4">
                                     <a href="{{ route('console.hadits.show', $item) }}" class="text-sm font-bold text-gray-900 hover:text-primary transition-colors duration-200 font-arabic leading-loose" dir="rtl">{{ \Illuminate\Support\Str::limit($item->arabic_text, 50) }}</a>
                                 </td>

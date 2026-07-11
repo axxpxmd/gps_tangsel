@@ -37,6 +37,7 @@
                 <table class="w-full min-w-[800px]">
                     <thead>
                         <tr class="border-b border-gray-100 bg-gray-50/80">
+                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-12">#</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-20">Gambar</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Kegiatan</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Tanggal & Waktu</th>
@@ -48,6 +49,7 @@
                     <tbody class="divide-y divide-gray-50">
                         @foreach ($activities as $activity)
                             <tr class="hover:bg-gray-50/50 transition-colors duration-150">
+                                <td class="px-5 py-4"><span class="text-xs font-medium text-gray-400">{{ $loop->iteration }}</span></td>
                                 <td class="px-5 py-4">
                                     <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
                                         @if ($activity->gambar_url)

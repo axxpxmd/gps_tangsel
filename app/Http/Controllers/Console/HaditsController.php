@@ -40,17 +40,17 @@ class HaditsController extends Controller
         return redirect()->route('console.hadits.index')->with('success', 'Hadits berhasil ditambahkan.');
     }
 
-    public function show(Hadits $hadits): View
+    public function show(Hadits $hadit): View
     {
-        return view('console.hadits.show', compact('hadits'));
+        return view('console.hadits.show', ['hadits' => $hadit]);
     }
 
-    public function edit(Hadits $hadits): View
+    public function edit(Hadits $hadit): View
     {
-        return view('console.hadits.edit', compact('hadits'));
+        return view('console.hadits.edit', ['hadits' => $hadit]);
     }
 
-    public function update(Request $request, Hadits $hadits): RedirectResponse
+    public function update(Request $request, Hadits $hadit): RedirectResponse
     {
         $validated = $request->validate([
             'arabic_text' => ['required', 'string'],
@@ -63,17 +63,17 @@ class HaditsController extends Controller
 
         // Hanya 1 yang boleh aktif
         if ($validated['is_active']) {
-            Hadits::where('id', '!=', $hadits->id)->update(['is_active' => false]);
+            Hadits::where('id', '!=', $hadit->id)->update(['is_active' => false]);
         }
 
-        $hadits->update($validated);
+        $hadit->update($validated);
 
         return redirect()->route('console.hadits.index')->with('success', 'Hadits berhasil diperbarui.');
     }
 
-    public function destroy(Hadits $hadits): RedirectResponse
+    public function destroy(Hadits $hadit): RedirectResponse
     {
-        $hadits->delete();
+        $hadit->delete();
 
         return redirect()->route('console.hadits.index')->with('success', 'Hadits berhasil dihapus.');
     }

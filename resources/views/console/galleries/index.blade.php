@@ -37,6 +37,7 @@
                 <table class="w-full min-w-[700px]">
                     <thead>
                         <tr class="border-b border-gray-100 bg-gray-50/80">
+                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-12">#</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Judul</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden sm:table-cell">Album</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden md:table-cell">Tanggal</th>
@@ -48,6 +49,7 @@
                     <tbody class="divide-y divide-gray-50">
                         @foreach ($galleries as $gallery)
                             <tr class="hover:bg-gray-50/50 transition-colors duration-150">
+                                <td class="px-5 py-4"><span class="text-xs font-medium text-gray-400">{{ $loop->iteration }}</span></td>
                                 <td class="px-5 py-4">
                                     <a href="{{ route('console.galleries.show', $gallery) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200">{{ $gallery->title }}</a>
                                     @if ($gallery->description)<p class="text-[11px] text-gray-400 line-clamp-1 mt-0.5">{{ $gallery->description }}</p>@endif

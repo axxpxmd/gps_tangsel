@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
+use App\Models\Hadits;
 use App\Models\Partner;
 use App\Models\Program;
 use App\Services\PrayerTimesService;
@@ -27,6 +28,7 @@ class WelcomeController extends Controller
             'videos' => $this->youtube->latestVideos(12),
             'programs' => Program::where('is_active', true)->latest()->get(),
             'partners' => Partner::where('is_active', true)->latest()->get(),
+            'hadits' => Hadits::where('is_active', true)->first(),
             'calendarEvents' => $this->getCalendarEvents(),
         ]);
     }

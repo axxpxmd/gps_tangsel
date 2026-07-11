@@ -80,6 +80,16 @@
                 <span class="ml-auto w-1.5 h-1.5 rounded-full bg-gold"></span>
             @endif
         </a>
+
+        <a href="{{ route('console.hadits.index') }}" class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('console.hadits.*') ? 'bg-white/10 text-white shadow-sm' : 'text-white/50 hover:text-white hover:bg-white/5' }}">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 {{ request()->routeIs('console.hadits.*') ? 'bg-primary text-white shadow-sm' : 'bg-white/5 text-white/40 group-hover:bg-white/10 group-hover:text-white/70' }}">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/></svg>
+            </span>
+            <span>Hadits</span>
+            @if (request()->routeIs('console.hadits.*'))
+                <span class="ml-auto w-1.5 h-1.5 rounded-full bg-gold"></span>
+            @endif
+        </a>
     </nav>
 
     {{-- User Info --}}

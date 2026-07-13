@@ -10,6 +10,7 @@ use App\Http\Controllers\Console\HaditsController;
 use App\Http\Controllers\Console\LoginController;
 use App\Http\Controllers\Console\PartnerController;
 use App\Http\Controllers\Console\ProgramController;
+use App\Http\Controllers\Console\TagController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\Berita;
 use App\Livewire\BeritaShow;
@@ -47,6 +48,7 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('galleries', GalleryController::class);
         Route::resource('hadits', HaditsController::class);
         Route::resource('categories', CategoryController::class);
+        Route::resource('tags', TagController::class);
         Route::resource('article-old', ArticleOldController::class)->only(['index', 'show']);
         Route::post('article-old/fetch', [ArticleOldController::class, 'fetch'])->name('article-old.fetch');
         Route::delete('galleries/{gallery}/images/{image}', [GalleryController::class, 'deleteImage'])->name('galleries.delete-image');

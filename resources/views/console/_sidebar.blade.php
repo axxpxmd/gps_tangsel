@@ -101,6 +101,16 @@
             @endif
         </a>
 
+        <a href="{{ route('console.tags.index') }}" class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('console.tags.*') ? 'bg-white/10 text-white shadow-sm' : 'text-white/50 hover:text-white hover:bg-white/5' }}">
+            <span class="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 {{ request()->routeIs('console.tags.*') ? 'bg-primary text-white shadow-sm' : 'bg-white/5 text-white/40 group-hover:bg-white/10 group-hover:text-white/70' }}">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.138 3.548.428a18.849 18.849 0 005.441-5.44c.71-1.157.51-2.625-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.88H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z"/></svg>
+            </span>
+            <span>Tag</span>
+            @if (request()->routeIs('console.tags.*'))
+                <span class="ml-auto w-1.5 h-1.5 rounded-full bg-gold"></span>
+            @endif
+        </a>
+
         <a href="{{ route('console.article-old.index') }}" class="group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('console.article-old.*') ? 'bg-white/10 text-white shadow-sm' : 'text-white/50 hover:text-white hover:bg-white/5' }}">
             <span class="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200 {{ request()->routeIs('console.article-old.*') ? 'bg-primary text-white shadow-sm' : 'bg-white/5 text-white/40 group-hover:bg-white/10 group-hover:text-white/70' }}">
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
@@ -210,6 +220,13 @@
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z"/></svg>
             </span>
             <span>Kategori</span>
+        </a>
+
+        <a href="{{ route('console.tags.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">
+            <span class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/40">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 2.25a3 3 0 00-3 3v4.318a3 3 0 00.879 2.121l9.58 9.581c.92.92 2.39 1.138 3.548.428a18.849 18.849 0 005.441-5.44c.71-1.157.51-2.625-.428-3.548l-9.58-9.581a3 3 0 00-2.122-.88H5.25zM6.375 7.5a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z"/></svg>
+            </span>
+            <span>Tag</span>
         </a>
 
         <a href="{{ route('console.article-old.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all duration-200">

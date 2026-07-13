@@ -14,19 +14,11 @@ class ArticleOld extends Model
     protected $table = 'article_old';
 
     protected $fillable = [
-        'wp_id',
         'title',
         'slug',
         'content',
         'excerpt',
-        'featured_image_url',
-        'wp_author_id',
-        'author_name',
-        'link',
         'status',
-        'format',
-        'categories',
-        'tags',
         'wp_created_at',
         'wp_modified_at',
     ];
@@ -34,8 +26,6 @@ class ArticleOld extends Model
     protected function casts(): array
     {
         return [
-            'categories' => 'array',
-            'tags' => 'array',
             'wp_created_at' => 'datetime',
             'wp_modified_at' => 'datetime',
         ];

@@ -44,30 +44,16 @@ class MigrateWordPressPosts extends Command
             }
 
             foreach ($posts as $wpPost) {
-                if (ArticleOld::where('wp_id', $wpPost['id'])->exists()) {
+                if (ArticleOld::where('slug', $wpPost['slug'])->exists()) {
                     continue;
                 }
 
-                $authorName = null;
-
-                if (! empty($wpPost['author'])) {
-                    $authorName = $this->fetchAuthorName($wpPost['author']);
-                }
-
                 ArticleOld::create([
-                    'wp_id' => $wpPost['id'],
                     'title' => html_entity_decode($wpPost['title']['rendered'], ENT_QUOTES | ENT_HTML5, 'UTF-8'),
                     'slug' => $wpPost['slug'],
                     'content' => $wpPost['content']['rendered'],
                     'excerpt' => $wpPost['excerpt']['rendered'] ?? null,
-                    'featured_image_url' => $wpPost['jetpack_featured_media_url'] ?: null,
-                    'wp_author_id' => $wpPost['author'],
-                    'author_name' => $authorName,
-                    'link' => $wpPost['link'],
                     'status' => $wpPost['status'],
-                    'format' => $wpPost['format'],
-                    'categories' => $wpPost['categories'] ?? [],
-                    'tags' => $wpPost['tags'] ?? [],
                     'wp_created_at' => $wpPost['date'],
                     'wp_modified_at' => $wpPost['modified'],
                 ]);
@@ -83,16 +69,5 @@ class MigrateWordPressPosts extends Command
         $this->info("Sukses! {$totalMigrated} artikel baru berhasil dimigrasi ke tabel article_old.");
 
         return Command::SUCCESS;
-    }
-
-    protected function fetchAuthorName(int $authorId): ?string
-    {
-        $response = Http::withoutVerifying()->get("https://public-api.wordpress.com/wp/v2/sites/gpstangsel.wordpress.com/users/{$authorId}");
-
-        if ($response->successful()) {
-            return $response->json('name');
-        }
-
-        return null;
     }
 }

@@ -43,14 +43,13 @@
     @else
         <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
-                <table class="w-full min-w-[900px]">
+                <table class="w-full min-w-[700px]">
                     <thead>
                         <tr class="border-b border-gray-100 bg-gray-50/80">
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-12">#</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Judul</th>
-                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider hidden md:table-cell">Penulis</th>
-                            <th class="text-center px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-28 hidden lg:table-cell">Status</th>
-                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-36 hidden xl:table-cell">Tanggal</th>
+                            <th class="text-center px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-28 hidden sm:table-cell">Status</th>
+                            <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-36 hidden lg:table-cell">Tanggal</th>
                             <th class="text-right px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-24">Aksi</th>
                         </tr>
                     </thead>
@@ -61,26 +60,10 @@
                                     <span class="text-xs font-medium text-gray-400">{{ $loop->iteration }}</span>
                                 </td>
                                 <td class="px-5 py-4">
-                                    <div class="flex items-center gap-3">
-                                        @if ($article->featured_image_url)
-                                            <img src="{{ $article->featured_image_url }}" alt="" class="w-10 h-10 rounded-lg object-cover bg-gray-100 flex-shrink-0">
-                                        @else
-                                            <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
-                                                <svg class="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/>
-                                                </svg>
-                                            </div>
-                                        @endif
-                                        <div class="min-w-0">
-                                            <a href="{{ route('console.article-old.show', $article) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200 line-clamp-1">{{ $article->title }}</a>
-                                            <p class="text-xs text-gray-400 mt-0.5">{{ $article->slug }}</p>
-                                        </div>
-                                    </div>
+                                    <a href="{{ route('console.article-old.show', $article) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200 line-clamp-2">{{ $article->title }}</a>
+                                    <p class="text-xs text-gray-400 mt-0.5">{{ $article->slug }}</p>
                                 </td>
-                                <td class="px-5 py-4 hidden md:table-cell">
-                                    <span class="text-sm text-gray-600">{{ $article->author_name ?? '—' }}</span>
-                                </td>
-                                <td class="px-5 py-4 text-center hidden lg:table-cell">
+                                <td class="px-5 py-4 text-center hidden sm:table-cell">
                                     @if ($article->status === 'publish')
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-[11px] font-semibold text-emerald-600">
                                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
@@ -93,25 +76,16 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="px-5 py-4 hidden xl:table-cell">
+                                <td class="px-5 py-4 hidden lg:table-cell">
                                     <span class="text-sm text-gray-500">{{ $article->wp_created_at?->translatedFormat('d M Y, H:i') ?? '—' }}</span>
                                 </td>
                                 <td class="px-5 py-4 text-right">
-                                    <div class="flex items-center justify-end gap-1">
-                                        <a href="{{ route('console.article-old.show', $article) }}" class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-primary/10 transition-colors duration-200" title="Detail">
-                                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            </svg>
-                                        </a>
-                                        @if ($article->link)
-                                            <a href="{{ $article->link }}" target="_blank" rel="noopener" class="p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors duration-200" title="Buka di WordPress">
-                                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/>
-                                                </svg>
-                                            </a>
-                                        @endif
-                                    </div>
+                                    <a href="{{ route('console.article-old.show', $article) }}" class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-primary/10 transition-colors duration-200 inline-flex" title="Detail">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        </svg>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach

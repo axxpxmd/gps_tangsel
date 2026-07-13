@@ -10,7 +10,7 @@
                 <div class="w-10 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
             </div>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
-                Program Kerja GPS TangSel
+                Program Kerja <span class="text-gradient-gold">GPS TANGSEL</span>
             </h2>
             <p class="text-gray-500 leading-relaxed">
                 Program utama yang menjadi pilar gerakan kami dalam memakmurkan masjid dan melayani masyarakat.

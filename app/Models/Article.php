@@ -5,6 +5,8 @@ namespace App\Models;
 use Database\Factories\ArticleFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
 {
@@ -14,11 +16,9 @@ class Article extends Model
     protected $fillable = [
         'title',
         'slug',
-        'category',
         'excerpt',
         'content',
         'image',
-        'images',
         'author',
         'read_time',
         'published_at',
@@ -29,8 +29,22 @@ class Article extends Model
         return [
             'published_at' => 'datetime',
             'read_time' => 'integer',
-            'images' => 'array',
         ];
+    }
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'article_category');
+    }
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'article_tag');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(ArticleImage::class)->orderBy('sort_order');
     }
 
     public function scopePublished($query)

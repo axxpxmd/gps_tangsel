@@ -18,9 +18,9 @@
     @endpush
 
     {{-- Full-Bleed Featured Image --}}
-    @if ($article->images && count($article->images) > 0)
+    @if ($article->images->count() > 0)
         <section class="relative w-full h-[70vh] sm:h-[80vh] lg:h-[85vh] overflow-hidden bg-dawn-night">
-            <img id="featured-img" src="{{ $article->images[0] }}" alt="{{ $article->title }}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700">
+            <img id="featured-img" src="{{ $article->images->first()->image }}" alt="{{ $article->title }}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-dawn-night via-dawn-night/30 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-dawn-night/60 via-transparent to-transparent"></div>
             <div class="absolute inset-0 islamic-pattern opacity-[0.02]"></div>
@@ -42,7 +42,7 @@
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
                     <div class="max-w-3xl">
                         <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gold/90 text-dawn-night backdrop-blur-sm mb-5 shadow-lg">
-                            {{ $article->category }}
+                            {{ $article->categories->first()?->name ?? '' }}
                         </span>
 
                         <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mb-6 drop-shadow-lg">
@@ -68,12 +68,12 @@
             </div>
 
             {{-- Image counter badge --}}
-            @if (count($article->images) > 1)
+            @if ($article->images->count() > 1)
                 <div class="absolute top-24 right-0 z-10">
                     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div id="featured-counter" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-black/40 backdrop-blur-md rounded-full border border-white/10">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                            <span id="counter-text">1 / {{ count($article->images) }}</span>
+                            <span id="counter-text">1 / {{ $article->images->count() }}</span>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
         </section>
 
         {{-- Thumbnail Strip --}}
-        @if (count($article->images) > 1)
+        @if ($article->images->count() > 1)
             <section class="relative -mt-1 bg-dawn-night pb-6 z-20">
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" id="thumb-strip">
@@ -91,7 +91,7 @@
                                 class="gallery-thumb flex-shrink-0 w-20 h-14 sm:w-28 sm:h-18 rounded-lg overflow-hidden border-2 transition-all duration-300 {{ $index === 0 ? 'border-gold shadow-lg shadow-gold/20 scale-105' : 'border-white/10 opacity-50 hover:opacity-80' }}"
                                 data-index="{{ $index }}"
                             >
-                                <img src="{{ $img }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
+                                <img src="{{ $img->image }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
                             </button>
                         @endforeach
                     </div>
@@ -120,7 +120,7 @@
                     Kembali ke Berita
                 </a>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/10 backdrop-blur-sm text-gold-light border border-white/10 mb-5">
-                    {{ $article->category }}
+                    {{ $article->categories->first()?->name ?? '' }}
                 </span>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
                     {{ $article->title }}
@@ -255,7 +255,7 @@
     @endif
 
     {{-- Lightbox Modal --}}
-    @if ($article->images && count($article->images) > 0)
+    @if ($article->images->count() > 0)
         <div id="lightbox" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/95" onclick="if(event.target===this)closeLightbox()">
             <button onclick="closeLightbox()" class="absolute top-6 right-6 z-10 p-3 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 backdrop-blur-sm">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -263,7 +263,7 @@
                 </svg>
             </button>
 
-            @if (count($article->images) > 1)
+            @if ($article->images->count() > 1)
                 <button onclick="prevImage()" class="absolute left-4 sm:left-8 z-10 p-3 sm:p-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200 backdrop-blur-sm">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
@@ -283,7 +283,7 @@
             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent py-6">
                 <div class="flex flex-col items-center gap-3">
                     <div id="lightbox-counter" class="text-white/80 text-sm font-medium bg-white/10 backdrop-blur-sm px-5 py-2 rounded-full"></div>
-                    @if (count($article->images) > 1)
+                    @if ($article->images->count() > 1)
                         <div class="flex gap-2" id="lightbox-dots">
                             @foreach ($article->images as $index => $_)
                                 <button onclick="goToImage({{ $index }})" class="lb-dot w-2 h-2 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-gold w-6' : 'bg-white/30 hover:bg-white/50' }}"></button>
@@ -296,10 +296,10 @@
     @endif
 </div>
 
-@if ($article->images && count($article->images) > 0)
+@if ($article->images->count() > 0)
     @push('scripts')
     <script>
-        const galleryImages = @json($article->images);
+        const galleryImages = @json($article->images->pluck('image')->values());
         let currentIndex = 0;
 
         function setFeaturedImage(index) {

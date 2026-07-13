@@ -48,10 +48,10 @@
                     </button>
                     @foreach ($categories as $cat)
                         <button
-                            wire:click="$set('category', '{{ $cat }}')"
-                            class="px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 {{ $category === $cat ? 'bg-primary text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
+                            wire:click="$set('category', '{{ $cat->slug }}')"
+                            class="px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 {{ $category === $cat->slug ? 'bg-primary text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
                         >
-                            {{ $cat }}
+                            {{ $cat->name }}
                         </button>
                     @endforeach
                 </div>
@@ -72,7 +72,7 @@
                             <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
                                 <img src="{{ $article->image }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                                 <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-primary border border-primary/10 shadow-sm">
-                                    {{ $article->category }}
+                                    {{ $article->categories->first()?->name ?? '' }}
                                 </span>
                             </div>
 

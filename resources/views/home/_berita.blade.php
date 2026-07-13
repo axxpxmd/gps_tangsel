@@ -25,9 +25,6 @@
                     {{-- Thumbnail --}}
                     <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
                         <img src="{{ $article['image'] }}" alt="{{ $article['title'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-                        <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-primary border border-primary/10 shadow-sm">
-                            {{ $article['category'] }}
-                        </span>
                     </div>
 
                     {{-- Body --}}

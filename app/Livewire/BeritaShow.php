@@ -13,6 +13,7 @@ class BeritaShow extends Component
     public function mount(string $slug): void
     {
         $this->article = Article::query()
+            ->with(['images', 'categories', 'tags'])
             ->published()
             ->where('slug', $slug)
             ->firstOrFail();
@@ -20,9 +21,11 @@ class BeritaShow extends Component
 
     public function render(): View
     {
+        $categoryIds = $this->article->categories->pluck('id');
+
         $related = Article::query()
             ->published()
-            ->where('category', $this->article->category)
+            ->whereHas('categories', fn ($q) => $q->whereIn('categories.id', $categoryIds))
             ->where('id', '!=', $this->article->id)
             ->latest('published_at')
             ->take(3)

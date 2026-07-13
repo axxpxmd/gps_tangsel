@@ -18,7 +18,6 @@ class ArticleFactory extends Factory
         return [
             'title' => $title,
             'slug' => Str::slug($title),
-            'category' => fake()->randomElement(['Safari Subuh', 'Sosial', 'Kesehatan', 'Pengumuman', 'Dakwah', 'Agenda Kegiatan']),
             'excerpt' => fake()->paragraph(2),
             'content' => collect(fake()->paragraphs(6))->map(fn ($p) => "<p>{$p}</p>")->implode("\n"),
             'image' => 'https://placehold.co/600x400/2F5FA3/F5E6B8?text=GPS+TangSel',

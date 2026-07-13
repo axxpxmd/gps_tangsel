@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Article;
+use App\Models\Category;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -19,15 +20,6 @@ class Berita extends Component
     #[Url]
     public string $category = '';
 
-    public array $categories = [
-        'Safari Subuh',
-        'Sosial',
-        'Kesehatan',
-        'Pengumuman',
-        'Dakwah',
-        'Agenda Kegiatan',
-    ];
-
     public function updatingSearch(): void
     {
         $this->resetPage();
@@ -41,14 +33,18 @@ class Berita extends Component
     public function render()
     {
         $articles = Article::query()
+            ->with('categories')
             ->published()
             ->when($this->search, fn ($q) => $q->where('title', 'like', "%{$this->search}%")->orWhere('excerpt', 'like', "%{$this->search}%"))
-            ->when($this->category, fn ($q) => $q->where('category', $this->category))
+            ->when($this->category, fn ($q) => $q->whereHas('categories', fn ($q) => $q->where('slug', $this->category)))
             ->latest('published_at')
             ->paginate(9);
 
+        $categories = Category::all();
+
         return view('livewire.berita', [
             'articles' => $articles,
+            'categories' => $categories,
         ])->layout('layouts.app');
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Category;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -11,6 +12,15 @@ class ArticleSeeder extends Seeder
 {
     public function run(): void
     {
+        $categories = [
+            'Safari Subuh' => Category::firstOrCreate(['slug' => 'safari-subuh'], ['name' => 'Safari Subuh']),
+            'Sosial' => Category::firstOrCreate(['slug' => 'sosial'], ['name' => 'Sosial']),
+            'Kesehatan' => Category::firstOrCreate(['slug' => 'kesehatan'], ['name' => 'Kesehatan']),
+            'Pengumuman' => Category::firstOrCreate(['slug' => 'pengumuman'], ['name' => 'Pengumuman']),
+            'Dakwah' => Category::firstOrCreate(['slug' => 'dakwah'], ['name' => 'Dakwah']),
+            'Agenda Kegiatan' => Category::firstOrCreate(['slug' => 'agenda-kegiatan'], ['name' => 'Agenda Kegiatan']),
+        ];
+
         $base = CarbonImmutable::now()->startOfDay();
 
         $rows = [
@@ -21,7 +31,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'Tim Komunikasi GPS',
                 'read_time' => 3,
                 'days_ago' => 2,
-                'color' => '2F5FA3',
             ],
             [
                 'title' => 'Pasar Bahagia: 300 Kepala Keluarga Terima Sayuran Gratis',
@@ -30,7 +39,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'Rina Marlina',
                 'read_time' => 4,
                 'days_ago' => 5,
-                'color' => '10B981',
             ],
             [
                 'title' => 'Puskesmas Cerdas Ceria Layani 150 Warga Gratis',
@@ -39,7 +47,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'dr. Ahmad Fauzi',
                 'read_time' => 5,
                 'days_ago' => 9,
-                'color' => '2F5FA3',
             ],
             [
                 'title' => 'Thibbun Nabawi: Bekam dan Ruqyah untuk Masyarakat',
@@ -48,7 +55,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'Ust. Hendra Gunawan',
                 'read_time' => 4,
                 'days_ago' => 14,
-                'color' => '2F5FA3',
             ],
             [
                 'title' => 'GPS TangSel Resmi Berbadan Hukum, SK AHU Terbit',
@@ -57,7 +63,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'Sekretariat GPS',
                 'read_time' => 2,
                 'days_ago' => 20,
-                'color' => 'D4A437',
             ],
             [
                 'title' => 'Ajukan Masjid Anda untuk Safari Subuh Berikutnya',
@@ -66,7 +71,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'Tim Lapangan GPS',
                 'read_time' => 3,
                 'days_ago' => 26,
-                'color' => 'D4A437',
             ],
             [
                 'title' => 'Kajian Fajar: Membangun Keluarga Sakinah di Era Digital',
@@ -75,7 +79,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'Tim Dakwah GPS',
                 'read_time' => 6,
                 'days_ago' => 30,
-                'color' => '2F5FA3',
             ],
             [
                 'title' => 'Safari Subuh Jelang Ramadhan: 500 Jamaah Padati Masjid Baiturrahman',
@@ -84,7 +87,6 @@ class ArticleSeeder extends Seeder
                 'author' => 'Tim Komunikasi GPS',
                 'read_time' => 4,
                 'days_ago' => 40,
-                'color' => '2F5FA3',
             ],
             [
                 'title' => 'GPS TangSel Buka Pendaftaran Relawan Angkatan ke-5',
@@ -93,31 +95,37 @@ class ArticleSeeder extends Seeder
                 'author' => 'Divisi SDM GPS',
                 'read_time' => 3,
                 'days_ago' => 50,
-                'color' => 'D4A437',
             ],
         ];
 
-        foreach ($rows as $idx => $row) {
+        $imagePaths = [
+            '/berita/gambar1.webp',
+            '/berita/gambar2.webp',
+            '/berita/gambar3.webp',
+        ];
+
+        foreach ($rows as $row) {
             $date = $base->subDays($row['days_ago']);
 
-            $images = [
-                '/berita/gambar1.webp',
-                '/berita/gambar2.webp',
-                '/berita/gambar3.webp',
-            ];
-
-            Article::create([
+            $article = Article::create([
                 'title' => $row['title'],
                 'slug' => Str::slug($row['title']),
-                'category' => $row['category'],
                 'excerpt' => $row['excerpt'],
                 'content' => '<p>'.$row['excerpt'].'</p><p>Kegiatan ini merupakan bagian dari program rutin GPS TangSel dalam rangka memakmurkan masjid dan memperkuat ukhuwah islamiyah di Tangerang Selatan. Seluruh kegiatan terbuka untuk umum dan tidak dipungut biaya.</p><p>Bagi masyarakat yang ingin berpartisipasi atau membutuhkan informasi lebih lanjut, dapat menghubungi sekretariat GPS TangSel melalui kanal resmi yang tersedia.</p>',
                 'image' => '/berita/gambar1.webp',
-                'images' => $images,
                 'author' => $row['author'],
                 'read_time' => $row['read_time'],
                 'published_at' => $date,
             ]);
+
+            $article->categories()->attach($categories[$row['category']]);
+
+            foreach ($imagePaths as $i => $path) {
+                $article->images()->create([
+                    'image' => $path,
+                    'sort_order' => $i + 1,
+                ]);
+            }
         }
     }
 }

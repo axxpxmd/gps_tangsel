@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Console\ActivityController;
+use App\Http\Controllers\Console\ArticleController;
 use App\Http\Controllers\Console\ArticleOldController;
 use App\Http\Controllers\Console\BoardMemberController;
 use App\Http\Controllers\Console\CategoryController;
@@ -47,6 +48,7 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('board-members', BoardMemberController::class);
         Route::resource('galleries', GalleryController::class);
         Route::resource('hadits', HaditsController::class);
+        Route::resource('articles', ArticleController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('tags', TagController::class);
         Route::resource('article-old', ArticleOldController::class)->only(['index', 'show']);

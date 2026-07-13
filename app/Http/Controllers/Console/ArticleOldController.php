@@ -46,13 +46,12 @@ class ArticleOldController extends Controller
             }
 
             foreach ($posts as $wpPost) {
-                if (ArticleOld::where('slug', $wpPost['slug'])->exists()) {
+                if (ArticleOld::where('title', html_entity_decode($wpPost['title']['rendered'], ENT_QUOTES | ENT_HTML5, 'UTF-8'))->exists()) {
                     continue;
                 }
 
                 ArticleOld::create([
                     'title' => html_entity_decode($wpPost['title']['rendered'], ENT_QUOTES | ENT_HTML5, 'UTF-8'),
-                    'slug' => $wpPost['slug'],
                     'content' => $wpPost['content']['rendered'],
                     'excerpt' => $wpPost['excerpt']['rendered'] ?? null,
                     'status' => $wpPost['status'],

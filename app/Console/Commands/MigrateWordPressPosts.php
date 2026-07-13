@@ -44,13 +44,14 @@ class MigrateWordPressPosts extends Command
             }
 
             foreach ($posts as $wpPost) {
-                if (ArticleOld::where('slug', $wpPost['slug'])->exists()) {
+                $title = html_entity_decode($wpPost['title']['rendered'], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+                if (ArticleOld::where('title', $title)->exists()) {
                     continue;
                 }
 
                 ArticleOld::create([
-                    'title' => html_entity_decode($wpPost['title']['rendered'], ENT_QUOTES | ENT_HTML5, 'UTF-8'),
-                    'slug' => $wpPost['slug'],
+                    'title' => $title,
                     'content' => $wpPost['content']['rendered'],
                     'excerpt' => $wpPost['excerpt']['rendered'] ?? null,
                     'status' => $wpPost['status'],

@@ -61,7 +61,6 @@
                                 </td>
                                 <td class="px-5 py-4">
                                     <a href="{{ route('console.article-old.show', $article) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200 line-clamp-2">{{ $article->title }}</a>
-                                    <p class="text-xs text-gray-400 mt-0.5">{{ $article->slug }}</p>
                                 </td>
                                 <td class="px-5 py-4 text-center hidden sm:table-cell">
                                     @if ($article->status === 'publish')

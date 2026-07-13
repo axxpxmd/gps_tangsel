@@ -15,7 +15,6 @@ class ArticleOld extends Model
 
     protected $fillable = [
         'title',
-        'slug',
         'content',
         'excerpt',
         'status',

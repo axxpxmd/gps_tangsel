@@ -54,12 +54,6 @@
                         {{ $articleOld->wp_created_at->translatedFormat('d M Y, H:i') }}
                     </span>
                 @endif
-                <span class="inline-flex items-center gap-1.5 text-sm text-gray-500">
-                    <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"/>
-                    </svg>
-                    {{ $articleOld->slug }}
-                </span>
             </div>
 
             {{-- Excerpt --}}

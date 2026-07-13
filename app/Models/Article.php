@@ -23,6 +23,7 @@ class Article extends Model
         'content',
         'image',
         'author',
+        'status',
         'read_time',
         'published_at',
     ];

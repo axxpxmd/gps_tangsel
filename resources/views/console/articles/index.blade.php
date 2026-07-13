@@ -47,7 +47,7 @@
                     <svg class="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $articles->filter(fn ($a) => $a->published_at && $a->published_at <= now())->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $articles->filter(fn ($a) => $a->status === 'publish')->count() }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Published</p>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     <svg class="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/></svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $articles->filter(fn ($a) => ! $a->published_at || $a->published_at > now())->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $articles->filter(fn ($a) => $a->status === 'draft')->count() }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Draft</p>
                 </div>
             </div>
@@ -232,7 +232,7 @@
                                     <span class="text-sm text-gray-600">{{ $article->author }}</span>
                                 </td>
                                 <td class="px-5 py-4 text-center">
-                                    @if ($article->published_at && $article->published_at <= now())
+                                    @if ($article->status === 'publish')
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-[11px] font-semibold text-emerald-600">
                                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                                             Published

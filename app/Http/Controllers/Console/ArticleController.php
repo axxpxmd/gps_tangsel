@@ -18,13 +18,7 @@ class ArticleController extends Controller
         $articles = Article::with('category')
             ->when($request->filled('search'), fn ($q) => $q->where('title', 'like', '%'.$request->search.'%')->orWhere('excerpt', 'like', '%'.$request->search.'%'))
             ->when($request->filled('category'), fn ($q) => $q->where('category_id', $request->category))
-            ->when($request->filled('status'), function ($q) use ($request) {
-                if ($request->status === 'published') {
-                    $q->whereNotNull('published_at')->where('published_at', '<=', now());
-                } elseif ($request->status === 'draft') {
-                    $q->where(fn ($q) => $q->whereNull('published_at')->orWhere('published_at', '>', now()));
-                }
-            })
+            ->when($request->filled('status'), fn ($q) => $q->where('status', $request->status))
             ->when($request->filled('date_from'), fn ($q) => $q->where(fn ($q) => $q->whereDate('published_at', '>=', $request->date_from)->orWhereDate('created_at', '>=', $request->date_from)))
             ->when($request->filled('date_to'), fn ($q) => $q->where(fn ($q) => $q->whereDate('published_at', '<=', $request->date_to)->orWhereDate('created_at', '<=', $request->date_to)))
             ->latest()
@@ -56,6 +50,7 @@ class ArticleController extends Controller
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
+        $validated['status'] = $request->filled('published_at') ? 'publish' : 'draft';
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('articles', 'sftp');
@@ -94,6 +89,7 @@ class ArticleController extends Controller
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
+        $validated['status'] = $request->filled('published_at') ? 'publish' : 'draft';
 
         if ($request->hasFile('image')) {
             if ($article->image) {

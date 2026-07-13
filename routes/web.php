@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Console\ActivityController;
+use App\Http\Controllers\Console\ArticleOldController;
 use App\Http\Controllers\Console\BoardMemberController;
 use App\Http\Controllers\Console\DashboardController;
 use App\Http\Controllers\Console\GalleryController;
@@ -44,6 +45,8 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('board-members', BoardMemberController::class);
         Route::resource('galleries', GalleryController::class);
         Route::resource('hadits', HaditsController::class);
+        Route::resource('article-old', ArticleOldController::class)->only(['index', 'show']);
+        Route::post('article-old/fetch', [ArticleOldController::class, 'fetch'])->name('article-old.fetch');
         Route::delete('galleries/{gallery}/images/{image}', [GalleryController::class, 'deleteImage'])->name('galleries.delete-image');
     });
 });

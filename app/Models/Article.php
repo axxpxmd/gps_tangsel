@@ -58,8 +58,7 @@ class Article extends Model
 
     public function scopePublished($query)
     {
-        return $query->whereNotNull('published_at')
-            ->where('published_at', '<=', now());
+        return $query->where('status', 'publish');
     }
 
     public function getFormattedDateAttribute(): string

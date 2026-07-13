@@ -53,6 +53,7 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('tags', TagController::class);
         Route::resource('article-old', ArticleOldController::class)->only(['index', 'show']);
         Route::post('article-old/fetch', [ArticleOldController::class, 'fetch'])->name('article-old.fetch');
+        Route::post('article-old/copy', [ArticleOldController::class, 'copyToArticles'])->name('article-old.copy');
         Route::delete('galleries/{gallery}/images/{image}', [GalleryController::class, 'deleteImage'])->name('galleries.delete-image');
     });
 });

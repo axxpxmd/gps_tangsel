@@ -8,17 +8,28 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
             <h2 class="text-lg font-extrabold text-gray-900">Berita & Artikel WordPress</h2>
-            <p class="text-xs text-gray-400 mt-0.5">{{ $articles->count() }} artikel tersimpan dari WordPress</p>
+            <p class="text-xs text-gray-400 mt-0.5">{{ $articles->count() }} artikel dari WordPress @if($copiedCount > 0) &middot; {{ $copiedCount }} sudah disalin ke artikel @endif</p>
         </div>
-        <form action="{{ route('console.article-old.fetch') }}" method="POST" onsubmit="return confirm('Tarik data terbaru dari WordPress?')">
-            @csrf
-            <button type="submit" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
-                </svg>
-                Tarik Data
-            </button>
-        </form>
+        <div class="flex items-center gap-2">
+            <form action="{{ route('console.article-old.copy') }}" method="POST" onsubmit="return confirm('Salin semua artikel dari WordPress ke tabel artikel? Artikel yang sudah ada akan dilewati.')">
+                @csrf
+                <button type="submit" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-emerald-500/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/>
+                    </svg>
+                    Salin ke Artikel
+                </button>
+            </form>
+            <form action="{{ route('console.article-old.fetch') }}" method="POST" onsubmit="return confirm('Tarik data terbaru dari WordPress?')">
+                @csrf
+                <button type="submit" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/>
+                    </svg>
+                    Tarik Data
+                </button>
+            </form>
+        </div>
     </div>
 
     @if (session('success'))

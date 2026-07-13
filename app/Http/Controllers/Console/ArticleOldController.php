@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
 use App\Models\ArticleOld;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ArticleOldController extends Controller
@@ -13,8 +15,9 @@ class ArticleOldController extends Controller
     public function index(): View
     {
         $articles = ArticleOld::latest('wp_created_at')->get();
+        $copiedCount = Article::count();
 
-        return view('console.article-old.index', compact('articles'));
+        return view('console.article-old.index', compact('articles', 'copiedCount'));
     }
 
     public function show(ArticleOld $articleOld): View
@@ -69,5 +72,35 @@ class ArticleOldController extends Controller
 
         return redirect()->route('console.article-old.index')
             ->with('success', "Berhasil! {$totalMigrated} artikel baru berhasil ditarik dari WordPress.");
+    }
+
+    public function copyToArticles(): RedirectResponse
+    {
+        $totalCopied = 0;
+
+        foreach (ArticleOld::all() as $old) {
+            if (Article::where('title', $old->title)->exists()) {
+                continue;
+            }
+
+            $strippedExcerpt = strip_tags((string) $old->excerpt);
+
+            Article::create([
+                'title' => $old->title,
+                'slug' => Str::slug($old->title),
+                'excerpt' => $strippedExcerpt,
+                'content' => $old->content,
+                'author' => 'GPS TangSel',
+                'status' => $old->status === 'publish' ? 'publish' : 'draft',
+                'read_time' => 3,
+                'created_at' => $old->wp_created_at,
+                'updated_at' => $old->wp_modified_at,
+            ]);
+
+            $totalCopied++;
+        }
+
+        return redirect()->route('console.article-old.index')
+            ->with('success', "Berhasil! {$totalCopied} artikel berhasil disalin ke tabel artikel.");
     }
 }

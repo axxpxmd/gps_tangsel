@@ -20,6 +20,12 @@ class Berita extends Component
     #[Url]
     public string $category = '';
 
+    #[Url]
+    public string $date_from = '';
+
+    #[Url]
+    public string $date_to = '';
+
     public function updatingSearch(): void
     {
         $this->resetPage();
@@ -30,6 +36,22 @@ class Berita extends Component
         $this->resetPage();
     }
 
+    public function updatingDateFrom(): void
+    {
+        $this->resetPage();
+    }
+
+    public function updatingDateTo(): void
+    {
+        $this->resetPage();
+    }
+
+    public function resetFilters(): void
+    {
+        $this->reset('search', 'category', 'date_from', 'date_to');
+        $this->resetPage();
+    }
+
     public function render()
     {
         $articles = Article::query()
@@ -37,6 +59,8 @@ class Berita extends Component
             ->published()
             ->when($this->search, fn ($q) => $q->where('title', 'like', "%{$this->search}%")->orWhere('excerpt', 'like', "%{$this->search}%"))
             ->when($this->category, fn ($q) => $q->whereHas('category', fn ($q) => $q->where('slug', $this->category)))
+            ->when($this->date_from, fn ($q) => $q->whereDate('published_at', '>=', $this->date_from))
+            ->when($this->date_to, fn ($q) => $q->whereDate('published_at', '<=', $this->date_to))
             ->latest('published_at')
             ->paginate(9);
 

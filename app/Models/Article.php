@@ -63,4 +63,11 @@ class Article extends Model
     {
         return $this->published_at?->format('d M Y') ?? $this->created_at->format('d M Y');
     }
+
+    public function getReadingTimeAttribute(): int
+    {
+        $wordCount = str_word_count((string) preg_replace('/\s+/', ' ', strip_tags((string) $this->content)));
+
+        return max(1, (int) ceil($wordCount / 200));
+    }
 }

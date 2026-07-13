@@ -24,7 +24,6 @@ class Article extends Model
         'image',
         'author',
         'status',
-        'read_time',
         'published_at',
     ];
 
@@ -32,7 +31,6 @@ class Article extends Model
     {
         return [
             'published_at' => 'datetime',
-            'read_time' => 'integer',
         ];
     }
 

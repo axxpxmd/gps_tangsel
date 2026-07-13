@@ -200,20 +200,6 @@
                         </div>
 
                         <div>
-                            <label for="read_time" class="flex items-center gap-2 text-xs font-semibold text-gray-600 mb-1.5">
-                                <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                Estimasi Baca <span class="text-red-400">*</span>
-                            </label>
-                            <div class="relative">
-                                <input type="number" id="read_time" name="read_time" value="{{ old('read_time', $article->read_time) }}" required min="1" max="60"
-                                    class="w-full px-4 py-2.5 rounded-xl border @error('read_time') border-red-300 bg-red-50 @else border-gray-200 @enderror text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                                    placeholder="3">
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400">menit</span>
-                            </div>
-                            @error('read_time')<p class="text-xs text-red-500 mt-1">{{ $message }}</p>@enderror
-                        </div>
-
-                        <div>
                             <label for="published_at" class="flex items-center gap-2 text-xs font-semibold text-gray-600 mb-1.5">
                                 <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
                                 Tanggal Publikasi

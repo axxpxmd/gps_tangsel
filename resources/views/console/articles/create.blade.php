@@ -218,25 +218,6 @@
                             @enderror
                         </div>
 
-                        {{-- Estimasi Baca --}}
-                        <div>
-                            <label for="read_time" class="flex items-center gap-2 text-xs font-semibold text-gray-600 mb-1.5">
-                                <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                                Estimasi Baca <span class="text-red-400">*</span>
-                            </label>
-                            <div class="relative">
-                                <input type="number" id="read_time" name="read_time" value="{{ old('read_time', 3) }}" required min="1" max="60"
-                                    class="w-full px-4 py-2.5 rounded-xl border @error('read_time') border-red-300 bg-red-50 @else border-gray-200 @enderror text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                                    placeholder="3">
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-gray-400">menit</span>
-                            </div>
-                            @error('read_time')
-                                <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                         {{-- Tanggal Publikasi --}}
                         <div>
                             <label for="published_at" class="flex items-center gap-2 text-xs font-semibold text-gray-600 mb-1.5">

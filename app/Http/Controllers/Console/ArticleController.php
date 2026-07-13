@@ -45,7 +45,6 @@ class ArticleController extends Controller
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'author' => ['required', 'string', 'max:255'],
-            'read_time' => ['required', 'integer', 'min:1', 'max:60'],
             'published_at' => ['nullable', 'date'],
         ]);
 
@@ -84,7 +83,6 @@ class ArticleController extends Controller
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'author' => ['required', 'string', 'max:255'],
-            'read_time' => ['required', 'integer', 'min:1', 'max:60'],
             'published_at' => ['nullable', 'date'],
         ]);
 

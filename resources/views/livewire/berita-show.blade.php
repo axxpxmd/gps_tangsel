@@ -42,7 +42,7 @@
                 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
                     <div class="max-w-3xl">
                         <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gold/90 text-dawn-night backdrop-blur-sm mb-5 shadow-lg">
-                            {{ $article->categories->first()?->name ?? '' }}
+                            {{ $article->category?->name ?? '' }}
                         </span>
 
                         <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-[1.15] mb-6 drop-shadow-lg">
@@ -120,7 +120,7 @@
                     Kembali ke Berita
                 </a>
                 <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/10 backdrop-blur-sm text-gold-light border border-white/10 mb-5">
-                    {{ $article->categories->first()?->name ?? '' }}
+                    {{ $article->category?->name ?? '' }}
                 </span>
                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6">
                     {{ $article->title }}

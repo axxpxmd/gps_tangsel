@@ -33,10 +33,10 @@ class Berita extends Component
     public function render()
     {
         $articles = Article::query()
-            ->with('categories')
+            ->with('category')
             ->published()
             ->when($this->search, fn ($q) => $q->where('title', 'like', "%{$this->search}%")->orWhere('excerpt', 'like', "%{$this->search}%"))
-            ->when($this->category, fn ($q) => $q->whereHas('categories', fn ($q) => $q->where('slug', $this->category)))
+            ->when($this->category, fn ($q) => $q->whereHas('category', fn ($q) => $q->where('slug', $this->category)))
             ->latest('published_at')
             ->paginate(9);
 

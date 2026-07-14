@@ -18,11 +18,6 @@ class TagController extends Controller
         return view('console.tags.index', compact('tags'));
     }
 
-    public function create(): View
-    {
-        return view('console.tags.create');
-    }
-
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -34,16 +29,6 @@ class TagController extends Controller
         Tag::create($validated);
 
         return redirect()->route('console.tags.index')->with('success', 'Tag berhasil ditambahkan.');
-    }
-
-    public function show(Tag $tag): View
-    {
-        return view('console.tags.show', compact('tag'));
-    }
-
-    public function edit(Tag $tag): View
-    {
-        return view('console.tags.edit', compact('tag'));
     }
 
     public function update(Request $request, Tag $tag): RedirectResponse

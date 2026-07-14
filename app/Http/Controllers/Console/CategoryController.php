@@ -18,11 +18,6 @@ class CategoryController extends Controller
         return view('console.categories.index', compact('categories'));
     }
 
-    public function create(): View
-    {
-        return view('console.categories.create');
-    }
-
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -34,16 +29,6 @@ class CategoryController extends Controller
         Category::create($validated);
 
         return redirect()->route('console.categories.index')->with('success', 'Kategori berhasil ditambahkan.');
-    }
-
-    public function show(Category $category): View
-    {
-        return view('console.categories.show', compact('category'));
-    }
-
-    public function edit(Category $category): View
-    {
-        return view('console.categories.edit', compact('category'));
     }
 
     public function update(Request $request, Category $category): RedirectResponse

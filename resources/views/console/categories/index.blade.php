@@ -1,21 +1,48 @@
+@php
+    $initialEditCategory = null;
+    if ($errors->any() && old('_modal') === 'edit') {
+        $initialEditCategory = ['id' => (int) old('category_id'), 'name' => old('name')];
+    }
+@endphp
+
 @extends('console.layout')
 
 @section('title', 'Kategori')
 @section('page_title', 'Kategori')
 
 @section('content')
-<div>
+<div x-data="{
+    showModal: {{ $errors->any() ? 'true' : 'false' }},
+    modalMode: @js(old('_modal', 'create')),
+    editCategory: @js($initialEditCategory),
+
+    openCreate() {
+        this.modalMode = 'create';
+        this.editCategory = null;
+        this.showModal = true;
+        this.$nextTick(() => this.$refs.createInput?.focus());
+    },
+    openEdit(category) {
+        this.modalMode = 'edit';
+        this.editCategory = category;
+        this.showModal = true;
+        this.$nextTick(() => this.$refs.editInput?.focus());
+    },
+    closeModal() {
+        this.showModal = false;
+    }
+}">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
             <h2 class="text-lg font-extrabold text-gray-900">Daftar Kategori</h2>
             <p class="text-xs text-gray-400 mt-0.5">{{ $categories->count() }} kategori tersimpan</p>
         </div>
-        <a href="{{ route('console.categories.create') }}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200 shadow-sm shadow-primary/20">
+        <button @click="openCreate()" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
             Tambah Kategori
-        </a>
+        </button>
     </div>
 
     @if (session('success'))
@@ -39,7 +66,7 @@
             <p class="text-sm text-gray-400">Klik tombol "Tambah Kategori" untuk menambahkan kategori pertama.</p>
         </div>
     @else
-        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full min-w-[600px]">
                     <thead>
@@ -58,7 +85,9 @@
                                     <span class="text-xs font-medium text-gray-400">{{ $loop->iteration }}</span>
                                 </td>
                                 <td class="px-5 py-4">
-                                    <a href="{{ route('console.categories.show', $category) }}" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200">{{ $category->name }}</a>
+                                    <button @click="openEdit(@js(['id' => $category->id, 'name' => $category->name]))" class="text-sm font-semibold text-gray-900 hover:text-primary transition-colors duration-200 cursor-pointer">
+                                        {{ $category->name }}
+                                    </button>
                                 </td>
                                 <td class="px-5 py-4">
                                     <code class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded">{{ $category->slug }}</code>
@@ -68,15 +97,15 @@
                                 </td>
                                 <td class="px-5 py-4 text-right">
                                     <div class="flex items-center justify-end gap-1">
-                                        <a href="{{ route('console.categories.edit', $category) }}" class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-primary/10 transition-colors duration-200" title="Edit">
+                                        <button @click="openEdit(@js(['id' => $category->id, 'name' => $category->name]))" class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-primary/10 transition-colors duration-200 cursor-pointer" title="Edit">
                                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
                                             </svg>
-                                        </a>
+                                        </button>
                                         <form action="{{ route('console.categories.destroy', $category) }}" method="POST" onsubmit="return confirm('Hapus kategori &quot;{{ $category->name }}&quot;?')" class="inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors duration-200" title="Hapus">
+                                            <button type="submit" class="p-2 rounded-lg text-gray-400 hover:text-red-500 hover:bg-red-50 transition-colors duration-200 cursor-pointer" title="Hapus">
                                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"/>
                                                 </svg>
@@ -91,5 +120,98 @@
             </div>
         </div>
     @endif
+
+    <div x-cloak x-show="showModal" class="fixed inset-0 z-50 overflow-y-auto" @keydown.escape.window="closeModal()">
+        <div class="fixed inset-0 bg-black/50 transition-opacity" @click="closeModal()"></div>
+
+        <div class="min-h-full flex items-center justify-center p-4">
+            <div class="relative bg-white rounded-2xl border border-gray-200 w-full max-w-lg p-6 sm:p-8" @click.stop="">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
+                        <svg x-show="modalMode === 'create'" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                        </svg>
+                        <svg x-show="modalMode === 'edit'" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 x-show="modalMode === 'create'" class="text-base font-extrabold text-gray-900">Tambah Kategori</h2>
+                        <h2 x-show="modalMode === 'edit'" class="text-base font-extrabold text-gray-900">Edit Kategori</h2>
+                        <p x-show="modalMode === 'create'" class="text-xs text-gray-400">Buat kategori artikel baru</p>
+                        <p x-show="modalMode === 'edit'" class="text-xs text-gray-400" x-text="editCategory?.name"></p>
+                    </div>
+                </div>
+
+                <form x-show="modalMode === 'create'" action="{{ route('console.categories.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="_modal" value="create">
+
+                    <div class="space-y-5">
+                        <div>
+                            <label for="create_name" class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Kategori</label>
+                            <input type="text" id="create_name" name="name" x-ref="createInput" value="{{ old('_modal') === 'create' ? old('name') : '' }}" required
+                                class="w-full px-4 py-3 rounded-2xl border {{ $errors->has('name') && old('_modal') === 'create' ? 'border-red-300 bg-red-50' : 'border-gray-200' }} text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                                placeholder="Masukkan nama kategori">
+                            @if(old('_modal') === 'create')
+                                @error('name')
+                                    <p class="text-xs text-red-500 mt-1.5">{{ $message }}</p>
+                                @enderror
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
+                        <button type="button" @click="closeModal()" class="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors duration-200 cursor-pointer">
+                            Batal
+                        </button>
+                        <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200 cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                            </svg>
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+
+                <form x-show="modalMode === 'edit'" :action="'{{ url('console/categories') }}/' + editCategory?.id" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="_modal" value="edit">
+                    <input type="hidden" name="category_id" :value="editCategory?.id">
+
+                    <div class="space-y-5">
+                        <div>
+                            <label for="edit_name" class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Kategori</label>
+                            <input type="text" id="edit_name" name="name" x-ref="editInput" :value="editCategory?.name" required
+                                class="w-full px-4 py-3 rounded-2xl border {{ $errors->has('name') && old('_modal') === 'edit' ? 'border-red-300 bg-red-50' : 'border-gray-200' }} text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                                placeholder="Masukkan nama kategori">
+                            @if(old('_modal') === 'edit')
+                                @error('name')
+                                    <p class="text-xs text-red-500 mt-1.5">{{ $message }}</p>
+                                @enderror
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
+                        <button type="button" @click="closeModal()" class="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors duration-200 cursor-pointer">
+                            Batal
+                        </button>
+                        <button type="submit" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200 cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+                            </svg>
+                            Simpan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    [x-cloak] { display: none !important; }
+</style>
 @endsection

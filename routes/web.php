@@ -49,8 +49,8 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('galleries', GalleryController::class);
         Route::resource('hadits', HaditsController::class);
         Route::resource('articles', ArticleController::class);
-        Route::resource('categories', CategoryController::class);
-        Route::resource('tags', TagController::class);
+        Route::resource('categories', CategoryController::class)->only(['index', 'store', 'update', 'destroy']);
+        Route::resource('tags', TagController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('article-old', ArticleOldController::class)->only(['index', 'show']);
         Route::post('article-old/fetch', [ArticleOldController::class, 'fetch'])->name('article-old.fetch');
         Route::post('article-old/copy', [ArticleOldController::class, 'copyToArticles'])->name('article-old.copy');

@@ -11,7 +11,7 @@
             <h2 class="text-lg font-extrabold text-gray-900">Program</h2>
             <p class="text-xs text-gray-400 mt-0.5">Kelola program unggulan GPS TangSel</p>
         </div>
-        <a href="{{ route('console.programs.create') }}" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200">
+        <a href="{{ route('console.programs.create') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200 w-full sm:w-auto">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
             </svg>
@@ -86,9 +86,9 @@
 
     {{-- Filter Bar --}}
     <div class="bg-white rounded-2xl border border-gray-200 p-4 mb-6">
-        <form method="GET" class="flex flex-col sm:flex-row sm:items-end gap-4">
+        <form method="GET" class="flex flex-col sm:flex-row sm:items-end gap-3 sm:gap-4">
             <!-- Cari Program -->
-            <div class="flex-1 min-w-[200px]">
+            <div class="flex-1 min-w-0">
                 <label class="flex items-center gap-1.5 text-xs font-semibold text-gray-700 mb-2">
                     <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -123,14 +123,14 @@
             </div>
 
             <!-- Buttons -->
-            <div class="flex items-center gap-2 self-stretch sm:self-end mt-4 sm:mt-0">
-                <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-5 py-2 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200">
+            <div class="flex items-center gap-2">
+                <button type="submit" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                     Filter
                 </button>
-                <a href="{{ route('console.programs.index') }}" class="inline-flex items-center justify-center w-[38px] h-[38px] text-gray-500 hover:text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl transition-colors duration-200" title="Reset">
+                <a href="{{ route('console.programs.index') }}" class="inline-flex items-center justify-center w-10 h-10 text-gray-500 hover:text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl transition-colors duration-200" title="Reset">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
                     </svg>

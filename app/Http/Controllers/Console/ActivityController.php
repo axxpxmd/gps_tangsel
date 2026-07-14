@@ -35,9 +35,15 @@ class ActivityController extends Controller
             $query->whereDate('date', '<=', $request->date_to);
         }
 
-        $activities = $query->orderBy('date', 'desc')->get();
+        $activities = $query->orderBy('date', 'desc')
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('console.activities.index', compact('activities'));
+        $totalActivities = Activity::count();
+        $activeCount = Activity::where('is_active', true)->count();
+        $inactiveCount = Activity::where('is_active', false)->count();
+
+        return view('console.activities.index', compact('activities', 'totalActivities', 'activeCount', 'inactiveCount'));
     }
 
     public function create(): View

@@ -38,7 +38,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $programs->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $totalPrograms }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Total Program</p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $programs->filter(fn ($p) => $p->is_active)->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $activeCount }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Aktif</p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $programs->filter(fn ($p) => !$p->is_active)->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $inactiveCount }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Nonaktif</p>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $programs->filter(fn ($p) => !empty($p->gambar))->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $withImageCount }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Dengan Gambar</p>
                 </div>
             </div>
@@ -301,6 +301,11 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        {{-- Pagination --}}
+        <div class="mt-6">
+            {{ $programs->links() }}
         </div>
     @endif
 </div>

@@ -38,7 +38,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $galleries->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $totalGalleries }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Total Galeri</p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $galleries->filter(fn ($g) => $g->is_active)->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $activeCount }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Aktif</p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $galleries->sum('images_count') }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $totalImages }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Total Gambar</p>
                 </div>
             </div>
@@ -308,6 +308,11 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        {{-- Pagination --}}
+        <div class="mt-6">
+            {{ $galleries->links() }}
         </div>
     @endif
 </div>

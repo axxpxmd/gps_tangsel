@@ -25,9 +25,15 @@ class ProgramController extends Controller
                 }
             })
             ->latest()
-            ->get();
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('console.programs.index', compact('programs'));
+        $totalPrograms = Program::count();
+        $activeCount = Program::where('is_active', true)->count();
+        $inactiveCount = Program::where('is_active', false)->count();
+        $withImageCount = Program::whereNotNull('gambar')->count();
+
+        return view('console.programs.index', compact('programs', 'totalPrograms', 'activeCount', 'inactiveCount', 'withImageCount'));
     }
 
     public function create(): View

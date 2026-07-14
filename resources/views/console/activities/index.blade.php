@@ -38,7 +38,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $activities->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $totalActivities }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Total Kegiatan</p>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $activities->filter(fn ($a) => $a->is_active)->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $activeCount }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Aktif</p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-2xl font-extrabold text-gray-900">{{ $activities->filter(fn ($a) => !$a->is_active)->count() }}</p>
+                    <p class="text-2xl font-extrabold text-gray-900">{{ $inactiveCount }}</p>
                     <p class="text-[11px] text-gray-400 font-medium">Nonaktif</p>
                 </div>
             </div>
@@ -308,6 +308,11 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        {{-- Pagination --}}
+        <div class="mt-6">
+            {{ $activities->links() }}
         </div>
     @endif
 </div>

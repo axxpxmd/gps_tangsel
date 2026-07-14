@@ -31,10 +31,16 @@ class GalleryController extends Controller
             $query->where('is_active', false);
         }
 
-        $galleries = $query->latest()->get();
-        $albums = Gallery::distinct()->pluck('album')->filter()->sort()->values();
+        $galleries = $query->latest()
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('console.galleries.index', compact('galleries', 'albums'));
+        $albums = Gallery::distinct()->pluck('album')->filter()->sort()->values();
+        $totalGalleries = Gallery::count();
+        $activeCount = Gallery::where('is_active', true)->count();
+        $totalImages = Gallery::sum('images_count');
+
+        return view('console.galleries.index', compact('galleries', 'albums', 'totalGalleries', 'activeCount', 'totalImages'));
     }
 
     public function create(): View

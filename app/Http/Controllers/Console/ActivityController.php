@@ -11,9 +11,29 @@ use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $activities = Activity::orderBy('date', 'desc')->get();
+        $query = Activity::query();
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%'.$request->search.'%');
+        }
+
+        if ($request->status === 'active') {
+            $query->where('is_active', true);
+        } elseif ($request->status === 'inactive') {
+            $query->where('is_active', false);
+        }
+
+        if ($request->filled('date_from')) {
+            $query->whereDate('date', '>=', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $query->whereDate('date', '<=', $request->date_to);
+        }
+
+        $activities = $query->orderBy('date', 'desc')->get();
 
         return view('console.activities.index', compact('activities'));
     }

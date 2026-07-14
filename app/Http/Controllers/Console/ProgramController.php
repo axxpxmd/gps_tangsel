@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Program;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -44,7 +45,7 @@ class ProgramController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('programs', 'sftp');
+            $validated['gambar'] = $this->uploadAndConvertToWebp($request->file('gambar'), 'programs');
         }
 
         Program::create($validated);
@@ -78,7 +79,7 @@ class ProgramController extends Controller
             if ($program->gambar) {
                 Storage::disk('sftp')->delete($program->gambar);
             }
-            $validated['gambar'] = $request->file('gambar')->store('programs', 'sftp');
+            $validated['gambar'] = $this->uploadAndConvertToWebp($request->file('gambar'), 'programs');
         }
 
         $program->update($validated);
@@ -95,5 +96,37 @@ class ProgramController extends Controller
         $program->delete();
 
         return redirect()->route('console.programs.index')->with('success', 'Program berhasil dihapus.');
+    }
+
+    /**
+     * Upload gambar dan konversi ke WebP jika bukan WebP.
+     */
+    protected function uploadAndConvertToWebp(UploadedFile $file, string $directory): string
+    {
+        $extension = strtolower($file->getClientOriginalExtension());
+
+        if ($extension === 'webp') {
+            return $file->store($directory, 'sftp');
+        }
+
+        $imageContent = file_get_contents($file->getRealPath());
+        $image = imagecreatefromstring($imageContent);
+
+        if ($image === false) {
+            return $file->store($directory, 'sftp');
+        }
+
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).'.webp';
+        $path = $directory.'/'.$filename;
+
+        ob_start();
+        imagewebp($image, null, 85);
+        $webpData = ob_get_clean();
+
+        imagedestroy($image);
+
+        Storage::disk('sftp')->put($path, $webpData);
+
+        return $path;
     }
 }

@@ -168,7 +168,7 @@
                             {{-- Thumbnail --}}
                             <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
                                 <img
-                                    src="{{ $article->image ?: asset('image-placeholder.png') }}"
+                                    src="{{ $article->image_url ?: asset('image-placeholder.png') }}"
                                     alt="{{ $article->title }}"
                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     loading="lazy"

@@ -20,7 +20,7 @@
     {{-- Full-Bleed Featured Image --}}
     @if ($article->images->count() > 0)
         <section class="relative w-full h-[70vh] sm:h-[80vh] lg:h-[85vh] overflow-hidden bg-dawn-night">
-            <img id="featured-img" src="{{ $article->images->first()->image }}" alt="{{ $article->title }}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700">
+            <img id="featured-img" src="{{ $article->images->first()->image_url }}" alt="{{ $article->title }}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-700">
             <div class="absolute inset-0 bg-gradient-to-t from-dawn-night via-dawn-night/30 to-transparent"></div>
             <div class="absolute inset-0 bg-gradient-to-r from-dawn-night/60 via-transparent to-transparent"></div>
             <div class="absolute inset-0 islamic-pattern opacity-[0.02]"></div>
@@ -87,7 +87,7 @@
                                 class="gallery-thumb flex-shrink-0 w-20 h-14 sm:w-28 sm:h-18 rounded-lg overflow-hidden border-2 transition-all duration-300 {{ $index === 0 ? 'border-gold shadow-lg shadow-gold/20 scale-105' : 'border-white/10 opacity-50 hover:opacity-80' }}"
                                 data-index="{{ $index }}"
                             >
-                                <img src="{{ $img->image }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
+                                <img src="{{ $img->image_url }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
                             </button>
                         @endforeach
                     </div>
@@ -217,7 +217,7 @@
                     @foreach ($related as $item)
                         <a href="{{ route('berita.show', $item->slug) }}" wire:navigate class="group relative flex flex-col bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-transparent hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 reveal" style="transition-delay: {{ $loop->index * 80 }}ms">
                             <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
-                                <img src="{{ $item->image ?: asset('image-placeholder.png') }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                <img src="{{ $item->image_url ?: asset('image-placeholder.png') }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                                 <span class="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-sm text-primary border border-primary/10 shadow-sm">
                                     {{ $item->category }}
                                 </span>
@@ -288,7 +288,7 @@
 @if ($article->images->count() > 0)
     @push('scripts')
     <script>
-        const galleryImages = @json($article->images->pluck('image')->values());
+        const galleryImages = @json($article->images->pluck('image_url')->values());
         let currentIndex = 0;
 
         function setFeaturedImage(index) {

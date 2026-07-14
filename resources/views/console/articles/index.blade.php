@@ -213,8 +213,8 @@
                                 </td>
                                 <td class="px-5 py-4">
                                     <div class="flex items-center gap-3">
-                                        @if ($article->image)
-                                            <img src="{{ $article->image }}" alt="" class="w-10 h-10 rounded-lg object-cover bg-gray-100 flex-shrink-0">
+                                        @if ($article->image_url)
+                                            <img src="{{ $article->image_url }}" alt="" class="w-10 h-10 rounded-lg object-cover bg-gray-100 flex-shrink-0">
                                         @else
                                             <div class="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
                                                 <svg class="w-4 h-4 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -286,8 +286,8 @@
             @foreach ($articles as $article)
                 <div class="bg-white rounded-2xl border border-gray-200 p-4">
                     <div class="flex items-start gap-3">
-                        @if ($article->image)
-                            <img src="{{ $article->image }}" alt="" class="w-12 h-12 rounded-xl object-cover bg-gray-100 flex-shrink-0">
+                        @if ($article->image_url)
+                            <img src="{{ $article->image_url }}" alt="" class="w-12 h-12 rounded-xl object-cover bg-gray-100 flex-shrink-0">
                         @else
                             <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-5 h-5 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">

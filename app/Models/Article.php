@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Database\Factories\ArticleFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -69,5 +70,16 @@ class Article extends Model
         $wordCount = str_word_count((string) preg_replace('/\s+/', ' ', strip_tags((string) $this->content)));
 
         return max(1, (int) ceil($wordCount / 200));
+    }
+
+    public function imageUrl(): Attribute
+    {
+        return Attribute::get(function () {
+            if (! $this->image) {
+                return null;
+            }
+
+            return rtrim((string) config('filesystems.disks.sftp.url', ''), '/').'/'.$this->image;
+        });
     }
 }

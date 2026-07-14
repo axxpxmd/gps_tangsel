@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Console;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
+use App\Services\ImageConversionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ArticleController extends Controller
 {
+    public function __construct(protected ImageConversionService $imageService) {}
+
     public function index(Request $request): View
     {
         $articles = Article::with('category')
@@ -60,7 +62,7 @@ class ArticleController extends Controller
         $uploadedImages = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $uploadedImages[] = $file->store('articles', 'sftp');
+                $uploadedImages[] = $this->imageService->uploadAndConvertToWebp($file, 'articles');
             }
             if (! empty($uploadedImages)) {
                 $validated['image'] = $uploadedImages[0];
@@ -119,16 +121,16 @@ class ArticleController extends Controller
 
         if ($request->hasFile('images')) {
             if ($article->image) {
-                Storage::disk('sftp')->delete($article->image);
+                $this->imageService->deleteFile($article->image);
             }
             foreach ($article->images as $img) {
-                Storage::disk('sftp')->delete($img->image);
+                $this->imageService->deleteFile($img->image);
             }
             $article->images()->delete();
 
             $uploadedImages = [];
             foreach ($request->file('images') as $file) {
-                $uploadedImages[] = $file->store('articles', 'sftp');
+                $uploadedImages[] = $this->imageService->uploadAndConvertToWebp($file, 'articles');
             }
             if (! empty($uploadedImages)) {
                 $validated['image'] = $uploadedImages[0];
@@ -148,9 +150,7 @@ class ArticleController extends Controller
 
     public function destroy(Article $article): RedirectResponse
     {
-        if ($article->image) {
-            Storage::disk('sftp')->delete($article->image);
-        }
+        $this->imageService->deleteFile($article->image);
 
         $article->delete();
 

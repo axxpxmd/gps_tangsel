@@ -10,12 +10,12 @@
 @section('content')
 @php
     $initialPreviews = [];
-    if ($article->image) {
-        $initialPreviews[] = $article->image;
+    if ($article->image_url) {
+        $initialPreviews[] = $article->image_url;
     }
     foreach ($article->images as $img) {
-        if (!in_array($img->image, $initialPreviews)) {
-            $initialPreviews[] = $img->image;
+        if ($img->image_url && !in_array($img->image_url, $initialPreviews)) {
+            $initialPreviews[] = $img->image_url;
         }
     }
 @endphp
@@ -41,7 +41,7 @@
         </a>
     </div>
 
-    <form action="{{ route('console.articles.update', $article) }}" method="POST" enctype="multipart/form-data" x-data="{ previewUrls: {{ json_encode($initialPreviews) }} }">
+    <form action="{{ route('console.articles.update', $article) }}" method="POST" enctype="multipart/form-data" x-data="{ previewUrls: {{ json_encode($initialPreviews) }} }" onsubmit="this.querySelectorAll('button[type=submit]').forEach(b => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); b.querySelector('.btn-text').textContent = 'Menyimpan...'; })">
         @csrf
         @method('PUT')
 
@@ -265,12 +265,12 @@
                         <button type="submit" name="status" value="draft"
                             class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 text-sm font-semibold transition-all duration-200 cursor-pointer">
                             <span class="material-symbols-rounded text-[18px]">save</span>
-                            Simpan sebagai Draft
+                            <span class="btn-text">Simpan sebagai Draft</span>
                         </button>
                         <button type="submit" name="status" value="publish"
                             class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white hover:bg-primary-dark rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer">
                             <span class="material-symbols-rounded text-[18px]">send</span>
-                            Kirim untuk Verifikasi
+                            <span class="btn-text">Simpan dan Publish</span>
                         </button>
                         <a href="{{ route('console.articles.index') }}"
                             class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-200 rounded-xl text-gray-500 hover:text-gray-700 hover:bg-gray-50 text-sm font-semibold transition-all duration-200">

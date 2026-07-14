@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
 use App\Models\Partner;
+use App\Services\ImageConversionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PartnerController extends Controller
 {
+    public function __construct(protected ImageConversionService $imageService) {}
+
     public function index(): View
     {
         $partners = Partner::latest()->get();
@@ -27,13 +29,11 @@ class PartnerController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'gambar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['boolean'],
         ]);
 
-        if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('partners', 'sftp');
-        }
+        $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'partners');
 
         Partner::create($validated);
 
@@ -61,10 +61,8 @@ class PartnerController extends Controller
         $validated['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('gambar')) {
-            if ($partner->gambar) {
-                Storage::disk('sftp')->delete($partner->gambar);
-            }
-            $validated['gambar'] = $request->file('gambar')->store('partners', 'sftp');
+            $this->imageService->deleteFile($partner->gambar);
+            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'partners');
         }
 
         $partner->update($validated);
@@ -74,9 +72,7 @@ class PartnerController extends Controller
 
     public function destroy(Partner $partner): RedirectResponse
     {
-        if ($partner->gambar) {
-            Storage::disk('sftp')->delete($partner->gambar);
-        }
+        $this->imageService->deleteFile($partner->gambar);
 
         $partner->delete();
 

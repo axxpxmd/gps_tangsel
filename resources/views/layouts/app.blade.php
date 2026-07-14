@@ -313,6 +313,27 @@
             } else {
                 countEls.forEach(function (el) { el.textContent = el.getAttribute('data-count'); });
             }
+
+            // Back to top button logic
+            const backToTopBtn = document.getElementById('back-to-top');
+            if (backToTopBtn) {
+                window.addEventListener('scroll', function () {
+                    if (window.scrollY > 300) {
+                        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                        backToTopBtn.classList.add('opacity-100', 'translate-y-0');
+                    } else {
+                        backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                        backToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+                    }
+                });
+
+                backToTopBtn.addEventListener('click', function () {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
         }
 
         document.addEventListener('DOMContentLoaded', initPage);
@@ -368,6 +389,13 @@
             document.addEventListener('livewire:initialized', initLivewireReveal);
         }
     </script>
+
+    {{-- Back to Top Button --}}
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-[#2F5FA3] hover:bg-[#244B82] text-white shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4 hover:-translate-y-0.5 focus:outline-none" aria-label="Kembali ke atas">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
 
     @stack('scripts')
 </body>

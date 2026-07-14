@@ -25,9 +25,8 @@ class BeritaShow extends Component
     {
         $related = Article::query()
             ->published()
-            ->where('category_id', $this->article->category_id)
             ->where('id', '!=', $this->article->id)
-            ->latest('published_at')
+            ->inRandomOrder()
             ->take(3)
             ->get();
 

@@ -151,23 +151,29 @@
                         </div>
 
                         {{-- Next Safari Subuh feature strip --}}
-                        <a href="#program" class="group block relative rounded-2xl bg-gradient-to-r from-primary/30 via-primary/20 to-gold/20 p-4 border border-gold/20 hover:border-gold/40 transition-all duration-200 hover:-translate-y-0.5">
-                            <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-light to-gold flex items-center justify-center flex-shrink-0 shadow-lg shadow-gold/20">
-                                    <svg class="w-6 h-6 text-dawn-night" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6M9 11h.01M15 11h.01"/>
+                        @if ($nextActivity)
+                            <a href="#program" class="group block relative rounded-2xl bg-gradient-to-r from-primary/30 via-primary/20 to-gold/20 p-4 border border-gold/20 hover:border-gold/40 transition-all duration-200 hover:-translate-y-0.5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-gold-light to-gold flex items-center justify-center flex-shrink-0 shadow-lg shadow-gold/20">
+                                        <svg class="w-6 h-6 text-dawn-night" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6M9 11h.01M15 11h.01"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-[10px] font-semibold text-gold-light uppercase tracking-widest mb-0.5">Safari Subuh Berikutnya</p>
+                                        <p class="text-sm font-bold text-white truncate">{{ $nextActivity->title }}</p>
+                                        <p class="text-[11px] text-white/60 mt-0.5">{{ $nextActivity->date->locale('id')->translatedFormat('l, H:i') }} WIB — {{ $nextActivity->location }}</p>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gold-light flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
                                     </svg>
                                 </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-[10px] font-semibold text-gold-light uppercase tracking-widest mb-0.5">Safari Subuh Berikutnya</p>
-                                    <p class="text-sm font-bold text-white truncate">Masjid Al-Hidayah, Ciputat</p>
-                                    <p class="text-[11px] text-white/60 mt-0.5">Sabtu, 04:45 WIB — Gratis & Terbuka untuk Umum</p>
-                                </div>
-                                <svg class="w-5 h-5 text-gold-light flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                                </svg>
+                            </a>
+                        @else
+                            <div class="relative rounded-2xl bg-gradient-to-r from-primary/30 via-primary/20 to-gold/20 p-4 border border-gold/20 text-center">
+                                <p class="text-xs text-white/70 font-medium">Safari Subuh berikutnya akan segera diumumkan.</p>
                             </div>
-                        </a>
+                        @endif
                     </div>
                 </div>
             </div>

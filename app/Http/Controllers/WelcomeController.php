@@ -18,6 +18,12 @@ class WelcomeController extends Controller
 
     public function __invoke(Request $request): View
     {
+        $nextActivity = Activity::query()
+            ->where('is_active', true)
+            ->where('date', '>=', now('Asia/Jakarta'))
+            ->orderBy('date', 'asc')
+            ->first();
+
         return view('welcome', [
             'prayerSchedule' => $this->prayerTimes->today(),
             'calendarEvents' => $this->getCalendarEvents(),
@@ -26,7 +32,7 @@ class WelcomeController extends Controller
             'programs' => Program::where('is_active', true)->latest()->get(),
             'partners' => Partner::where('is_active', true)->latest()->get(),
             'hadits' => Hadits::where('is_active', true)->first(),
-            'calendarEvents' => $this->getCalendarEvents(),
+            'nextActivity' => $nextActivity,
         ]);
     }
 

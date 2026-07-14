@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
 use App\Models\BoardMember;
+use App\Services\ImageConversionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class BoardMemberController extends Controller
 {
+    public function __construct(protected ImageConversionService $imageService) {}
+
     public function index(): View
     {
         $members = BoardMember::latest()->get();
@@ -35,7 +37,7 @@ class BoardMemberController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('board-members', 'sftp');
+            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'board-members');
         }
 
         BoardMember::create($validated);
@@ -67,10 +69,8 @@ class BoardMemberController extends Controller
         $validated['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('gambar')) {
-            if ($board_member->gambar) {
-                Storage::disk('sftp')->delete($board_member->gambar);
-            }
-            $validated['gambar'] = $request->file('gambar')->store('board-members', 'sftp');
+            $this->imageService->deleteFile($board_member->gambar);
+            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'board-members');
         }
 
         $board_member->update($validated);
@@ -80,9 +80,7 @@ class BoardMemberController extends Controller
 
     public function destroy(BoardMember $board_member): RedirectResponse
     {
-        if ($board_member->gambar) {
-            Storage::disk('sftp')->delete($board_member->gambar);
-        }
+        $this->imageService->deleteFile($board_member->gambar);
 
         $board_member->delete();
 

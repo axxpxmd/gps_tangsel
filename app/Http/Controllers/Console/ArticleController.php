@@ -43,7 +43,8 @@ class ArticleController extends Controller
             'category_id' => ['nullable', 'exists:categories,id'],
             'excerpt' => ['required', 'string'],
             'content' => ['required', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'published_at' => ['nullable', 'date'],
         ]);
 
@@ -56,11 +57,26 @@ class ArticleController extends Controller
             $validated['published_at'] = now();
         }
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('articles', 'sftp');
+        $uploadedImages = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $uploadedImages[] = $file->store('articles', 'sftp');
+            }
+            if (! empty($uploadedImages)) {
+                $validated['image'] = $uploadedImages[0];
+            }
         }
 
-        Article::create($validated);
+        $article = Article::create($validated);
+
+        if (! empty($uploadedImages)) {
+            foreach ($uploadedImages as $index => $path) {
+                $article->images()->create([
+                    'image' => $path,
+                    'sort_order' => $index,
+                ]);
+            }
+        }
 
         return redirect()->route('console.articles.index')->with('success', 'Artikel berhasil ditambahkan.');
     }
@@ -86,7 +102,8 @@ class ArticleController extends Controller
             'category_id' => ['nullable', 'exists:categories,id'],
             'excerpt' => ['required', 'string'],
             'content' => ['required', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'images' => ['nullable', 'array'],
+            'images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'published_at' => ['nullable', 'date'],
         ]);
 
@@ -100,11 +117,28 @@ class ArticleController extends Controller
             $validated['published_at'] = null;
         }
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('images')) {
             if ($article->image) {
                 Storage::disk('sftp')->delete($article->image);
             }
-            $validated['image'] = $request->file('image')->store('articles', 'sftp');
+            foreach ($article->images as $img) {
+                Storage::disk('sftp')->delete($img->image);
+            }
+            $article->images()->delete();
+
+            $uploadedImages = [];
+            foreach ($request->file('images') as $file) {
+                $uploadedImages[] = $file->store('articles', 'sftp');
+            }
+            if (! empty($uploadedImages)) {
+                $validated['image'] = $uploadedImages[0];
+                foreach ($uploadedImages as $index => $path) {
+                    $article->images()->create([
+                        'image' => $path,
+                        'sort_order' => $index,
+                    ]);
+                }
+            }
         }
 
         $article->update($validated);

@@ -48,7 +48,7 @@ class ArticleController extends Controller
             'published_at' => ['nullable', 'date'],
         ]);
 
-        $validated['slug'] = Str::slug($validated['title']);
+        $validated['slug'] = $this->uniqueSlug(Str::slug($validated['title']));
         $validated['status'] = $request->filled('published_at') ? 'publish' : 'draft';
 
         if ($request->hasFile('image')) {
@@ -86,7 +86,7 @@ class ArticleController extends Controller
             'published_at' => ['nullable', 'date'],
         ]);
 
-        $validated['slug'] = Str::slug($validated['title']);
+        $validated['slug'] = $this->uniqueSlug(Str::slug($validated['title']), $article->id);
         $validated['status'] = $request->filled('published_at') ? 'publish' : 'draft';
 
         if ($request->hasFile('image')) {
@@ -110,5 +110,18 @@ class ArticleController extends Controller
         $article->delete();
 
         return redirect()->route('console.articles.index')->with('success', 'Artikel berhasil dihapus.');
+    }
+
+    private function uniqueSlug(string $slug, ?int $excludeId = null): string
+    {
+        $originalSlug = $slug;
+        $counter = 1;
+
+        while (Article::where('slug', $slug)->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))->exists()) {
+            $slug = $originalSlug.'-'.$counter;
+            $counter++;
+        }
+
+        return $slug;
     }
 }

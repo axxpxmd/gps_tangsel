@@ -119,7 +119,7 @@
                                 class="hidden">
                         </div>
 
-                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-4 flex flex-col items-center justify-center min-h-[140px] bg-gray-50/50 overflow-hidden">
+                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-4 flex items-center justify-center min-h-[140px] bg-gray-50/50 overflow-hidden">
                             <template x-if="!previewUrl">
                                 <div class="text-center">
                                     <div class="w-8 h-8 mx-auto mb-2 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400">
@@ -129,13 +129,13 @@
                                 </div>
                             </template>
                             <template x-if="previewUrl">
-                                <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden">
-                                    <img :src="previewUrl" alt="Preview" class="w-full h-full object-cover">
+                                <div class="relative inline-block">
+                                    <img :src="previewUrl" alt="Preview" class="max-w-[50%] h-auto object-contain rounded-lg mx-auto">
                                     <button type="button" @click="
                                         document.getElementById('gambar').value = '';
                                         previewUrl = '';
                                     "
-                                        class="absolute top-1.5 right-1.5 p-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">
+                                        class="absolute top-0 right-[25%] p-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">
                                         <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                                         </svg>

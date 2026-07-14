@@ -54,13 +54,11 @@ class ActivityController extends Controller
             'latitude' => ['nullable', 'numeric', 'between:-90,90'],
             'longitude' => ['nullable', 'numeric', 'between:-180,180'],
             'description' => ['required', 'string'],
-            'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'gambar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['boolean'],
         ]);
 
-        if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'activities');
-        }
+        $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'activities');
 
         Activity::create($validated);
 

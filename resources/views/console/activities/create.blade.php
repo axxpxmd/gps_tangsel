@@ -79,7 +79,7 @@
                         <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
                             <span class="material-symbols-rounded text-amber-500 text-[18px]">image</span>
                         </div>
-                        <span class="text-sm font-bold text-gray-800">Poster Kegiatan</span>
+                        <span class="text-sm font-bold text-gray-800">Poster Kegiatan <span class="text-red-500">*</span></span>
                     </div>
 
                     <div class="space-y-4">
@@ -91,7 +91,7 @@
                                     Choose Files
                                 </label>
                                 <span class="text-xs text-gray-500 truncate" id="file-name">No file chosen</span>
-                                <input type="file" id="gambar" name="gambar" accept="image/jpeg,image/png,image/webp"
+                                <input type="file" id="gambar" name="gambar" accept="image/jpeg,image/png,image/webp" required
                                     @change="document.getElementById('file-name').textContent = $el.files[0] ? $el.files[0].name : 'No file chosen'"
                                     class="hidden">
                             </div>
@@ -108,7 +108,7 @@
                         </div>
 
                         {{-- Preview Area --}}
-                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center min-h-[160px] bg-gray-50/50" id="gambar-preview">
+                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 flex items-center justify-center min-h-[160px] bg-gray-50/50" id="gambar-preview">
                             <div class="text-center" id="preview-placeholder">
                                 <div class="w-10 h-10 mx-auto mb-2 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400">
                                     <span class="material-symbols-rounded text-[20px]">add_photo_alternate</span>
@@ -262,7 +262,7 @@
         var img = document.createElement('img');
         img.src = URL.createObjectURL(file);
         img.alt = 'Preview';
-        img.className = 'w-full h-full object-cover rounded-xl';
+        img.className = 'max-w-[50%] h-auto object-contain rounded-xl';
         preview.appendChild(img);
     });
 </script>

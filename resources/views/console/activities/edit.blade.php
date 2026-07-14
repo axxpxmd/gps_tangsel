@@ -115,9 +115,9 @@
                         </div>
 
                         {{-- Preview Area --}}
-                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center min-h-[160px] bg-gray-50/50" id="gambar-preview">
+                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 flex items-center justify-center min-h-[160px] bg-gray-50/50" id="gambar-preview">
                             @if ($activity->gambar_url)
-                                <img src="{{ $activity->gambar_url }}" alt="Preview" class="w-full h-full object-cover rounded-xl" id="preview-img">
+                                <img src="{{ $activity->gambar_url }}" alt="Preview" class="max-w-[50%] h-auto object-contain rounded-xl" id="preview-img">
                             @else
                                 <div class="text-center" id="preview-placeholder">
                                     <div class="w-10 h-10 mx-auto mb-2 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400">
@@ -273,7 +273,7 @@
         var img = document.createElement('img');
         img.src = URL.createObjectURL(file);
         img.alt = 'Preview';
-        img.className = 'w-full h-full object-cover rounded-xl';
+        img.className = 'max-w-[50%] h-auto object-contain rounded-xl';
         img.id = 'preview-img';
         preview.appendChild(img);
     });

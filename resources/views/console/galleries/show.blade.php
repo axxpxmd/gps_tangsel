@@ -4,51 +4,208 @@
 @section('page_title', 'Detail Galeri')
 
 @section('content')
-<div class="max-w-4xl mx-auto space-y-6">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+<div>
+    {{-- Header --}}
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center shadow-sm">
-                <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
+                </svg>
             </div>
-            <div>
+            <div class="min-w-0">
                 <h2 class="text-base font-extrabold text-gray-900">Detail Galeri</h2>
-                <p class="text-xs text-gray-400">{{ $gallery->title }}</p>
+                <p class="text-xs text-gray-400 line-clamp-1">{{ $gallery->title }}</p>
             </div>
         </div>
-        <div class="flex items-center gap-2">
-            <a href="{{ route('console.galleries.index') }}" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors duration-200">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
-                Daftar Galeri
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+            <a href="{{ route('console.galleries.index') }}" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors duration-200">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+                </svg>
+                Kembali
             </a>
-            <a href="{{ route('console.galleries.edit', $gallery) }}" class="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200 shadow-sm">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+            <a href="{{ route('console.galleries.edit', $gallery) }}" class="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/>
+                </svg>
                 Edit
             </a>
         </div>
     </div>
 
-    <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-8">
-        <h3 class="text-xl font-extrabold text-gray-900 mb-3">{{ $gallery->title }}</h3>
-        @if ($gallery->description)<p class="text-sm text-gray-500 mb-4">{{ $gallery->description }}</p>@endif
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-5">
+        {{-- Left — Main Content --}}
+        <div class="xl:col-span-2 space-y-5">
+            {{-- Gambar --}}
+            <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                <div class="flex items-center gap-2.5 px-5 py-4 border-b border-gray-100">
+                    <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-rounded text-amber-500 text-[18px]">image</span>
+                    </div>
+                    <span class="text-sm font-bold text-gray-800">Gambar ({{ $gallery->images->count() }})</span>
+                </div>
+                <div class="p-5">
+                    @if ($gallery->images->isEmpty())
+                        <div class="w-full h-48 flex items-center justify-center bg-gray-50 rounded-xl">
+                            <div class="text-center">
+                                <svg class="w-12 h-12 text-gray-300 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
+                                </svg>
+                                <p class="text-xs text-gray-400">Tidak ada gambar</p>
+                            </div>
+                        </div>
+                    @else
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            @foreach ($gallery->images as $image)
+                                <div class="relative group rounded-xl overflow-hidden bg-gray-100 aspect-square border border-gray-200">
+                                    <img src="{{ $image->gambar_url }}" alt="Gambar {{ $loop->iteration }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
 
-        <div class="flex flex-wrap gap-3 mb-6">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold">{{ $gallery->album }}</span>
-            @if ($gallery->date)<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-gray-600 text-xs font-semibold">{{ $gallery->date->translatedFormat('d M Y') }}</span>@endif
-            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold {{ $gallery->is_active ? 'bg-emerald-50 text-emerald-600' : 'bg-gray-100 text-gray-400' }}">{{ $gallery->is_active ? 'Aktif' : 'Nonaktif' }}</span>
+            {{-- Deskripsi --}}
+            @if ($gallery->description)
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                    <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-primary-light flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-rounded text-primary text-[18px]">edit_note</span>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800">Deskripsi</span>
+                    </div>
+                    <p class="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{{ $gallery->description }}</p>
+                </div>
+            @endif
         </div>
 
-        <h4 class="text-sm font-bold text-gray-700 mb-3">Gambar ({{ $gallery->images->count() }})</h4>
-        @if ($gallery->images->isEmpty())
-            <p class="text-sm text-gray-400">Tidak ada gambar.</p>
-        @else
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                @foreach ($gallery->images as $image)
-                    <div class="relative group rounded-xl overflow-hidden bg-gray-100 aspect-square">
-                        <img src="{{ $image->gambar_url }}" alt="Gambar {{ $loop->iteration }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+        {{-- Right — Sidebar --}}
+        <div class="space-y-5">
+            {{-- Info Galeri --}}
+            <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
+                    <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+                        </svg>
                     </div>
-                @endforeach
+                    <span class="text-sm font-bold text-gray-800">Informasi Galeri</span>
+                </div>
+
+                <div class="space-y-4">
+                    {{-- Album --}}
+                    <div>
+                        <p class="text-[11px] text-gray-400 font-medium mb-1.5">Album</p>
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-primary-light text-xs font-medium text-primary">{{ $gallery->album }}</span>
+                    </div>
+
+                    {{-- Tanggal --}}
+                    @if ($gallery->date)
+                        <div>
+                            <p class="text-[11px] text-gray-400 font-medium mb-1.5">Tanggal</p>
+                            <p class="text-sm text-gray-700 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/>
+                                </svg>
+                                {{ $gallery->date->translatedFormat('d M Y') }}
+                            </p>
+                        </div>
+                    @endif
+
+                    {{-- Jumlah Gambar --}}
+                    <div>
+                        <p class="text-[11px] text-gray-400 font-medium mb-1.5">Jumlah Gambar</p>
+                        <p class="text-sm text-gray-700 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
+                            </svg>
+                            {{ $gallery->images->count() }} gambar
+                        </p>
+                    </div>
+                </div>
             </div>
-        @endif
+
+            {{-- Status --}}
+            <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-rounded text-emerald-500 text-[18px]">visibility</span>
+                    </div>
+                    <span class="text-sm font-bold text-gray-800">Status</span>
+                </div>
+                <div>
+                    @if ($gallery->is_active)
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-sm font-semibold text-emerald-600">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            Aktif
+                        </span>
+                    @else
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-sm font-semibold text-gray-500">
+                            <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                            Nonaktif
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            {{-- Info Waktu --}}
+            <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-rounded text-blue-500 text-[18px]">info</span>
+                    </div>
+                    <span class="text-sm font-bold text-gray-800">Informasi</span>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <p class="text-[11px] text-gray-400 font-medium mb-1">Dibuat</p>
+                        <p class="text-xs text-gray-600 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            {{ $gallery->created_at->translatedFormat('d M Y, H:i') }}
+                        </p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-gray-400 font-medium mb-1">Diperbarui</p>
+                        <p class="text-xs text-gray-600 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0A4.987 4.987 0 012.985 15m11.998-7.7c.375-.483.807-.955 1.293-1.39M5.1 7.5c-.176-.36-.322-.73-.438-1.107M5.1 7.5l5.4 5.4M5.1 7.5A11.998 11.998 0 004.285 12c0 1.55.294 3.032.83 4.4"/>
+                            </svg>
+                            {{ $gallery->updated_at->translatedFormat('d M Y, H:i') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Aksi --}}
+            <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-rounded text-blue-500 text-[18px]">verified_user</span>
+                    </div>
+                    <span class="text-sm font-bold text-gray-800">Aksi</span>
+                </div>
+                <div class="space-y-3">
+                    <a href="{{ route('console.galleries.edit', $gallery) }}"
+                        class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white hover:bg-primary-dark rounded-xl text-sm font-semibold transition-all duration-200">
+                        <span class="material-symbols-rounded text-[18px]">edit</span>
+                        Edit Galeri
+                    </a>
+                    <form action="{{ route('console.galleries.destroy', $gallery) }}" method="POST" onsubmit="return confirm('Hapus galeri &quot;{{ $gallery->title }}&quot;? Semua gambar juga akan ikut terhapus.')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                            class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-red-200 text-red-500 hover:bg-red-50 rounded-xl text-sm font-semibold transition-all duration-200">
+                            <span class="material-symbols-rounded text-[18px]">delete</span>
+                            Hapus Galeri
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

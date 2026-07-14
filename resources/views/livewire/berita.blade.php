@@ -45,7 +45,7 @@
             {{-- Filter Card --}}
             <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 sm:p-6 lg:p-7">
                 {{-- Search Bar --}}
-                <div class="mb-6">
+                <div class="mb-6" x-data="{ showClear: {{ $search ? 'true' : 'false' }} }">
                     <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Kata Kunci</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -54,29 +54,30 @@
                             </svg>
                         </div>
                         <input
-                            wire:model.live.debounce.300ms="search"
+                            wire:model="search"
+                            x-ref="searchInput"
                             type="text"
                             placeholder="Cari berdasarkan judul atau isi artikel..."
+                            @input="showClear = $event.target.value.length > 0"
                             class="w-full pl-12 pr-12 py-3 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                         >
-                        @if ($search)
-                            <button wire:click="$set('search', '')" class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-700 transition-colors" aria-label="Hapus pencarian">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                                </svg>
-                            </button>
-                        @endif
-                        <div wire:loading.delay class="absolute inset-y-0 right-0 pr-4 flex items-center" wire:target="search">
-                            <svg class="w-4 h-4 text-primary animate-spin" fill="none" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-                                <path d="M4 12a8 8 0 018-8" stroke="currentColor" stroke-width="4" stroke-linecap="round" class="opacity-75"></path>
+                        <button
+                            type="button"
+                            x-show="showClear"
+                            x-cloak
+                            @click="$refs.searchInput.value = ''; showClear = false"
+                            class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-700 transition-colors"
+                            aria-label="Hapus teks pencarian"
+                        >
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
-                        </div>
+                        </button>
                     </div>
                 </div>
 
                 {{-- Date Range --}}
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
                         <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-2">Dari Tanggal</label>
                         <div class="relative">
@@ -86,7 +87,7 @@
                                 </svg>
                             </div>
                             <input
-                                wire:model.live="date_from"
+                                wire:model="date_from"
                                 type="date"
                                 class="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                             >
@@ -102,46 +103,52 @@
                                 </svg>
                             </div>
                             <input
-                                wire:model.live="date_to"
+                                wire:model="date_to"
                                 type="date"
                                 class="w-full pl-10 pr-3 py-2.5 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors"
                             >
                         </div>
                     </div>
-
-                    <div class="flex items-end">
-                        <button
-                            wire:click="resetFilters"
-                            @disabled(!$search && !$category && !$date_from && !$date_to)
-                            class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-gray-50"
-                        >
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                            </svg>
-                            Reset Filter
-                        </button>
-                    </div>
                 </div>
 
                 {{-- Category Filter --}}
-                <div>
+                <div class="mb-6">
                     <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-3">Kategori</label>
                     <div class="flex flex-wrap gap-2">
-                        <button
-                            wire:click="$set('category', '')"
-                            class="px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 {{ $category === '' ? 'bg-primary text-white shadow-md shadow-primary/20' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
-                        >
+                        <input type="radio" wire:model="category" value="" id="cat-all" class="sr-only peer" @checked($category === '')>
+                        <label for="cat-all" class="px-4 py-2 text-xs font-semibold rounded-full cursor-pointer transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200 peer-checked:bg-primary peer-checked:text-white peer-checked:shadow-md peer-checked:shadow-primary/20">
                             Semua Kategori
-                        </button>
+                        </label>
                         @foreach ($categories as $cat)
-                            <button
-                                wire:click="$set('category', '{{ $cat->slug }}')"
-                                class="px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 {{ $category === $cat->slug ? 'bg-primary text-white shadow-md shadow-primary/20' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}"
-                            >
+                            <input type="radio" wire:model="category" value="{{ $cat->slug }}" id="cat-{{ $cat->slug }}" class="sr-only peer" @checked($category === $cat->slug)>
+                            <label for="cat-{{ $cat->slug }}" class="px-4 py-2 text-xs font-semibold rounded-full cursor-pointer transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200 peer-checked:bg-primary peer-checked:text-white peer-checked:shadow-md peer-checked:shadow-primary/20">
                                 {{ $cat->name }}
-                            </button>
+                            </label>
                         @endforeach
                     </div>
+                </div>
+
+                {{-- Action Buttons --}}
+                <div class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-gray-100">
+                    <button
+                        wire:click="applyFilters"
+                        class="flex-1 sm:flex-none sm:px-8 inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-bold text-white bg-primary hover:bg-primary-dark rounded-xl transition-colors shadow-md shadow-primary/20"
+                    >
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                        </svg>
+                        Filter
+                    </button>
+                    <button
+                        wire:click="resetFilters"
+                        @disabled(!$search && !$category && !$date_from && !$date_to)
+                        class="flex-1 sm:flex-none sm:px-6 inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-gray-50"
+                    >
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        Reset Filter
+                    </button>
                 </div>
             </div>
         </div>
@@ -171,6 +178,7 @@
                         <a
                             href="{{ route('berita.show', $article->slug) }}"
                             wire:navigate
+                            x-reveal
                             class="group relative flex flex-col bg-white rounded-2xl border border-gray-200 overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300 reveal"
                             style="transition-delay: {{ $loop->index * 80 }}ms"
                         >

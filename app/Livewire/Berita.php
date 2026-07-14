@@ -26,22 +26,7 @@ class Berita extends Component
     #[Url]
     public string $date_to = '';
 
-    public function updatingSearch(): void
-    {
-        $this->resetPage();
-    }
-
-    public function updatingCategory(): void
-    {
-        $this->resetPage();
-    }
-
-    public function updatingDateFrom(): void
-    {
-        $this->resetPage();
-    }
-
-    public function updatingDateTo(): void
+    public function applyFilters(): void
     {
         $this->resetPage();
     }

@@ -28,12 +28,14 @@
         }
     </style>
 
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
+        <style>
+            html {
+                scroll-behavior: smooth;
+            }
 
-        body {
+            [x-cloak] { display: none !important; }
+
+            body {
             font-family: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
         }
 
@@ -315,6 +317,56 @@
 
         document.addEventListener('DOMContentLoaded', initPage);
         document.addEventListener('livewire:navigated', initPage);
+
+        {{-- Alpine directive: re-runs after Livewire DOM morphs (e.g. pagination),
+            so newly inserted elements get a fresh IntersectionObserver. --}}
+        document.addEventListener('alpine:init', () => {
+            window.Alpine.directive('reveal', (el) => {
+                if (!('IntersectionObserver' in window)) {
+                    el.classList.add('is-visible');
+                    return;
+                }
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                observer.observe(el);
+            });
+        });
+
+        {{-- Re-observe .reveal elements after Livewire component updates (pagination, filtering, etc.) --}}
+        function observeReveal(el) {
+            if (!('IntersectionObserver' in window)) {
+                el.classList.add('is-visible');
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            observer.observe(el);
+        }
+
+        function initLivewireReveal() {
+            if (typeof Livewire === 'undefined') return;
+            Livewire.hook('morphed', ({ el }) => {
+                el.querySelectorAll('.reveal:not(.is-visible)').forEach(observeReveal);
+            });
+        }
+
+        if (window.Livewire) {
+            initLivewireReveal();
+        } else {
+            document.addEventListener('livewire:initialized', initLivewireReveal);
+        }
     </script>
 
     @stack('scripts')

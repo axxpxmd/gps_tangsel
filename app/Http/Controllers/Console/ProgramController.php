@@ -11,9 +11,19 @@ use Illuminate\View\View;
 
 class ProgramController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $programs = Program::latest()->get();
+        $programs = Program::query()
+            ->when($request->filled('search'), fn ($q) => $q->where('title', 'like', '%'.$request->search.'%')->orWhere('description', 'like', '%'.$request->search.'%'))
+            ->when($request->filled('status'), function ($q) use ($request) {
+                if ($request->status === 'active') {
+                    $q->where('is_active', true);
+                } elseif ($request->status === 'inactive') {
+                    $q->where('is_active', false);
+                }
+            })
+            ->latest()
+            ->get();
 
         return view('console.programs.index', compact('programs'));
     }

@@ -26,7 +26,7 @@
         </a>
     </div>
 
-    <form action="{{ route('console.programs.update', $program) }}" method="POST" enctype="multipart/form-data" x-data="{ previewUrl: @js($program->gambar_url) }">
+    <form action="{{ route('console.programs.update', $program) }}" method="POST" enctype="multipart/form-data" x-data="{ previewUrl: @js($program->gambar_url) }" onsubmit="this.querySelectorAll('button[type=submit]').forEach(b => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); b.querySelector('.btn-text').textContent = 'Menyimpan...'; })">
         @csrf
         @method('PUT')
 
@@ -186,7 +186,7 @@
                         <button type="submit"
                             class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white hover:bg-primary-dark rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer">
                             <span class="material-symbols-rounded text-[18px]">save</span>
-                            Simpan Perubahan
+                            <span class="btn-text">Simpan Perubahan</span>
                         </button>
                         <a href="{{ route('console.programs.index') }}"
                             class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-gray-200 rounded-xl text-gray-500 hover:text-gray-700 hover:bg-gray-50 text-sm font-semibold transition-all duration-200">

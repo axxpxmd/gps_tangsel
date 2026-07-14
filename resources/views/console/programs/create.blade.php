@@ -98,7 +98,7 @@
                         <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
                             <span class="material-symbols-rounded text-amber-500 text-[18px]">image</span>
                         </div>
-                        <span class="text-sm font-bold text-gray-800">Thumbnail</span>
+                        <span class="text-sm font-bold text-gray-800">Thumbnail <span class="text-red-500">*</span></span>
                     </div>
 
                     <div class="space-y-4">
@@ -107,7 +107,7 @@
                                 Choose File
                             </label>
                             <span class="text-xs text-gray-500 truncate" x-text="previewUrl ? '1 file selected' : 'No file chosen'">No file chosen</span>
-                            <input type="file" id="gambar" name="gambar" accept="image/jpeg,image/png,image/webp"
+                            <input type="file" id="gambar" name="gambar" accept="image/jpeg,image/png,image/webp" required
                                 @change="
                                     if ($el.files && $el.files[0]) {
                                         previewUrl = URL.createObjectURL($el.files[0]);

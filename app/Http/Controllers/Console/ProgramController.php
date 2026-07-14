@@ -41,13 +41,11 @@ class ProgramController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'penerima_manfaat' => ['required', 'string'],
-            'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'gambar' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['boolean'],
         ]);
 
-        if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'programs');
-        }
+        $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'programs');
 
         Program::create($validated);
 

@@ -51,6 +51,7 @@
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Jabatan</th>
                             <th class="text-left px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider">Kelompok</th>
                             <th class="text-center px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-24">Status</th>
+                            <th class="text-center px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-24">Kontak</th>
                             <th class="text-right px-5 py-3.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider w-28">Aksi</th>
                         </tr>
                     </thead>
@@ -93,6 +94,19 @@
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 text-[11px] font-semibold text-gray-400">
                                             <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                                             Nonaktif
+                                        </span>
+                                    @endif
+                                </td>
+                                <td class="px-5 py-4 text-center">
+                                    @if ($member->is_contact)
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-50 text-[11px] font-semibold text-blue-600">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                            Ya
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-gray-100 text-[11px] font-semibold text-gray-400">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+                                            Tidak
                                         </span>
                                     @endif
                                 </td>
@@ -146,17 +160,25 @@
                         <div class="flex-1 min-w-0">
                             <div class="flex items-start justify-between gap-2 mb-1">
                                 <a href="{{ route('console.board-members.show', $member) }}" class="text-sm font-bold text-gray-900 hover:text-primary transition-colors duration-200">{{ $member->name }}</a>
-                                @if ($member->is_active)
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-[10px] font-semibold text-emerald-600 flex-shrink-0">
-                                        <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
-                                        Aktif
-                                    </span>
-                                @else
-                                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-[10px] font-semibold text-gray-400 flex-shrink-0">
-                                        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
-                                        Nonaktif
-                                    </span>
-                                @endif
+                                <div class="flex items-center gap-1 flex-shrink-0">
+                                    @if ($member->is_active)
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-[10px] font-semibold text-emerald-600">
+                                            <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
+                                            Aktif
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-gray-100 text-[10px] font-semibold text-gray-400">
+                                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                                            Nonaktif
+                                        </span>
+                                    @endif
+                                    @if ($member->is_contact)
+                                        <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-50 text-[10px] font-semibold text-blue-600">
+                                            <span class="w-1 h-1 rounded-full bg-blue-500"></span>
+                                            Kontak
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                             <p class="text-xs text-primary font-medium mb-1">{{ $member->position }}</p>
                             <div class="flex items-center justify-between">

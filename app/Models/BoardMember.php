@@ -19,10 +19,12 @@ class BoardMember extends Model
         'gambar',
         'phone',
         'is_active',
+        'is_contact',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_contact' => 'boolean',
     ];
 
     public function gambarUrl(): Attribute

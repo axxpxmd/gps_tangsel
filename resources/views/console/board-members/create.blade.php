@@ -162,12 +162,20 @@
                         </div>
                         <span class="text-sm font-bold text-gray-800">Status Tampilan</span>
                     </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }} class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
-                        <span class="ml-3.5 text-sm font-medium text-gray-700">Tampilkan di halaman depan</span>
-                    </label>
+                    <div class="space-y-4">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="hidden" name="is_active" value="0">
+                            <input type="checkbox" name="is_active" value="1" {{ old('is_active', true) ? 'checked' : '' }} class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                            <span class="ml-3.5 text-sm font-medium text-gray-700">Tampilkan di halaman depan</span>
+                        </label>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="hidden" name="is_contact" value="0">
+                            <input type="checkbox" name="is_contact" value="1" {{ old('is_contact', false) ? 'checked' : '' }} class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                            <span class="ml-3.5 text-sm font-medium text-gray-700">Tampilkan di halaman kontak</span>
+                        </label>
+                    </div>
                 </div>
 
                 {{-- Aksi --}}

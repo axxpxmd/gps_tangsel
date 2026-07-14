@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Article;
+use App\Models\BoardMember;
 use App\Models\Hadits;
 use App\Models\Partner;
 use App\Models\Program;
@@ -33,6 +34,7 @@ class WelcomeController extends Controller
             'partners' => Partner::where('is_active', true)->latest()->get(),
             'hadits' => Hadits::where('is_active', true)->first(),
             'nextActivity' => $nextActivity,
+            'contacts' => BoardMember::where('is_contact', true)->orderBy('group')->orderBy('position')->get(),
         ]);
     }
 

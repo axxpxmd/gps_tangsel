@@ -34,7 +34,11 @@ class BoardMemberController extends Controller
             'phone' => ['nullable', 'string', 'max:20'],
             'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['boolean'],
+            'is_contact' => ['boolean'],
         ]);
+
+        $validated['is_active'] = $request->boolean('is_active');
+        $validated['is_contact'] = $request->boolean('is_contact');
 
         if ($request->hasFile('gambar')) {
             $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'board-members');
@@ -64,9 +68,11 @@ class BoardMemberController extends Controller
             'phone' => ['nullable', 'string', 'max:20'],
             'gambar' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'is_active' => ['boolean'],
+            'is_contact' => ['boolean'],
         ]);
 
         $validated['is_active'] = $request->boolean('is_active');
+        $validated['is_contact'] = $request->boolean('is_contact');
 
         if ($request->hasFile('gambar')) {
             $this->imageService->deleteFile($board_member->gambar);

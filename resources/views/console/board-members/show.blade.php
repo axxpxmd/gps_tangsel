@@ -90,18 +90,35 @@
                     </div>
                     <span class="text-sm font-bold text-gray-800">Status</span>
                 </div>
-                <div>
-                    @if ($member->is_active)
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-sm font-semibold text-emerald-600">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                            Aktif
-                        </span>
-                    @else
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-sm font-semibold text-gray-500">
-                            <span class="w-2 h-2 rounded-full bg-gray-400"></span>
-                            Nonaktif
-                        </span>
-                    @endif
+                <div class="space-y-3">
+                    <div>
+                        <p class="text-[11px] text-gray-400 font-medium mb-1">Status Tampilan</p>
+                        @if ($member->is_active)
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-sm font-semibold text-emerald-600">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                Aktif
+                            </span>
+                        @else
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-sm font-semibold text-gray-500">
+                                <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                                Nonaktif
+                            </span>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-gray-400 font-medium mb-1">Halaman Kontak</p>
+                        @if ($member->is_contact)
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-50 text-sm font-semibold text-blue-600">
+                                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                Ditampilkan
+                            </span>
+                        @else
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 text-sm font-semibold text-gray-500">
+                                <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                                Tidak Ditampilkan
+                            </span>
+                        @endif
+                    </div>
                 </div>
             </div>
 

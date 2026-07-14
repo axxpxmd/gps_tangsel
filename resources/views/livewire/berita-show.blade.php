@@ -13,7 +13,7 @@
         .article-content ol { list-style-type: decimal; }
         .article-content li { margin-bottom: 0.5rem; }
 
-        .article-content img { border-radius: 1rem; margin: 2.5rem 0; width: 70%; border: 1px solid #e5e7eb; }
+        .article-content img { display: block; border-radius: 1rem; margin: 2.5rem auto; width: 45%; border: 1px solid #e5e7eb; }
         
         /* Custom scroll progress bar */
         .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(0, 0, 0, 0.05); z-index: 9999; }
@@ -249,31 +249,43 @@
 
             {{-- Right Column — Sidebar Widgets --}}
             <div class="lg:col-span-1 space-y-6">
-                {{-- INFO CUACA --}}
+                {{-- AGENDA SAFARI SUBUH --}}
                 <div class="bg-white rounded-xl border border-gray-200 p-5">
                     <div class="flex justify-between items-start mb-4">
-                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">INFO CUACA</div>
-                        <div class="text-[10px] font-bold text-red-500 uppercase tracking-widest flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                            LIVE
-                        </div>
+                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">SAFARI SUBUH TERDEKAT</div>
+                        <span class="text-[10px] font-bold text-[#2F5FA3] uppercase tracking-widest flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#2F5FA3] {{ $nextActivity ? 'animate-pulse' : '' }}"></span>
+                            {{ $nextActivity ? 'SEGERA' : 'INFO' }}
+                        </span>
                     </div>
-                    <div class="flex items-baseline justify-between">
+                    @if ($nextActivity)
                         <div>
-                            <div class="text-3xl font-extrabold text-gray-900 leading-none">31&deg;C</div>
-                            <div class="text-[11px] text-gray-400 mt-1 font-semibold">Tangerang Raya, Banten</div>
+                            <h4 class="text-sm font-bold text-gray-800 leading-snug">{{ $nextActivity->title }}</h4>
+                            <p class="text-[11px] text-gray-500 mt-3.5 flex items-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-[#2F5FA3] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                <span class="truncate">{{ $nextActivity->location }}</span>
+                            </p>
+                            <p class="text-[11px] text-gray-500 mt-1.5 flex items-center gap-1.5">
+                                <svg class="w-3.5 h-3.5 text-[#2F5FA3] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <span>{{ $nextActivity->date->translatedFormat('l, d M Y') }} · {{ $nextActivity->date->format('H:i') }} WIB</span>
+                            </p>
                         </div>
-                        <div class="text-right">
-                            <div class="text-xs font-bold text-slate-700">Hujan Ringan</div>
-                            <div class="text-[10px] text-gray-400 mt-0.5">Kec. Karawaci &bull; Angin: 12 km/jam</div>
+                    @else
+                        <div class="text-center py-4">
+                            <p class="text-xs text-gray-400 font-semibold">Safari Subuh berikutnya akan segera diumumkan.</p>
                         </div>
-                    </div>
+                    @endif
                 </div>
 
                 {{-- JADWAL SHOLAT TANGERANG --}}
                 <div class="bg-white rounded-xl border border-gray-200 p-5">
                     @php
-                        $now = now();
+                        $now = now('Asia/Jakarta');
                         $nowMin = $now->hour * 60 + $now->minute;
                         $nextPrayerKey = 'subuh';
                         
@@ -311,7 +323,7 @@
                             @foreach ($related as $item)
                                 <a href="{{ route('berita.show', $item->slug) }}" wire:navigate class="group block pb-3 border-b border-gray-100 last:border-b-0 last:pb-0">
                                     <div class="text-[9px] font-bold text-[#2F5FA3] uppercase tracking-wider mb-1">
-                                        {{ $item->category?->name ?? 'METRO' }}
+                                        {{ $item->category?->name }}
                                     </div>
                                     <h5 class="text-xs font-bold text-gray-800 leading-snug group-hover:text-[#2F5FA3] transition-colors duration-200">
                                         {{ $item->title }}
@@ -345,7 +357,7 @@
                             </div>
                             <div class="p-4 space-y-2">
                                 <div class="text-[9px] font-bold text-[#2F5FA3] uppercase tracking-wider">
-                                    {{ $item->category?->name ?? 'METRO' }}
+                                    {{ $item->category?->name }}
                                 </div>
                                 <h5 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-[#2F5FA3] transition-colors duration-200 line-clamp-2">
                                     {{ $item->title }}

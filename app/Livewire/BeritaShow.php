@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Activity;
 use App\Models\Article;
 use App\Services\PrayerTimesService;
 use Illuminate\View\View;
@@ -30,9 +31,16 @@ class BeritaShow extends Component
             ->take(3)
             ->get();
 
+        $nextActivity = Activity::query()
+            ->where('is_active', true)
+            ->where('date', '>=', now('Asia/Jakarta'))
+            ->orderBy('date', 'asc')
+            ->first();
+
         return view('livewire.berita-show', [
             'related' => $related,
             'prayerSchedule' => $prayerTimes->today(),
+            'nextActivity' => $nextActivity,
         ])->layout('layouts.app')
             ->title($this->article->title.' — GPS TangSel');
     }

@@ -1,22 +1,11 @@
 <div>
     @push('styles')
     <style>
-        .article-content h2 { font-size: 1.75rem; font-weight: 800; color: #111827; margin-top: 3rem; margin-bottom: 1.25rem; letter-spacing: -0.025em; line-height: 1.35; }
-        .article-content h3 { font-size: 1.35rem; font-weight: 700; color: #1f2937; margin-top: 2.25rem; margin-bottom: 1rem; letter-spacing: -0.02em; line-height: 1.4; }
-        .article-content p { margin-bottom: 1.5rem; line-height: 1.85; color: #374151; }
-        .article-content a { color: #0164CA; text-decoration: none; border-bottom: 2px solid rgba(1, 100, 202, 0.15); font-weight: 600; transition: all 0.2s ease; }
-        .article-content a:hover { border-bottom-color: #0164CA; background-color: rgba(1, 100, 202, 0.04); }
-        .article-content strong { color: #111827; font-weight: 700; }
-        .article-content blockquote { border-left: 4px solid #D4A437; padding: 1.5rem 1.75rem; margin: 2.5rem 0; background: linear-gradient(135deg, rgba(212, 164, 55, 0.08), rgba(1, 100, 202, 0.03)); border-radius: 0 1rem 1rem 0; font-style: italic; color: #4b5563; font-size: 1.05rem; line-height: 1.75; }
-        .article-content ul, .article-content ol { padding-left: 1.75rem; margin: 1.5rem 0; }
-        .article-content ul { list-style-type: disc; }
-        .article-content ol { list-style-type: decimal; }
-        .article-content li { margin-bottom: 0.75rem; line-height: 1.75; color: #4b5563; }
-        .article-content img { border-radius: 1rem; margin: 2.5rem 0; width: 100%; border: 1px solid #e5e7eb; width: 70%}
-
+        .article-content img { border-radius: 1rem; margin: 2.5rem 0; width: 70%; border: 1px solid #e5e7eb; }
+        
         /* Custom scroll progress bar */
         .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(0, 0, 0, 0.05); z-index: 9999; }
-        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #0164CA, #00A6FF); transition: width 0.1s ease-out; }
+        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #2F5FA3, #4A7BC8); transition: width 0.1s ease-out; }
     </style>
     @endpush
 
@@ -26,16 +15,14 @@
     </div>
 
     {{-- Hero Section --}}
-    <section class="relative bg-slate-950 overflow-hidden py-16 sm:py-20 lg:py-24">
-        {{-- Decorative glowing orbs --}}
-        <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none -translate-y-1/2"></div>
-        <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#00A6FF]/5 rounded-full blur-[100px] pointer-events-none translate-y-1/2"></div>
-        
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20fill%3D%22%23ffffff%22%20fill-opacity%3D%220.015%22%3E%3Cpath%20d%3D%22M36%2034v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6%2034v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6%204V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-40"></div>
+    <section class="relative bg-dawn-night overflow-hidden py-16 sm:py-20 lg:py-24">
+        <div class="absolute inset-0 islamic-pattern opacity-[0.04]"></div>
+        <div class="absolute -top-24 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-24 left-10 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
         
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {{-- Back Button --}}
-            <div class="mb-8">
+            <div class="mb-10 mt-8">
                 <a href="{{ route('berita') }}" wire:navigate class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors duration-300 group">
                     <span class="w-8 h-8 rounded-lg bg-white/5 group-hover:bg-white/10 flex items-center justify-center transition-all duration-300">
                         <svg class="w-4 h-4 transform group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -49,7 +36,7 @@
             {{-- Article Meta & Title --}}
             <div class="max-w-4xl">
                 @if ($article->category)
-                    <span class="inline-flex items-center px-3.5 py-1.5 rounded-xl bg-[#0164CA]/15 text-[#00A6FF] text-xs font-semibold mb-6 border border-[#0164CA]/20 backdrop-blur-sm">
+                    <span class="inline-flex items-center px-3.5 py-1.5 rounded-xl bg-[#2F5FA3]/15 text-[#4A7BC8] text-xs font-semibold mb-6 border border-[#2F5FA3]/20 backdrop-blur-sm">
                         <svg class="w-3.5 h-3.5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z"/>
                         </svg>
@@ -63,7 +50,7 @@
 
                 <div class="flex flex-wrap items-center gap-y-3 gap-x-6 text-sm text-slate-400">
                     <span class="inline-flex items-center gap-2">
-                        <div class="w-6 h-6 rounded-full bg-[#0164CA] flex items-center justify-center text-[10px] font-bold text-white uppercase">
+                        <div class="w-6 h-6 rounded-full bg-[#2F5FA3] flex items-center justify-center text-[10px] font-bold text-white uppercase">
                             {{ substr($article->author, 0, 1) }}
                         </div>
                         <span class="font-semibold text-slate-200">{{ $article->author }}</span>
@@ -120,7 +107,7 @@
                             <div class="mt-4 flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-300">
                                 @foreach ($article->images as $index => $img)
                                     <button onclick="setFeaturedImage({{ $index }})"
-                                            class="gallery-thumb flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 {{ $index === 0 ? 'border-[#0164CA] ring-4 ring-[#0164CA]/15 scale-[0.98]' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-[0.98]' }}"
+                                            class="gallery-thumb flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 {{ $index === 0 ? 'border-[#2F5FA3] ring-4 ring-[#2F5FA3]/15 scale-[0.98]' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-[0.98]' }}"
                                             data-index="{{ $index }}">
                                         <img src="{{ $img->image_url }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
                                     </button>
@@ -148,7 +135,7 @@
                 @if ($article->tags->count() > 0)
                     <div class="flex flex-wrap gap-2 py-4">
                         @foreach ($article->tags as $tag)
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-xl bg-slate-50 border border-gray-200 text-xs font-semibold text-slate-600 hover:bg-[#0164CA] hover:text-white hover:border-[#0164CA] transition-all duration-300 cursor-default">
+                            <span class="inline-flex items-center px-3 py-1.5 rounded-xl bg-slate-50 border border-gray-200 text-xs font-semibold text-slate-600 hover:bg-[#2F5FA3] hover:text-white hover:border-[#2F5FA3] transition-all duration-300 cursor-default">
                                 #{{ $tag->name }}
                             </span>
                         @endforeach
@@ -197,7 +184,7 @@
                 {{-- Comments Section ("KOMENTAR PEMBACA") --}}
                 <div class="py-6 border-t border-gray-200 space-y-6">
                     <h4 class="text-sm font-bold text-gray-900 flex items-center gap-2">
-                        <span class="w-2.5 h-4 bg-[#0164CA] inline-block"></span>
+                        <span class="w-2.5 h-4 bg-[#2F5FA3] inline-block"></span>
                         KOMENTAR PEMBACA (2)
                     </h4>
                     
@@ -212,7 +199,7 @@
                             <input type="text" placeholder="Nama Anda" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
                             <input type="email" placeholder="Email Anda (tidak dipublikasikan)" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all">
                         </div>
-                        <button type="button" class="px-5 py-2.5 bg-[#0164CA] hover:bg-[#0052A3] text-white text-xs font-bold rounded-xl transition-colors duration-200">
+                        <button type="button" class="px-5 py-2.5 bg-[#2F5FA3] hover:bg-[#244B82] text-white text-xs font-bold rounded-xl transition-colors duration-200">
                             KIRIM KOMENTAR
                         </button>
                     </div>
@@ -290,9 +277,9 @@
                             <div class="text-[8px] font-bold text-gray-400 uppercase">ASHAR</div>
                             <div class="text-xs font-extrabold text-gray-800 mt-0.5">15:19</div>
                         </div>
-                        <div class="p-1.5 bg-[#0164CA]/5 border border-[#0164CA]/20 rounded-lg">
-                            <div class="text-[8px] font-bold text-[#0164CA] uppercase">MAGHRIB</div>
-                            <div class="text-xs font-extrabold text-[#0164CA] mt-0.5">17:54</div>
+                        <div class="p-1.5 bg-[#2F5FA3]/5 border border-[#2F5FA3]/20 rounded-lg">
+                            <div class="text-[8px] font-bold text-[#2F5FA3] uppercase">MAGHRIB</div>
+                            <div class="text-xs font-extrabold text-[#2F5FA3] mt-0.5">17:54</div>
                         </div>
                         <div class="p-1.5 bg-slate-50 border border-gray-100 rounded-lg">
                             <div class="text-[8px] font-bold text-gray-400 uppercase">ISYA</div>
@@ -308,10 +295,10 @@
                         <div class="space-y-4">
                             @foreach ($related as $item)
                                 <a href="{{ route('berita.show', $item->slug) }}" wire:navigate class="group block pb-3 border-b border-gray-100 last:border-b-0 last:pb-0">
-                                    <div class="text-[9px] font-bold text-blue-500 uppercase tracking-wider mb-1">
+                                    <div class="text-[9px] font-bold text-[#2F5FA3] uppercase tracking-wider mb-1">
                                         {{ $item->category?->name ?? 'METRO' }}
                                     </div>
-                                    <h5 class="text-xs font-bold text-gray-800 leading-snug group-hover:text-[#0164CA] transition-colors duration-200">
+                                    <h5 class="text-xs font-bold text-gray-800 leading-snug group-hover:text-[#2F5FA3] transition-colors duration-200">
                                         {{ $item->title }}
                                     </h5>
                                     <p class="text-[9px] text-gray-400 mt-1 uppercase">{{ $item->formatted_date }}</p>
@@ -322,25 +309,25 @@
                 @endif
 
                 {{-- Banner Ad --}}
-                <div class="rounded-xl overflow-hidden border border-gray-200 bg-[#E8F3FF] p-6 relative flex flex-col justify-between min-h-[350px]">
+                <div class="rounded-xl overflow-hidden border border-gray-200 bg-[#E8EEF7] p-6 relative flex flex-col justify-between min-h-[350px]">
                     <div class="absolute top-2 right-2 text-[8px] font-bold text-gray-300 uppercase tracking-wider bg-black/5 px-1.5 py-0.5 rounded">AD</div>
                     <div>
-                        <div class="text-[11px] font-extrabold text-[#0164CA] uppercase tracking-widest">Schooliday Sale</div>
-                        <div class="text-2xl font-extrabold text-[#003B7E] leading-tight mt-2">Kalender Promo Liburan Sekolah</div>
-                        <div class="text-[10px] text-blue-600/80 font-bold mt-1">9 Juni - 2 Juli</div>
+                        <div class="text-[11px] font-extrabold text-[#2F5FA3] uppercase tracking-widest">Schooliday Sale</div>
+                        <div class="text-2xl font-extrabold text-[#244B82] leading-tight mt-2">Kalender Promo Liburan Sekolah</div>
+                        <div class="text-[10px] text-primary/80 font-bold mt-1">9 Juni - 2 Juli</div>
                     </div>
                     <div class="space-y-2 mt-8">
-                        <div class="bg-white/80 backdrop-blur-sm p-3 rounded-lg flex items-center justify-between border border-blue-100">
+                        <div class="bg-white/80 backdrop-blur-sm p-3 rounded-lg flex items-center justify-between border border-[#2F5FA3]/15">
                             <div>
-                                <div class="text-[9px] font-extrabold text-blue-900 uppercase">Tiket Pesawat</div>
-                                <div class="text-xs font-extrabold text-[#0164CA]">Diskon s.d 500rb</div>
+                                <div class="text-[9px] font-extrabold text-[#244B82] uppercase">Tiket Pesawat</div>
+                                <div class="text-xs font-extrabold text-[#2F5FA3]">Diskon s.d 500rb</div>
                             </div>
-                            <div class="text-[10px] font-extrabold bg-[#0164CA] text-white px-2 py-1 rounded">Beli 2 Gratis 1</div>
+                            <div class="text-[10px] font-extrabold bg-[#2F5FA3] text-white px-2 py-1 rounded">Beli 2 Gratis 1</div>
                         </div>
-                        <div class="bg-white/80 backdrop-blur-sm p-3 rounded-lg flex items-center justify-between border border-blue-100">
+                        <div class="bg-white/80 backdrop-blur-sm p-3 rounded-lg flex items-center justify-between border border-[#2F5FA3]/15">
                             <div>
-                                <div class="text-[9px] font-extrabold text-blue-900 uppercase">Hotel & Villa</div>
-                                <div class="text-xs font-extrabold text-[#0164CA]">Kupon Cashback 800rb</div>
+                                <div class="text-[9px] font-extrabold text-[#244B82] uppercase">Hotel & Villa</div>
+                                <div class="text-xs font-extrabold text-[#2F5FA3]">Kupon Cashback 800rb</div>
                             </div>
                             <div class="text-[10px] font-extrabold bg-amber-500 text-white px-2 py-1 rounded">Diskon 30%</div>
                         </div>
@@ -353,7 +340,7 @@
         @if ($related->count() > 0)
             <div class="mt-12 pt-8 border-t border-gray-200 space-y-6">
                 <h4 class="text-sm font-bold text-gray-900 flex items-center gap-2">
-                    <span class="w-2.5 h-4 bg-[#0164CA] inline-block"></span>
+                    <span class="w-2.5 h-4 bg-[#2F5FA3] inline-block"></span>
                     BERITA TERKAIT
                 </h4>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -363,10 +350,10 @@
                                 <img src="{{ $item->image_url ?: asset('image-placeholder.png') }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
                             </div>
                             <div class="p-4 space-y-2">
-                                <div class="text-[9px] font-bold text-blue-500 uppercase tracking-wider">
+                                <div class="text-[9px] font-bold text-[#2F5FA3] uppercase tracking-wider">
                                     {{ $item->category?->name ?? 'METRO' }}
                                 </div>
-                                <h5 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-[#0164CA] transition-colors duration-200 line-clamp-2">
+                                <h5 class="text-sm font-bold text-gray-900 leading-snug group-hover:text-[#2F5FA3] transition-colors duration-200 line-clamp-2">
                                     {{ $item->title }}
                                 </h5>
                                 <p class="text-[10px] text-gray-400">{{ $item->formatted_date }}</p>
@@ -448,7 +435,7 @@
             document.querySelectorAll('.gallery-thumb').forEach(function(thumb) {
                 const i = parseInt(thumb.getAttribute('data-index'));
                 if (i === index) {
-                    thumb.className = 'gallery-thumb flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 border-[#0164CA] ring-4 ring-[#0164CA]/15 scale-[0.98] transition-all duration-300';
+                    thumb.className = 'gallery-thumb flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 border-[#2F5FA3] ring-4 ring-[#2F5FA3]/15 scale-[0.98] transition-all duration-300';
                 } else {
                     thumb.className = 'gallery-thumb flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 border-transparent opacity-60 hover:opacity-100 hover:scale-[0.98] transition-all duration-300';
                 }

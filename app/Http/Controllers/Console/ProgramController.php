@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Services\ImageConversionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProgramController extends Controller
 {
+    public function __construct(protected ImageConversionService $imageService) {}
+
     public function index(Request $request): View
     {
         $programs = Program::query()
@@ -45,7 +46,7 @@ class ProgramController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $this->uploadAndConvertToWebp($request->file('gambar'), 'programs');
+            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'programs');
         }
 
         Program::create($validated);
@@ -76,10 +77,8 @@ class ProgramController extends Controller
         $validated['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('gambar')) {
-            if ($program->gambar) {
-                Storage::disk('sftp')->delete($program->gambar);
-            }
-            $validated['gambar'] = $this->uploadAndConvertToWebp($request->file('gambar'), 'programs');
+            $this->imageService->deleteFile($program->gambar);
+            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'programs');
         }
 
         $program->update($validated);
@@ -89,44 +88,10 @@ class ProgramController extends Controller
 
     public function destroy(Program $program): RedirectResponse
     {
-        if ($program->gambar) {
-            Storage::disk('sftp')->delete($program->gambar);
-        }
+        $this->imageService->deleteFile($program->gambar);
 
         $program->delete();
 
         return redirect()->route('console.programs.index')->with('success', 'Program berhasil dihapus.');
-    }
-
-    /**
-     * Upload gambar dan konversi ke WebP jika bukan WebP.
-     */
-    protected function uploadAndConvertToWebp(UploadedFile $file, string $directory): string
-    {
-        $extension = strtolower($file->getClientOriginalExtension());
-
-        if ($extension === 'webp') {
-            return $file->store($directory, 'sftp');
-        }
-
-        $imageContent = file_get_contents($file->getRealPath());
-        $image = imagecreatefromstring($imageContent);
-
-        if ($image === false) {
-            return $file->store($directory, 'sftp');
-        }
-
-        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME).'.webp';
-        $path = $directory.'/'.$filename;
-
-        ob_start();
-        imagewebp($image, null, 85);
-        $webpData = ob_get_clean();
-
-        imagedestroy($image);
-
-        Storage::disk('sftp')->put($path, $webpData);
-
-        return $path;
     }
 }

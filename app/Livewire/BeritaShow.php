@@ -31,6 +31,13 @@ class BeritaShow extends Component
             ->take(3)
             ->get();
 
+        $latest = Article::query()
+            ->published()
+            ->where('id', '!=', $this->article->id)
+            ->latest('published_at')
+            ->take(5)
+            ->get();
+
         $nextActivity = Activity::query()
             ->where('is_active', true)
             ->where('date', '>=', now('Asia/Jakarta'))
@@ -39,6 +46,7 @@ class BeritaShow extends Component
 
         return view('livewire.berita-show', [
             'related' => $related,
+            'latest' => $latest,
             'prayerSchedule' => $prayerTimes->today(),
             'nextActivity' => $nextActivity,
         ])->layout('layouts.app')

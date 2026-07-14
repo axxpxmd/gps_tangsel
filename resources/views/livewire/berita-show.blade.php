@@ -140,18 +140,7 @@
                             @endif
                         </div>
 
-                        {{-- Thumbnails Carousel --}}
-                        @if ($allImages->count() > 1)
-                            <div class="mt-4 flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-300">
-                                @foreach ($allImages as $index => $imgUrl)
-                                    <button onclick="setFeaturedImage({{ $index }})"
-                                            class="gallery-thumb flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 {{ $index === 0 ? 'border-[#2F5FA3] ring-4 ring-[#2F5FA3]/15 scale-[0.98]' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-[0.98]' }}"
-                                            data-index="{{ $index }}">
-                                        <img src="{{ $imgUrl }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
-                                    </button>
-                                @endforeach
-                            </div>
-                        @endif
+
                     </div>
                 @endif
 
@@ -208,14 +197,13 @@
                             </svg>
                             X / Twitter
                         </a>
-                        <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}&text={{ urlencode($article->title) }}" 
-                           target="_blank" rel="noopener" 
-                           class="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs font-bold text-sky-700 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-xl transition-all duration-200">
-                            <svg class="w-4 h-4 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        <button onclick="copyLink(this)" 
+                                class="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs font-bold text-slate-700 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl transition-all duration-200">
+                            <svg class="w-4 h-4 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m-2 4h5m-2-2v5"/>
                             </svg>
-                            Telegram
-                        </a>
+                            Salin Link
+                        </button>
                     </div>
                 </div>
 
@@ -342,11 +330,11 @@
                 </div>
 
                 {{-- BERITA TERBARU --}}
-                @if ($related->count() > 0)
+                @if ($latest->count() > 0)
                     <div class="bg-white rounded-xl border border-gray-200 p-5">
                         <h4 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">BERITA TERBARU</h4>
                         <div class="space-y-4">
-                            @foreach ($related as $item)
+                            @foreach ($latest as $item)
                                 <a href="{{ route('berita.show', $item->slug) }}" wire:navigate class="group block pb-3 border-b border-gray-100 last:border-b-0 last:pb-0">
                                     <div class="text-[9px] font-bold text-[#2F5FA3] uppercase tracking-wider mb-1">
                                         {{ $item->category?->name }}
@@ -533,21 +521,6 @@
             }
         }
 
-        function copyLink(btn) {
-            navigator.clipboard.writeText(window.location.href).then(function() {
-                const originalContent = btn.innerHTML;
-                btn.innerHTML = '<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
-                btn.classList.add('bg-green-600', 'text-white');
-                btn.classList.remove('bg-slate-50', 'text-slate-700');
-
-                setTimeout(function() {
-                    btn.innerHTML = originalContent;
-                    btn.classList.remove('bg-green-600', 'text-white');
-                    btn.classList.add('bg-slate-50', 'text-slate-700');
-                }, 2000);
-            });
-        }
-
         document.addEventListener('keydown', function(e) {
             const lb = document.getElementById('lightbox');
             if (!lb || lb.classList.contains('hidden')) return;
@@ -558,3 +531,33 @@
     </script>
     @endpush
 @endif
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function copyLink(btn) {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Tautan berhasil disalin!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+
+                const originalContent = btn.innerHTML;
+                btn.innerHTML = '<svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg> Terdesalin!';
+                btn.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
+                btn.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+
+                setTimeout(function() {
+                    btn.innerHTML = originalContent;
+                    btn.classList.remove('bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
+                    btn.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+                }, 2000);
+            });
+        }
+    </script>
+@endpush

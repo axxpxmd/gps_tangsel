@@ -14,7 +14,7 @@
                     </div>
                     <span class="flex flex-col leading-none">
                         <span class="text-lg lg:text-xl font-extrabold tracking-tight transition-colors duration-300 navbar-brand text-white">GPS TANGSEL</span>
-                        <span class="block text-[9px] font-medium tracking-[0.2em] uppercase text-gold-light/70 mt-0.5 transition-colors duration-300 navbar-tagline">Pejuang Subuh</span>
+                        <span class="block text-[9px] font-medium tracking-[0.2em] uppercase text-gold-light/70 mt-0.5 transition-colors duration-300 navbar-tagline" style="letter-spacing: 4.8px">Pejuang Subuh</span>
                     </span>
                 </a>
 

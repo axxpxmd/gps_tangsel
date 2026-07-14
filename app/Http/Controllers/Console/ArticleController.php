@@ -17,18 +17,21 @@ class ArticleController extends Controller
 
     public function index(Request $request): View
     {
-        $articles = Article::with('category')
+        $query = Article::with('category')
             ->when($request->filled('search'), fn ($q) => $q->where('title', 'like', '%'.$request->search.'%')->orWhere('excerpt', 'like', '%'.$request->search.'%'))
             ->when($request->filled('category'), fn ($q) => $q->where('category_id', $request->category))
             ->when($request->filled('status'), fn ($q) => $q->where('status', $request->status))
             ->when($request->filled('date_from'), fn ($q) => $q->where(fn ($q) => $q->whereDate('published_at', '>=', $request->date_from)->orWhereDate('created_at', '>=', $request->date_from)))
-            ->when($request->filled('date_to'), fn ($q) => $q->where(fn ($q) => $q->whereDate('published_at', '<=', $request->date_to)->orWhereDate('created_at', '<=', $request->date_to)))
-            ->latest()
-            ->get();
+            ->when($request->filled('date_to'), fn ($q) => $q->where(fn ($q) => $q->whereDate('published_at', '<=', $request->date_to)->orWhereDate('created_at', '<=', $request->date_to)));
+
+        $articles = $query->latest()->paginate(10)->withQueryString();
 
         $categories = Category::all();
+        $totalArticles = Article::count();
+        $publishedCount = Article::where('status', 'publish')->count();
+        $draftCount = Article::where('status', 'draft')->count();
 
-        return view('console.articles.index', compact('articles', 'categories'));
+        return view('console.articles.index', compact('articles', 'categories', 'totalArticles', 'publishedCount', 'draftCount'));
     }
 
     public function create(): View

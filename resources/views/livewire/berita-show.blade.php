@@ -13,7 +13,7 @@
         .article-content ol { list-style-type: decimal; }
         .article-content li { margin-bottom: 0.5rem; }
 
-        .article-content img { display: block; border-radius: 1rem; margin: 2.5rem auto; width: 45%; border: 1px solid #e5e7eb; }
+        .article-content img { display: block; border-radius: 1rem; margin: 2.5rem auto; width: 50%; border: 1px solid #e5e7eb; }
         
         /* Custom scroll progress bar */
         .progress-bar-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(0, 0, 0, 0.05); z-index: 9999; }
@@ -92,36 +92,62 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {{-- Left Column — Article Detail --}}
             <div class="lg:col-span-2 space-y-6">
+                @php
+                    $allImages = collect();
+                    if ($article->image) {
+                        $allImages->push($article->image_url);
+                    }
+                    foreach ($article->images as $img) {
+                        if ($img->image) {
+                            $allImages->push($img->image_url);
+                        }
+                    }
+                    $allImages = $allImages->unique()->filter()->values();
+                @endphp
+
                 {{-- Featured Image Slider --}}
-                @if ($article->images->count() > 0)
+                @if ($allImages->count() > 0)
                     <div>
                         <div class="relative rounded-xl overflow-hidden bg-slate-200 border border-slate-200/50 group/img">
                             <img id="featured-img" 
-                                 src="{{ $article->images->first()->image_url }}" 
+                                 src="{{ $allImages->first() }}" 
                                  alt="{{ $article->title }}" 
                                  class="w-full h-auto max-h-[500px] object-cover cursor-zoom-in transition-all duration-500 hover:scale-[1.02]"
-                                 onclick="openLightbox(0)">
+                                 onclick="openLightbox(currentIndex)">
                             
-                            @if ($article->images->count() > 1)
+                            @if ($allImages->count() > 1)
+                                {{-- Left Arrow --}}
+                                <button onclick="prevFeaturedImage()" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-slate-950/60 hover:bg-slate-950/85 border border-white/10 text-white opacity-0 group-hover/img:opacity-100 transition-all duration-300 shadow-md">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                {{-- Right Arrow --}}
+                                <button onclick="nextFeaturedImage()" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-slate-950/60 hover:bg-slate-950/85 border border-white/10 text-white opacity-0 group-hover/img:opacity-100 transition-all duration-300 shadow-md">
+                                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+
                                 <div class="absolute bottom-4 right-4">
                                     <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-950/80 backdrop-blur-md text-white text-xs font-semibold rounded-xl border border-white/10 shadow-lg">
                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
-                                        <span id="counter-text">1 / {{ $article->images->count() }}</span>
+                                        <span id="counter-text">1 / {{ $allImages->count() }}</span>
                                     </span>
                                 </div>
                             @endif
                         </div>
 
                         {{-- Thumbnails Carousel --}}
-                        @if ($article->images->count() > 1)
+                        @if ($allImages->count() > 1)
                             <div class="mt-4 flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-300">
-                                @foreach ($article->images as $index => $img)
+                                @foreach ($allImages as $index => $imgUrl)
                                     <button onclick="setFeaturedImage({{ $index }})"
                                             class="gallery-thumb flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 {{ $index === 0 ? 'border-[#2F5FA3] ring-4 ring-[#2F5FA3]/15 scale-[0.98]' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-[0.98]' }}"
                                             data-index="{{ $index }}">
-                                        <img src="{{ $img->image_url }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
+                                        <img src="{{ $imgUrl }}" alt="Foto {{ $index + 1 }}" class="w-full h-full object-cover">
                                     </button>
                                 @endforeach
                             </div>
@@ -372,7 +398,7 @@
     </div>
 
     {{-- Lightbox Modal --}}
-    @if ($article->images->count() > 0)
+    @if ($allImages->count() > 0)
         <div id="lightbox" class="fixed inset-0 z-[9999] hidden items-center justify-center bg-slate-950/95 backdrop-blur-md" onclick="if(event.target===this)closeLightbox()">
             <button onclick="closeLightbox()" class="absolute top-6 right-6 z-10 p-2.5 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200">
                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -380,7 +406,7 @@
                 </svg>
             </button>
 
-            @if ($article->images->count() > 1)
+            @if ($allImages->count() > 1)
                 <button onclick="prevImage()" class="absolute left-6 z-10 p-3.5 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full transition-all duration-200">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
@@ -400,9 +426,9 @@
             <div class="absolute bottom-6 left-0 right-0">
                 <div class="flex flex-col items-center gap-3">
                     <div id="lightbox-counter" class="text-white/90 text-sm font-semibold bg-white/10 backdrop-blur-md px-4.5 py-2 rounded-xl border border-white/5"></div>
-                    @if ($article->images->count() > 1)
+                    @if ($allImages->count() > 1)
                         <div class="flex gap-1.5" id="lightbox-dots">
-                            @foreach ($article->images as $index => $_)
+                            @foreach ($allImages as $index => $_)
                                 <button onclick="goToImage({{ $index }})" class="lb-dot w-2.5 h-2.5 rounded-full transition-all duration-300 {{ $index === 0 ? 'bg-white w-6' : 'bg-white/30 hover:bg-white/50' }}"></button>
                             @endforeach
                         </div>
@@ -423,11 +449,21 @@
     });
 </script>
 
-@if ($article->images->count() > 0)
+@if ($allImages->count() > 0)
     @push('scripts')
     <script>
-        const galleryImages = @json($article->images->pluck('image_url')->values());
+        const galleryImages = @json($allImages);
         let currentIndex = 0;
+
+        function prevFeaturedImage() {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            setFeaturedImage(currentIndex);
+        }
+
+        function nextFeaturedImage() {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            setFeaturedImage(currentIndex);
+        }
 
         function setFeaturedImage(index) {
             currentIndex = index;

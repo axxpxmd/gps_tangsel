@@ -44,12 +44,17 @@ class ArticleController extends Controller
             'excerpt' => ['required', 'string'],
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'author' => ['required', 'string', 'max:255'],
             'published_at' => ['nullable', 'date'],
         ]);
 
+        $validated['author'] = auth()->user()->name;
         $validated['slug'] = $this->uniqueSlug(Str::slug($validated['title']));
-        $validated['status'] = $request->filled('published_at') ? 'publish' : 'draft';
+
+        $status = $request->input('status');
+        $validated['status'] = ($status === 'publish' || $request->filled('published_at')) ? 'publish' : 'draft';
+        if ($validated['status'] === 'publish' && ! $request->filled('published_at')) {
+            $validated['published_at'] = now();
+        }
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('articles', 'sftp');
@@ -82,12 +87,18 @@ class ArticleController extends Controller
             'excerpt' => ['required', 'string'],
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
-            'author' => ['required', 'string', 'max:255'],
             'published_at' => ['nullable', 'date'],
         ]);
 
         $validated['slug'] = $this->uniqueSlug(Str::slug($validated['title']), $article->id);
-        $validated['status'] = $request->filled('published_at') ? 'publish' : 'draft';
+
+        $status = $request->input('status');
+        $validated['status'] = ($status === 'publish' || $request->filled('published_at')) ? 'publish' : 'draft';
+        if ($validated['status'] === 'publish' && ! $request->filled('published_at')) {
+            $validated['published_at'] = now();
+        } elseif ($validated['status'] === 'draft') {
+            $validated['published_at'] = null;
+        }
 
         if ($request->hasFile('image')) {
             if ($article->image) {

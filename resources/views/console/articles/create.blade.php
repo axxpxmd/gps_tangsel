@@ -107,61 +107,72 @@
                     @enderror
                 </div>
             </div>
-
             {{-- Right — Metadata Sidebar --}}
             <div class="space-y-5">
 
-                {{-- Gambar Utama --}}
-                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 sm:p-6">
-                    <div class="flex items-center gap-2.5 mb-3">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0">
-                            <svg class="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
-                            </svg>
+                {{-- Gambar Artikel --}}
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                    <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-rounded text-amber-500 text-[18px]">image</span>
                         </div>
+                        <span class="text-sm font-bold text-gray-800">Gambar Artikel</span>
+                    </div>
+
+                    <div class="space-y-4">
                         <div>
-                            <label class="text-sm font-bold text-gray-800">Gambar Utama</label>
-                            <p class="text-[11px] text-gray-400">JPG, PNG, WebP — Maks 2MB</p>
+                            <label class="block text-xs font-bold text-gray-700 mb-2">Upload Gambar <span class="text-red-500">*</span></label>
+                            
+                            <div class="flex items-center gap-3 w-full border border-gray-200 rounded-xl p-2 bg-white hover:border-gray-300 transition-colors">
+                                <label for="image" class="cursor-pointer px-4 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-xs font-bold transition-colors">
+                                    Choose Files
+                                </label>
+                                <span class="text-xs text-gray-500 truncate" x-text="previewUrl ? '1 file selected' : 'No file chosen'">No file chosen</span>
+                                <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/webp"
+                                    @change="previewUrl = $el.files.length ? URL.createObjectURL($el.files[0]) : null"
+                                    class="hidden">
+                            </div>
+                            <p class="text-[11px] text-gray-400 mt-2 flex items-center gap-1">
+                                <span class="material-symbols-rounded text-gray-400 text-[14px]">info</span>
+                                Upload beberapa gambar sekaligus. Format: JPG, JPEG, PNG (max 5MB per file). Gambar > 1MB akan dikompres otomatis.
+                            </p>
+                            @error('image')
+                                <p class="text-xs text-red-500 mt-1.5 flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
+                        {{-- Preview Area --}}
+                        <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center min-h-[160px] bg-gray-50/50">
+                            <template x-if="!previewUrl">
+                                <div class="text-center">
+                                    <div class="w-10 h-10 mx-auto mb-2 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400">
+                                        <span class="material-symbols-rounded text-[20px]">add_photo_alternate</span>
+                                    </div>
+                                    <p class="text-xs font-semibold text-gray-700">Belum ada gambar yang diupload</p>
+                                    <p class="text-[11px] text-gray-400 mt-0.5">Pilih file untuk memulai upload</p>
+                                </div>
+                            </template>
+                            <template x-if="previewUrl">
+                                <div class="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-gray-100">
+                                    <img :src="previewUrl" alt="Preview" class="w-full h-full object-cover">
+                                    <button type="button" @click="previewUrl = null; document.getElementById('image').value = ''"
+                                        class="absolute top-2 right-2 p-1.5 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">
+                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </template>
                         </div>
                     </div>
-
-                    {{-- Preview --}}
-                    <div class="mb-3">
-                        <template x-if="!previewUrl">
-                            <div class="aspect-[16/9] rounded-xl bg-gray-100 border-2 border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400">
-                                <svg class="w-10 h-10 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/>
-                                </svg>
-                                <span class="text-xs">Belum ada gambar</span>
-                            </div>
-                        </template>
-                        <template x-if="previewUrl">
-                            <div class="relative aspect-[16/9] rounded-xl overflow-hidden bg-gray-100">
-                                <img :src="previewUrl" alt="Preview" class="w-full h-full object-cover">
-                                <button type="button" @click="previewUrl = null; document.getElementById('image').value = ''"
-                                    class="absolute top-2 right-2 p-1.5 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors shadow-sm">
-                                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </template>
-                    </div>
-
-                    <input type="file" id="image" name="image" accept="image/jpeg,image/png,image/webp"
-                        @change="previewUrl = $el.files.length ? URL.createObjectURL($el.files[0]) : null"
-                        class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary-light file:text-primary hover:file:bg-primary/20 file:transition-colors file:cursor-pointer">
-                    @error('image')
-                        <p class="text-xs text-red-500 mt-1.5 flex items-center gap-1">
-                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
-                            {{ $message }}
-                        </p>
-                    @enderror
                 </div>
 
-                {{-- Metadata --}}
-                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-5 sm:p-6">
-                    <div class="flex items-center gap-2.5 mb-4">
+                {{-- Info Artikel --}}
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                    <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
                         <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
                             <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
@@ -202,22 +213,6 @@
                             @enderror
                         </div>
 
-                        {{-- Penulis --}}
-                        <div>
-                            <label for="author" class="flex items-center gap-2 text-xs font-semibold text-gray-600 mb-1.5">
-                                <svg class="w-3.5 h-3.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
-                                </svg>
-                                Penulis <span class="text-red-400">*</span>
-                            </label>
-                            <input type="text" id="author" name="author" value="{{ old('author') }}" required
-                                class="w-full px-4 py-2.5 rounded-xl border @error('author') border-red-300 bg-red-50 @else border-gray-200 @enderror text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                                placeholder="Nama penulis">
-                            @error('author')
-                                <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
                         {{-- Tanggal Publikasi --}}
                         <div>
                             <label for="published_at" class="flex items-center gap-2 text-xs font-semibold text-gray-600 mb-1.5">
@@ -238,27 +233,35 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        {{-- Actions --}}
-        <div class="bg-white rounded-2xl border border-gray-200 shadow-sm p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <div class="flex items-center gap-2 text-xs text-gray-400">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
-                </svg>
-                <span>Artikel akan disimpan dan bisa diedit kembali sebelum dipublikasikan.</span>
+                {{-- Aksi --}}
+                <div class="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6">
+                    <div class="flex items-center gap-2.5 mb-4 border-b border-gray-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-rounded text-blue-500 text-[18px]">verified_user</span>
+                        </div>
+                        <span class="text-sm font-bold text-gray-800">Aksi</span>
+                    </div>
+                    <div class="space-y-3">
+                        <button type="submit" name="status" value="draft"
+                            class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 text-sm font-semibold transition-all duration-200 cursor-pointer">
+                            <span class="material-symbols-rounded text-[18px]">save</span>
+                            Simpan sebagai Draft
+                        </button>
+                        <button type="submit" name="status" value="publish"
+                            class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white hover:bg-primary-dark rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer">
+                            <span class="material-symbols-rounded text-[18px]">send</span>
+                            Kirim untuk Verifikasi
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center gap-3">
+
+            {{-- Batal Button --}}
+            <div class="flex items-center justify-end gap-3 mt-4 w-full">
                 <a href="{{ route('console.articles.index') }}" class="inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors duration-200">
                     Batal
                 </a>
-                <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
-                    </svg>
-                    Simpan Artikel
-                </button>
             </div>
         </div>
     </form>

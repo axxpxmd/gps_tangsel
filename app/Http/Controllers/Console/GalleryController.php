@@ -50,20 +50,18 @@ class GalleryController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'album' => ['required', 'string', 'max:255'],
-            'date' => ['nullable', 'date'],
+            'date' => ['required', 'date'],
             'is_active' => ['boolean'],
-            'gambar' => ['nullable', 'array'],
+            'gambar' => ['required', 'array'],
             'gambar.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
         $gallery = Gallery::create($validated);
 
-        if ($request->hasFile('gambar')) {
-            foreach ($request->file('gambar') as $file) {
-                $gallery->images()->create([
-                    'gambar' => $this->imageService->uploadAndConvertToWebp($file, 'galleries'),
-                ]);
-            }
+        foreach ($request->file('gambar') as $file) {
+            $gallery->images()->create([
+                'gambar' => $this->imageService->uploadAndConvertToWebp($file, 'galleries'),
+            ]);
         }
 
         return redirect()->route('console.galleries.index')->with('success', 'Galeri berhasil ditambahkan.');
@@ -90,7 +88,7 @@ class GalleryController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'album' => ['required', 'string', 'max:255'],
-            'date' => ['nullable', 'date'],
+            'date' => ['required', 'date'],
             'is_active' => ['boolean'],
             'gambar' => ['nullable', 'array'],
             'gambar.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Article;
+use App\Services\PrayerTimesService;
 use Illuminate\View\View;
 use Livewire\Component;
 
@@ -19,7 +20,7 @@ class BeritaShow extends Component
             ->firstOrFail();
     }
 
-    public function render(): View
+    public function render(PrayerTimesService $prayerTimes): View
     {
         $related = Article::query()
             ->published()
@@ -31,6 +32,7 @@ class BeritaShow extends Component
 
         return view('livewire.berita-show', [
             'related' => $related,
+            'prayerSchedule' => $prayerTimes->today(),
         ])->layout('layouts.app')
             ->title($this->article->title.' — GPS TangSel');
     }

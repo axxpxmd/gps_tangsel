@@ -1,6 +1,18 @@
 <div>
     @push('styles')
     <style>
+        .article-content h2 { font-size: 1.5rem; font-weight: 800; color: #111827; margin-top: 2.5rem; margin-bottom: 1rem; }
+        .article-content h3 { font-size: 1.25rem; font-weight: 700; color: #1f2937; margin-top: 2rem; margin-bottom: 0.75rem; }
+        .article-content p { margin-bottom: 1.25rem; }
+        .article-content a { color: #2F5FA3; text-decoration: none; border-bottom: 1px solid #2F5FA333; }
+        .article-content a:hover { border-bottom-color: #2F5FA3; }
+        .article-content strong { color: #1f2937; font-weight: 700; }
+        .article-content blockquote { border-left: 4px solid #D4A437; padding: 1.25rem 1.5rem; margin: 2rem 0; background: linear-gradient(135deg, #F5E6B820, #2F5FA308); border-radius: 0 0.75rem 0.75rem 0; font-style: italic; color: #4b5563; }
+        .article-content ul, .article-content ol { padding-left: 1.5rem; margin: 1.25rem 0; }
+        .article-content ul { list-style-type: disc; }
+        .article-content ol { list-style-type: decimal; }
+        .article-content li { margin-bottom: 0.5rem; }
+
         .article-content img { border-radius: 1rem; margin: 2.5rem 0; width: 70%; border: 1px solid #e5e7eb; }
         
         /* Custom scroll progress bar */
@@ -260,31 +272,34 @@
 
                 {{-- JADWAL SHOLAT TANGERANG --}}
                 <div class="bg-white rounded-xl border border-gray-200 p-5">
+                    @php
+                        $now = now();
+                        $nowMin = $now->hour * 60 + $now->minute;
+                        $nextPrayerKey = 'subuh';
+                        
+                        foreach ($prayerSchedule['prayers'] as $prayer) {
+                            $parts = explode(':', $prayer['time']);
+                            $prayerMin = ((int)$parts[0]) * 60 + (int)$parts[1];
+                            if ($nowMin < $prayerMin) {
+                                $nextPrayerKey = $prayer['key'];
+                                break;
+                            }
+                        }
+                    @endphp
                     <div class="flex justify-between items-start mb-4">
-                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">JADWAL SHOLAT TANGERANG</div>
-                        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">14 JUL</div>
+                        <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">JADWAL SHOLAT {{ strtoupper($prayerSchedule['location']) }}</div>
+                        <div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{{ $now->translatedFormat('d M') }}</div>
                     </div>
                     <div class="grid grid-cols-5 gap-1.5 text-center">
-                        <div class="p-1.5 bg-slate-50 border border-gray-100 rounded-lg">
-                            <div class="text-[8px] font-bold text-gray-400 uppercase">SUBUH</div>
-                            <div class="text-xs font-extrabold text-gray-800 mt-0.5">04:42</div>
-                        </div>
-                        <div class="p-1.5 bg-slate-50 border border-gray-100 rounded-lg">
-                            <div class="text-[8px] font-bold text-gray-400 uppercase">DZUHUR</div>
-                            <div class="text-xs font-extrabold text-gray-800 mt-0.5">11:58</div>
-                        </div>
-                        <div class="p-1.5 bg-slate-50 border border-gray-100 rounded-lg">
-                            <div class="text-[8px] font-bold text-gray-400 uppercase">ASHAR</div>
-                            <div class="text-xs font-extrabold text-gray-800 mt-0.5">15:19</div>
-                        </div>
-                        <div class="p-1.5 bg-[#2F5FA3]/5 border border-[#2F5FA3]/20 rounded-lg">
-                            <div class="text-[8px] font-bold text-[#2F5FA3] uppercase">MAGHRIB</div>
-                            <div class="text-xs font-extrabold text-[#2F5FA3] mt-0.5">17:54</div>
-                        </div>
-                        <div class="p-1.5 bg-slate-50 border border-gray-100 rounded-lg">
-                            <div class="text-[8px] font-bold text-gray-400 uppercase">ISYA</div>
-                            <div class="text-xs font-extrabold text-gray-800 mt-0.5">19:08</div>
-                        </div>
+                        @foreach ($prayerSchedule['prayers'] as $prayer)
+                            @php
+                                $isNext = $prayer['key'] === $nextPrayerKey;
+                            @endphp
+                            <div class="p-1.5 rounded-lg transition-colors duration-200 {{ $isNext ? 'bg-[#2F5FA3]/5 border border-[#2F5FA3]/20' : 'bg-slate-50 border border-gray-100' }}">
+                                <div class="text-[8px] font-bold uppercase {{ $isNext ? 'text-[#2F5FA3]' : 'text-gray-400' }}">{{ $prayer['name'] }}</div>
+                                <div class="text-xs font-extrabold mt-0.5 {{ $isNext ? 'text-[#2F5FA3]' : 'text-gray-800' }}">{{ $prayer['time'] }}</div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -308,30 +323,9 @@
                     </div>
                 @endif
 
-                {{-- Banner Ad --}}
-                <div class="rounded-xl overflow-hidden border border-gray-200 bg-[#E8EEF7] p-6 relative flex flex-col justify-between min-h-[350px]">
-                    <div class="absolute top-2 right-2 text-[8px] font-bold text-gray-300 uppercase tracking-wider bg-black/5 px-1.5 py-0.5 rounded">AD</div>
-                    <div>
-                        <div class="text-[11px] font-extrabold text-[#2F5FA3] uppercase tracking-widest">Schooliday Sale</div>
-                        <div class="text-2xl font-extrabold text-[#244B82] leading-tight mt-2">Kalender Promo Liburan Sekolah</div>
-                        <div class="text-[10px] text-primary/80 font-bold mt-1">9 Juni - 2 Juli</div>
-                    </div>
-                    <div class="space-y-2 mt-8">
-                        <div class="bg-white/80 backdrop-blur-sm p-3 rounded-lg flex items-center justify-between border border-[#2F5FA3]/15">
-                            <div>
-                                <div class="text-[9px] font-extrabold text-[#244B82] uppercase">Tiket Pesawat</div>
-                                <div class="text-xs font-extrabold text-[#2F5FA3]">Diskon s.d 500rb</div>
-                            </div>
-                            <div class="text-[10px] font-extrabold bg-[#2F5FA3] text-white px-2 py-1 rounded">Beli 2 Gratis 1</div>
-                        </div>
-                        <div class="bg-white/80 backdrop-blur-sm p-3 rounded-lg flex items-center justify-between border border-[#2F5FA3]/15">
-                            <div>
-                                <div class="text-[9px] font-extrabold text-[#244B82] uppercase">Hotel & Villa</div>
-                                <div class="text-xs font-extrabold text-[#2F5FA3]">Kupon Cashback 800rb</div>
-                            </div>
-                            <div class="text-[10px] font-extrabold bg-amber-500 text-white px-2 py-1 rounded">Diskon 30%</div>
-                        </div>
-                    </div>
+                {{-- Banner Donasi --}}
+                <div class="rounded-xl overflow-hidden border border-gray-200 shadow-sm bg-white">
+                    <img src="{{ asset('poster_donasi.webp') }}" alt="Poster Donasi" class="w-full h-auto object-cover">
                 </div>
             </div>
         </div>

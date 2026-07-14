@@ -30,8 +30,9 @@
         </a>
     </div>
 
-    <form action="{{ route('console.articles.store') }}" method="POST" enctype="multipart/form-data" x-data="{ previewUrls: [] }" onsubmit="this.querySelectorAll('button[type=submit]').forEach(b => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); b.querySelector('.btn-text').textContent = 'Menyimpan...'; })">
+    <form action="{{ route('console.articles.store') }}" method="POST" enctype="multipart/form-data" x-data="{ previewUrls: [] }" onsubmit="if(event.submitter){this.querySelector('input[name=status]').value=event.submitter.value;} this.querySelectorAll('button[type=submit]').forEach(b => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); b.querySelector('.btn-text').textContent = 'Menyimpan...'; })">
         @csrf
+        <input type="hidden" name="status" value="draft">
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-6">
             {{-- Left — Main Content --}}

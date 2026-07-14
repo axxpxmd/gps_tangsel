@@ -123,26 +123,43 @@ class ArticleController extends Controller
         }
 
         if ($request->hasFile('images')) {
-            if ($article->image) {
-                $this->imageService->deleteFile($article->image);
-            }
-            foreach ($article->images as $img) {
-                $this->imageService->deleteFile($img->image);
-            }
-            $article->images()->delete();
-
             $uploadedImages = [];
             foreach ($request->file('images') as $file) {
                 $uploadedImages[] = $this->imageService->uploadAndConvertToWebp($file, 'articles');
             }
             if (! empty($uploadedImages)) {
-                $validated['image'] = $uploadedImages[0];
+                $nextOrder = $article->images()->max('sort_order') + 1;
                 foreach ($uploadedImages as $index => $path) {
                     $article->images()->create([
                         'image' => $path,
-                        'sort_order' => $index,
+                        'sort_order' => $nextOrder + $index,
                     ]);
                 }
+                if (! $article->image) {
+                    $validated['image'] = $uploadedImages[0];
+                }
+            }
+        }
+
+        $removeImages = $request->input('remove_images', []);
+        if (! empty($removeImages)) {
+            foreach ($removeImages as $removeId) {
+                if (str_starts_with($removeId, 'main_')) {
+                    if ($article->image) {
+                        $this->imageService->deleteFile($article->image);
+                    }
+                    $validated['image'] = $article->images()->first()?->image ?? null;
+                } elseif (str_starts_with($removeId, 'img_')) {
+                    $imgId = (int) str_replace('img_', '', $removeId);
+                    $img = $article->images()->find($imgId);
+                    if ($img) {
+                        $this->imageService->deleteFile($img->image);
+                        $img->delete();
+                    }
+                }
+            }
+            if (! $article->image && ! isset($validated['image'])) {
+                $validated['image'] = $article->images()->first()?->image ?? null;
             }
         }
 

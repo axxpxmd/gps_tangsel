@@ -9,13 +9,13 @@
 
 @section('content')
 @php
-    $initialPreviews = [];
+    $existingImages = [];
     if ($article->image_url) {
-        $initialPreviews[] = $article->image_url;
+        $existingImages[] = ['id' => 'main_'.$article->id, 'url' => $article->image_url];
     }
     foreach ($article->images as $img) {
-        if ($img->image_url && !in_array($img->image_url, $initialPreviews)) {
-            $initialPreviews[] = $img->image_url;
+        if ($img->image_url) {
+            $existingImages[] = ['id' => 'img_'.$img->id, 'url' => $img->image_url];
         }
     }
 @endphp
@@ -41,9 +41,13 @@
         </a>
     </div>
 
-    <form action="{{ route('console.articles.update', $article) }}" method="POST" enctype="multipart/form-data" x-data="{ previewUrls: {{ json_encode($initialPreviews) }} }" onsubmit="this.querySelectorAll('button[type=submit]').forEach(b => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); b.querySelector('.btn-text').textContent = 'Menyimpan...'; })">
+    <form action="{{ route('console.articles.update', $article) }}" method="POST" enctype="multipart/form-data" x-data="{ existingImages: {{ json_encode($existingImages) }}, newPreviews: [], removeIds: [] }" onsubmit="if(event.submitter){this.querySelector('input[name=status]').value=event.submitter.value;} this.querySelectorAll('button[type=submit]').forEach(b => { b.disabled = true; b.classList.add('opacity-60', 'cursor-not-allowed'); b.querySelector('.btn-text').textContent = 'Menyimpan...'; })">
         @csrf
         @method('PUT')
+        <input type="hidden" name="status" value="{{ $article->status ?? 'draft' }}">
+        <template x-for="rid in removeIds" :key="rid">
+            <input type="hidden" name="remove_images[]" :value="rid">
+        </template>
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-5 mb-6">
             {{-- Left — Main Content --}}
@@ -120,13 +124,12 @@
                                 <label for="image" class="cursor-pointer px-4 py-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg text-xs font-bold transition-colors">
                                     Choose Files
                                 </label>
-                                <span class="text-xs text-gray-500 truncate" x-text="previewUrls.length ? previewUrls.length + ' file(s) selected' : 'No file chosen'">No file chosen</span>
+                                <span class="text-xs text-gray-500 truncate" x-text="(existingImages.length - removeIds.length + newPreviews.length) > 0 ? (existingImages.length - removeIds.length + newPreviews.length) + ' file(s) selected' : 'No file chosen'">No file chosen</span>
                                 <input type="file" id="image" name="images[]" accept="image/jpeg,image/png,image/webp" multiple
                                     @change="
-                                        previewUrls = [];
                                         if ($el.files) {
                                             Array.from($el.files).forEach(file => {
-                                                previewUrls.push(URL.createObjectURL(file));
+                                                newPreviews.push(URL.createObjectURL(file));
                                             });
                                         }
                                     "
@@ -152,7 +155,7 @@
 
                         {{-- Preview Area --}}
                         <div class="border-2 border-dashed border-gray-200 rounded-xl p-6 flex flex-col items-center justify-center min-h-[160px] bg-gray-50/50">
-                            <template x-if="previewUrls.length === 0">
+                            <template x-if="existingImages.length === 0 && newPreviews.length === 0">
                                 <div class="text-center">
                                     <div class="w-10 h-10 mx-auto mb-2 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400">
                                         <span class="material-symbols-rounded text-[20px]">add_photo_alternate</span>
@@ -161,20 +164,36 @@
                                     <p class="text-[11px] text-gray-400 mt-0.5">Pilih file untuk memulai upload</p>
                                 </div>
                             </template>
-                            <template x-if="previewUrls.length > 0">
+                            <template x-if="existingImages.length > 0 || newPreviews.length > 0">
                                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full">
-                                    <template x-for="(url, index) in previewUrls" :key="index">
+                                    <template x-for="(img, index) in existingImages.filter(e => !removeIds.includes(e.id))" :key="'exist-'+img.id">
+                                        <div class="relative aspect-[16/9] rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
+                                            <img :src="img.url" alt="Existing" class="w-full h-full object-cover">
+                                            <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-500 text-white">Lama</span>
+                                            <button type="button" @click="removeIds.push(img.id)"
+                                                class="absolute top-1.5 right-1.5 p-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">
+                                                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </template>
+                                    <template x-for="(url, index) in newPreviews" :key="'new-'+index">
                                         <div class="relative aspect-[16/9] rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
                                             <img :src="url" alt="Preview" class="w-full h-full object-cover">
+                                            <span class="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-500 text-white">Baru</span>
                                             <button type="button" @click="
                                                 const dt = new DataTransfer();
                                                 const input = document.getElementById('image');
                                                 const { files } = input;
+                                                let newIdx = 0;
                                                 for (let i = 0; i < files.length; i++) {
-                                                    if (i !== index) dt.items.add(files[i]);
+                                                    if (newPreviews.indexOf(URL.createObjectURL(files[i])) !== index) {
+                                                        dt.items.add(files[i]);
+                                                    }
                                                 }
                                                 input.files = dt.files;
-                                                previewUrls.splice(index, 1);
+                                                newPreviews.splice(index, 1);
                                             "
                                                 class="absolute top-1.5 right-1.5 p-1 rounded-lg bg-red-500 text-white hover:bg-red-600 transition-colors">
                                                 <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

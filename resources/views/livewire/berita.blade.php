@@ -1,6 +1,6 @@
 <div>
     {{-- Hero Section --}}
-    <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden bg-dawn-night">
+     <section class="relative min-h-[35vh] sm:min-h-[45vh] flex items-center justify-center overflow-hidden bg-dawn-night">
         <div class="absolute inset-0 islamic-pattern opacity-[0.04]"></div>
         <div class="absolute -top-24 right-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
         <div class="absolute -bottom-24 left-10 w-80 h-80 bg-gold/10 rounded-full blur-3xl"></div>
@@ -111,23 +111,6 @@
                     </div>
                 </div>
 
-                {{-- Category Filter --}}
-                <div class="mb-6">
-                    <label class="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-3">Kategori</label>
-                    <div class="flex flex-wrap gap-2">
-                        <input type="radio" wire:model="category" value="" id="cat-all" class="sr-only peer" @checked($category === '')>
-                        <label for="cat-all" class="px-4 py-2 text-xs font-semibold rounded-full cursor-pointer transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200 peer-checked:bg-primary peer-checked:text-white peer-checked:shadow-md peer-checked:shadow-primary/20">
-                            Semua Kategori
-                        </label>
-                        @foreach ($categories as $cat)
-                            <input type="radio" wire:model="category" value="{{ $cat->slug }}" id="cat-{{ $cat->slug }}" class="sr-only peer" @checked($category === $cat->slug)>
-                            <label for="cat-{{ $cat->slug }}" class="px-4 py-2 text-xs font-semibold rounded-full cursor-pointer transition-all duration-200 bg-gray-100 text-gray-600 hover:bg-gray-200 peer-checked:bg-primary peer-checked:text-white peer-checked:shadow-md peer-checked:shadow-primary/20">
-                                {{ $cat->name }}
-                            </label>
-                        @endforeach
-                    </div>
-                </div>
-
                 {{-- Action Buttons --}}
                 <div class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-gray-100">
                     <button
@@ -141,7 +124,7 @@
                     </button>
                     <button
                         wire:click="resetFilters"
-                        @disabled(!$search && !$category && !$date_from && !$date_to)
+                        @disabled(!$search && !$date_from && !$date_to)
                         class="flex-1 sm:flex-none sm:px-6 inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-gray-50"
                     >
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -259,8 +242,8 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-700 mb-2">Artikel tidak ditemukan</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Coba ubah kata kunci pencarian, rentang tanggal, atau pilih kategori yang berbeda untuk menemukan artikel yang Anda cari.</p>
-                    @if ($search || $category || $date_from || $date_to)
+                    <p class="text-sm text-gray-500 leading-relaxed">Coba ubah kata kunci pencarian atau rentang tanggal untuk menemukan artikel yang Anda cari.</p>
+                    @if ($search || $date_from || $date_to)
                         <button wire:click="resetFilters" class="mt-6 inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-primary hover:bg-primary-dark rounded-xl transition-colors shadow-md shadow-primary/20">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>

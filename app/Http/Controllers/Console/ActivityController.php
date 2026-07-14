@@ -4,13 +4,15 @@ namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
+use App\Services\ImageConversionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
+    public function __construct(protected ImageConversionService $imageService) {}
+
     public function index(Request $request): View
     {
         $query = Activity::query();
@@ -57,7 +59,7 @@ class ActivityController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('activities', 'sftp');
+            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'activities');
         }
 
         Activity::create($validated);
@@ -91,10 +93,8 @@ class ActivityController extends Controller
         $validated['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('gambar')) {
-            if ($activity->gambar) {
-                Storage::disk('sftp')->delete($activity->gambar);
-            }
-            $validated['gambar'] = $request->file('gambar')->store('activities', 'sftp');
+            $this->imageService->deleteFile($activity->gambar);
+            $validated['gambar'] = $this->imageService->uploadAndConvertToWebp($request->file('gambar'), 'activities');
         }
 
         $activity->update($validated);
@@ -104,9 +104,7 @@ class ActivityController extends Controller
 
     public function destroy(Activity $activity): RedirectResponse
     {
-        if ($activity->gambar) {
-            Storage::disk('sftp')->delete($activity->gambar);
-        }
+        $this->imageService->deleteFile($activity->gambar);
 
         $activity->delete();
 

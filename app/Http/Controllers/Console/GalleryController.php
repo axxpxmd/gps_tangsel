@@ -4,23 +4,44 @@ namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use App\Services\ImageConversionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
-    public function index(): View
-    {
-        $galleries = Gallery::withCount('images')->latest()->get();
+    public function __construct(protected ImageConversionService $imageService) {}
 
-        return view('console.galleries.index', compact('galleries'));
+    public function index(Request $request): View
+    {
+        $query = Gallery::withCount('images');
+
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%'.$request->search.'%');
+        }
+
+        if ($request->filled('album')) {
+            $query->where('album', $request->album);
+        }
+
+        if ($request->status === 'active') {
+            $query->where('is_active', true);
+        } elseif ($request->status === 'inactive') {
+            $query->where('is_active', false);
+        }
+
+        $galleries = $query->latest()->get();
+        $albums = Gallery::distinct()->pluck('album')->filter()->sort()->values();
+
+        return view('console.galleries.index', compact('galleries', 'albums'));
     }
 
     public function create(): View
     {
-        return view('console.galleries.create');
+        $albums = Gallery::distinct()->pluck('album')->filter()->sort()->values();
+
+        return view('console.galleries.create', compact('albums'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -40,7 +61,7 @@ class GalleryController extends Controller
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $file) {
                 $gallery->images()->create([
-                    'gambar' => $file->store('galleries', 'sftp'),
+                    'gambar' => $this->imageService->uploadAndConvertToWebp($file, 'galleries'),
                 ]);
             }
         }
@@ -58,8 +79,9 @@ class GalleryController extends Controller
     public function edit(Gallery $gallery): View
     {
         $gallery->load('images');
+        $albums = Gallery::distinct()->pluck('album')->filter()->sort()->values();
 
-        return view('console.galleries.edit', compact('gallery'));
+        return view('console.galleries.edit', compact('gallery', 'albums'));
     }
 
     public function update(Request $request, Gallery $gallery): RedirectResponse
@@ -80,7 +102,7 @@ class GalleryController extends Controller
         if ($request->hasFile('gambar')) {
             foreach ($request->file('gambar') as $file) {
                 $gallery->images()->create([
-                    'gambar' => $file->store('galleries', 'sftp'),
+                    'gambar' => $this->imageService->uploadAndConvertToWebp($file, 'galleries'),
                 ]);
             }
         }
@@ -91,7 +113,7 @@ class GalleryController extends Controller
     public function destroy(Gallery $gallery): RedirectResponse
     {
         foreach ($gallery->images as $image) {
-            Storage::disk('sftp')->delete($image->gambar);
+            $this->imageService->deleteFile($image->gambar);
         }
 
         $gallery->delete();
@@ -103,7 +125,7 @@ class GalleryController extends Controller
     {
         $image = $gallery->images()->findOrFail($imageId);
 
-        Storage::disk('sftp')->delete($image->gambar);
+        $this->imageService->deleteFile($image->gambar);
         $image->delete();
 
         return back()->with('success', 'Gambar berhasil dihapus.');

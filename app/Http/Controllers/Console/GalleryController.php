@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Console;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use App\Models\GalleryImage;
 use App\Services\ImageConversionService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class GalleryController extends Controller
         $albums = Gallery::distinct()->pluck('album')->filter()->sort()->values();
         $totalGalleries = Gallery::count();
         $activeCount = Gallery::where('is_active', true)->count();
-        $totalImages = Gallery::sum('images_count');
+        $totalImages = GalleryImage::count();
 
         return view('console.galleries.index', compact('galleries', 'albums', 'totalGalleries', 'activeCount', 'totalImages'));
     }

@@ -12,6 +12,7 @@ use App\Http\Controllers\Console\GalleryController;
 use App\Http\Controllers\Console\HaditsController;
 use App\Http\Controllers\Console\LoginController;
 use App\Http\Controllers\Console\PartnerController;
+use App\Http\Controllers\Console\ProfileController;
 use App\Http\Controllers\Console\ProgramController;
 use App\Http\Controllers\Console\TagController;
 use App\Http\Controllers\GoogleAuthController;
@@ -68,5 +69,9 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::post('article-old/fetch', [ArticleOldController::class, 'fetch'])->name('article-old.fetch');
         Route::post('article-old/copy', [ArticleOldController::class, 'copyToArticles'])->name('article-old.copy');
         Route::delete('galleries/{gallery}/images/{image}', [GalleryController::class, 'deleteImage'])->name('galleries.delete-image');
+
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
+        Route::patch('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     });
 });

@@ -41,7 +41,7 @@ class DashboardController extends Controller
         $followedUpCollaborations = Collaboration::where('status', Collaboration::STATUS_DITINDAKLANJUTI)->count();
 
         $recentArticles = Article::with('category')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('published_at', 'desc')
             ->limit(5)
             ->get();
 

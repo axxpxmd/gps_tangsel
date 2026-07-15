@@ -139,7 +139,7 @@
                                 @if ($article->category)
                                     <span class="text-[10px] font-medium text-primary bg-primary-light px-1.5 py-0.5 rounded">{{ $article->category->name }}</span>
                                 @endif
-                                <span class="text-[11px] text-gray-400">{{ $article->created_at->diffForHumans() }}</span>
+                                <span class="text-[11px] text-gray-400">{{ $article->published_at?->diffForHumans() ?? '-' }}</span>
                             </div>
                         </div>
                         @if ($article->status === 'publish')

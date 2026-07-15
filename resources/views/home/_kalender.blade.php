@@ -102,6 +102,9 @@
             const calMonthNames = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
             const calMonthKeys = Object.keys(calEvents).sort();
             let calCurrentIdx = 0;
+            // Fallback: jika tidak ada data, gunakan bulan saat ini
+            const calNowKey = calTodayKey();
+            const calHasData = calMonthKeys.length > 0;
             let calSelectedDay = null;
             const calMonthLabel = document.getElementById('cal-month-label');
             const calEventCount = document.getElementById('cal-event-count');
@@ -127,23 +130,51 @@
                 const t = new Date();
                 return t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0');
             }
+            function calGetCurrentMonthKey() {
+                return calHasData ? calMonthKeys[calCurrentIdx] : calNowKey;
+            }
             function calTodayDay() { return new Date().getDate(); }
             function calDateStr(y, m, d) {
                 return d + ' ' + calMonthNames[m - 1] + ' ' + y;
             }
 
             function renderCalendar() {
-                if (calMonthKeys.length === 0) {
-                    calMonthLabel.textContent = 'Tidak ada kegiatan';
+                if (!calHasData) {
+                    // Render bulan saat ini meskipun tidak ada kegiatan
+                    const [year, month] = calNowKey.split('-').map(v => parseInt(v, 10));
+                    calMonthLabel.textContent = calMonthNames[month - 1] + ' ' + year;
                     calEventCount.textContent = '0 kegiatan';
                     calPrevBtn.disabled = true;
                     calNextBtn.disabled = true;
-                    calGrid.innerHTML = '';
+
+                    const firstWeekday = new Date(year, month - 1, 1).getDay();
+                    const daysInMonth = new Date(year, month, 0).getDate();
+                    const todayDay = calTodayDay();
+
+                    let html = '';
+                    for (let i = 0; i < firstWeekday; i++) {
+                        html += '<div class="bg-white aspect-square"></div>';
+                    }
+                    for (let d = 1; d <= daysInMonth; d++) {
+                        const isToday = d === todayDay;
+                        const past = d < todayDay;
+                        let classes = 'bg-white aspect-square flex flex-col items-center justify-center text-sm font-semibold transition-all duration-200 relative ';
+                        let opacity = past ? 'opacity-50' : '';
+                        if (isToday) {
+                            classes += '!bg-primary text-white shadow-inner ';
+                        } else {
+                            classes += 'text-gray-400 cursor-default ';
+                        }
+                        html += '<div class="' + classes.trim() + ' ' + opacity + '">';
+                        html += '<span>' + d + '</span>';
+                        html += '</div>';
+                    }
+                    calGrid.innerHTML = html;
                     renderEmptyDetail();
                     return;
                 }
 
-                const monthKey = calMonthKeys[calCurrentIdx];
+                const monthKey = calGetCurrentMonthKey();
                 const [year, month] = monthKey.split('-').map(v => parseInt(v, 10));
                 const monthEvents = calEvents[monthKey] || [];
                 const firstWeekday = new Date(year, month - 1, 1).getDay();

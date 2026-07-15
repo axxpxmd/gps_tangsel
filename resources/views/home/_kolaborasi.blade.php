@@ -22,7 +22,8 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             {{-- Left: Form --}}
             <div class="reveal">
-                <form class="bg-white rounded-2xl border border-gray-100 p-5 sm:p-7 lg:p-9 space-y-4 sm:space-y-5">
+                <form id="kolab-form" class="bg-white rounded-2xl border border-gray-100 p-5 sm:p-7 lg:p-9 space-y-4 sm:space-y-5">
+                    @csrf
                     {{-- Nama --}}
                     <div>
                         <label for="kolab-nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
@@ -57,10 +58,25 @@
                         <textarea id="kolab-tujuan" name="tujuan" rows="5" placeholder="Ceritakan tujuan kolaborasi Anda..." class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"></textarea>
                     </div>
 
+                    {{-- Captcha --}}
+                    <div>
+                        <label for="kolab-captcha" class="block text-sm font-semibold text-gray-700 mb-2">Berapa hasil dari: <span id="captcha-question" class="font-bold text-primary">...</span></label>
+                        <div class="flex gap-2">
+                            <input type="number" id="kolab-captcha" name="captcha" placeholder="Jawaban" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200">
+                            <button type="button" id="btn-refresh-captcha" class="px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center" title="Refresh Captcha">
+                                <span class="material-icons text-base">refresh</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    {{-- Message Area --}}
+                    <div id="kolab-message" class="hidden p-4 rounded-xl text-sm font-medium border"></div>
+
                     {{-- Submit --}}
-                    <button type="submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-primary rounded-xl border border-primary-dark/30 hover:bg-primary-dark hover:-translate-y-0.5 transition-all duration-200 shadow-sm">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-                        Kirim Pesan
+                    <button type="submit" id="kolab-submit" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-primary rounded-xl border border-primary-dark/30 hover:bg-primary-dark hover:-translate-y-0.5 transition-all duration-200 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                        <svg id="kolab-submit-icon" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                        <svg id="kolab-loading-icon" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                        <span id="kolab-submit-text">Kirim Pesan</span>
                     </button>
                 </form>
 
@@ -90,3 +106,102 @@
         </div>
     </div>
 </section>
+
+@push('scripts')
+    <script>
+        function initCollaboration() {
+            const kolabForm = document.getElementById('kolab-form');
+            if (!kolabForm) return;
+
+            const kolabSubmit = document.getElementById('kolab-submit');
+            const kolabSubmitIcon = document.getElementById('kolab-submit-icon');
+            const kolabLoadingIcon = document.getElementById('kolab-loading-icon');
+            const kolabSubmitText = document.getElementById('kolab-submit-text');
+            const kolabMessage = document.getElementById('kolab-message');
+            const captchaQuestion = document.getElementById('captcha-question');
+            const btnRefreshCaptcha = document.getElementById('btn-refresh-captcha');
+            const captchaInput = document.getElementById('kolab-captcha');
+
+            function refreshCaptcha() {
+                fetch('{{ route("kolaborasi.captcha") }}')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (captchaQuestion) {
+                            captchaQuestion.textContent = data.question;
+                        }
+                        if (captchaInput) {
+                            captchaInput.value = '';
+                        }
+                    })
+                    .catch(err => console.error('Gagal memuat captcha:', err));
+            }
+
+            if (btnRefreshCaptcha) {
+                btnRefreshCaptcha.addEventListener('click', refreshCaptcha);
+            }
+
+            // Load captcha on load
+            refreshCaptcha();
+
+            kolabForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Clear messages
+                kolabMessage.classList.add('hidden');
+                kolabMessage.className = 'hidden p-4 rounded-xl text-sm font-medium border';
+
+                // Disable submit button
+                kolabSubmit.disabled = true;
+                if (kolabSubmitIcon) kolabSubmitIcon.classList.add('hidden');
+                if (kolabLoadingIcon) kolabLoadingIcon.classList.remove('hidden');
+                if (kolabSubmitText) kolabSubmitText.textContent = 'Mengirim...';
+
+                const formData = new FormData(kolabForm);
+
+                fetch('{{ route("kolaborasi.store") }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                })
+                .then(response => response.json().then(data => ({ status: response.status, body: data })))
+                .then(res => {
+                    if (res.status === 200 && res.body.success) {
+                        kolabMessage.textContent = res.body.message;
+                        kolabMessage.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+                        kolabMessage.classList.remove('hidden');
+                        kolabForm.reset();
+                    } else {
+                        let errMsg = res.body.message || 'Terjadi kesalahan. Silakan coba lagi.';
+                        if (res.body.errors) {
+                            const firstErrKey = Object.keys(res.body.errors)[0];
+                            errMsg = res.body.errors[firstErrKey][0];
+                        }
+                        kolabMessage.textContent = errMsg;
+                        kolabMessage.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
+                        kolabMessage.classList.remove('hidden');
+                    }
+                    refreshCaptcha();
+                })
+                .catch(err => {
+                    console.error('Error:', err);
+                    kolabMessage.textContent = 'Terjadi kesalahan koneksi. Silakan coba lagi.';
+                    kolabMessage.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
+                    kolabMessage.classList.remove('hidden');
+                })
+                .finally(() => {
+                    // Re-enable submit button
+                    kolabSubmit.disabled = false;
+                    if (kolabSubmitIcon) kolabSubmitIcon.classList.remove('hidden');
+                    if (kolabLoadingIcon) kolabLoadingIcon.classList.add('hidden');
+                    if (kolabSubmitText) kolabSubmitText.textContent = 'Kirim Pesan';
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initCollaboration);
+        document.addEventListener('livewire:navigated', initCollaboration);
+    </script>
+@endpush

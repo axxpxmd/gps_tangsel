@@ -1,9 +1,6 @@
 {{-- ============ KONTRIBUSI SECTION ============ --}}
 <section class="relative py-14 lg:py-20 bg-[#F5F5F5] overflow-hidden" id="kontribusi">
     <div class="absolute inset-0 islamic-pattern-dark opacity-[0.015]"></div>
-    <div class="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-    <div class="absolute bottom-0 left-0 w-72 h-72 bg-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
-
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-2xl mx-auto mb-10 lg:mb-14 text-center reveal">
             <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/10 mb-4 sm:mb-5">

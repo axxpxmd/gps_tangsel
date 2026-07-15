@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CollaborationController;
 use App\Http\Controllers\Console\ActivityController;
 use App\Http\Controllers\Console\ArticleController;
 use App\Http\Controllers\Console\ArticleOldController;
@@ -24,6 +25,9 @@ use App\Livewire\VisiMisi;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', WelcomeController::class)->name('home');
+
+Route::post('/kolaborasi', [CollaborationController::class, 'store'])->name('kolaborasi.store');
+Route::get('/kolaborasi/captcha', [CollaborationController::class, 'refreshCaptcha'])->name('kolaborasi.captcha');
 
 // Google OAuth routes
 Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');

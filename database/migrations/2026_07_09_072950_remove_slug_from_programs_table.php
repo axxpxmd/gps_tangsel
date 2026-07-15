@@ -8,10 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('programs', function (Blueprint $table) {
-            $table->dropUnique('programs_slug_unique');
-            $table->dropColumn('slug');
-        });
+        if (Schema::hasColumn('programs', 'slug')) {
+            Schema::table('programs', function (Blueprint $table) {
+                if (config('database.default') !== 'sqlite') {
+                    $table->dropUnique('programs_slug_unique');
+                }
+                $table->dropColumn('slug');
+            });
+        }
     }
 
     public function down(): void

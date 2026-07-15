@@ -12,6 +12,7 @@ use App\Http\Controllers\Console\LoginController;
 use App\Http\Controllers\Console\PartnerController;
 use App\Http\Controllers\Console\ProgramController;
 use App\Http\Controllers\Console\TagController;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\WelcomeController;
 use App\Livewire\Berita;
 use App\Livewire\BeritaShow;
@@ -23,6 +24,11 @@ use App\Livewire\VisiMisi;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', WelcomeController::class)->name('home');
+
+// Google OAuth routes
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
+Route::post('/auth/logout-jemaah', [GoogleAuthController::class, 'logout'])->name('auth.logout-jemaah');
 
 // Redirect default Laravel auth to CMS login
 Route::redirect('/login', '/console/login')->name('login');

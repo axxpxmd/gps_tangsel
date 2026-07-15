@@ -59,7 +59,7 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <h3 class="text-sm lg:text-base font-bold text-gray-900 text-center group-hover:text-primary transition-colors duration-200">{{ $partner->name }}</h3>
+                                    <h3 class="text-xs lg:text-xs font-bold text-gray-900 text-center group-hover:text-primary transition-colors duration-200">{{ $partner->name }}</h3>
                                 </div>
                             </div>
                         @endforeach

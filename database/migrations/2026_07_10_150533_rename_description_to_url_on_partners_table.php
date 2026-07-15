@@ -8,9 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('partners', function (Blueprint $table) {
-            $table->renameColumn('description', 'url');
-        });
+        if (Schema::hasColumn('partners', 'description')) {
+            Schema::table('partners', function (Blueprint $table) {
+                $table->renameColumn('description', 'url');
+            });
+        }
     }
 
     public function down(): void

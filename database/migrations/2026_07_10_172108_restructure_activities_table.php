@@ -10,15 +10,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('activities', function (Blueprint $table) {
-            $table->decimal('latitude', 10, 7)->nullable()->after('location');
-            $table->decimal('longitude', 10, 7)->nullable()->after('latitude');
+            if (! Schema::hasColumn('activities', 'latitude')) {
+                $table->decimal('latitude', 10, 7)->nullable()->after('location');
+            }
+            if (! Schema::hasColumn('activities', 'longitude')) {
+                $table->decimal('longitude', 10, 7)->nullable()->after('latitude');
+            }
         });
 
-        // Change date to datetime
-        DB::statement('ALTER TABLE activities MODIFY COLUMN date DATETIME NOT NULL');
+        if (config('database.default') !== 'sqlite') {
+            DB::statement('ALTER TABLE activities MODIFY COLUMN date DATETIME NOT NULL');
+        }
 
         Schema::table('activities', function (Blueprint $table) {
-            $table->dropColumn(['time', 'program', 'color', 'icon']);
+            $columnsToDrop = [];
+            foreach (['time', 'program', 'color', 'icon'] as $col) {
+                if (Schema::hasColumn('activities', $col)) {
+                    $columnsToDrop[] = $col;
+                }
+            }
+            if (! empty($columnsToDrop)) {
+                $table->dropColumn($columnsToDrop);
+            }
         });
     }
 

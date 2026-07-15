@@ -8,9 +8,11 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::table('programs', function (Blueprint $table) {
-            $table->dropColumn('subtitle');
-        });
+        if (Schema::hasColumn('programs', 'subtitle')) {
+            Schema::table('programs', function (Blueprint $table) {
+                $table->dropColumn('subtitle');
+            });
+        }
     }
 
     public function down(): void

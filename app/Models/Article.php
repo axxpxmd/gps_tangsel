@@ -55,6 +55,11 @@ class Article extends Model
         return $this->hasMany(ArticleImage::class)->orderBy('sort_order');
     }
 
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class)->latest();
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'publish');

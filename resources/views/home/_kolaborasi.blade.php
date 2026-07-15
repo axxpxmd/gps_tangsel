@@ -27,7 +27,7 @@
                     {{-- Nama --}}
                     <div>
                         <label for="kolab-nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap</label>
-                        <input type="text" id="kolab-nama" name="nama" placeholder="Masukkan nama Anda" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200">
+                        <input type="text" id="kolab-nama" name="nama" placeholder="Masukkan nama Anda" required pattern="^[a-zA-Z\s\.,'\-]+$" title="Nama lengkap hanya boleh berisi huruf, spasi, titik, koma, tanda petik, dan tanda hubung." class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200">
                     </div>
 
                     {{-- WhatsApp --}}
@@ -37,7 +37,7 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                                 <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                             </div>
-                            <input type="tel" id="kolab-whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx" class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200">
+                            <input type="tel" id="kolab-whatsapp" name="whatsapp" placeholder="08xxxxxxxxxx" required pattern="(?:\+62|62|0)8[1-9][0-9]{7,11}" title="Nomor WhatsApp harus valid, diawali dengan 08, 628, atau +628 diikuti oleh 9-13 digit." class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200">
                         </div>
                     </div>
 
@@ -48,14 +48,14 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
                                 <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                             </div>
-                            <input type="email" id="kolab-email" name="email" placeholder="nama@email.com" class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200">
+                            <input type="email" id="kolab-email" name="email" placeholder="nama@email.com" required class="w-full pl-11 pr-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200">
                         </div>
                     </div>
 
                     {{-- Tujuan --}}
                     <div>
                         <label for="kolab-tujuan" class="block text-sm font-semibold text-gray-700 mb-2">Tujuan Kolaborasi</label>
-                        <textarea id="kolab-tujuan" name="tujuan" rows="5" placeholder="Ceritakan tujuan kolaborasi Anda..." class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"></textarea>
+                        <textarea id="kolab-tujuan" name="tujuan" rows="5" placeholder="Ceritakan tujuan kolaborasi Anda..." required class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"></textarea>
                     </div>
 
                     {{-- Captcha --}}

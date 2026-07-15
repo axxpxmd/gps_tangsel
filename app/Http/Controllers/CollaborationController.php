@@ -11,14 +11,16 @@ class CollaborationController extends Controller
     public function store(Request $request): JsonResponse
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
-            'whatsapp' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
-            'tujuan' => 'required|string',
-            'captcha' => 'required|integer',
+            'nama' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s\.,\'\-]+$/'],
+            'whatsapp' => ['required', 'string', 'max:20', 'regex:/^(?:\+62|62|0)8[1-9][0-9]{7,11}$/'],
+            'email' => ['required', 'email', 'max:255'],
+            'tujuan' => ['required', 'string'],
+            'captcha' => ['required', 'integer'],
         ], [
             'nama.required' => 'Nama lengkap wajib diisi.',
+            'nama.regex' => 'Nama lengkap hanya boleh berisi huruf, spasi, titik, koma, tanda petik, dan tanda hubung.',
             'whatsapp.required' => 'Nomor WhatsApp wajib diisi.',
+            'whatsapp.regex' => 'Format nomor WhatsApp tidak valid. Gunakan format seperti 081234567890 atau +6281234567890.',
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'tujuan.required' => 'Tujuan kolaborasi wajib diisi.',
@@ -41,10 +43,10 @@ class CollaborationController extends Controller
         session()->forget('captcha_answer');
 
         Collaboration::create([
-            'nama' => $request->nama,
-            'whatsapp' => $request->whatsapp,
-            'email' => $request->email,
-            'tujuan' => $request->tujuan,
+            'nama' => strip_tags($request->nama),
+            'whatsapp' => strip_tags($request->whatsapp),
+            'email' => strip_tags($request->email),
+            'tujuan' => strip_tags($request->tujuan),
         ]);
 
         return response()->json([

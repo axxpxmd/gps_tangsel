@@ -81,4 +81,36 @@ class CollaborationTest extends TestCase
         // Assert that captcha answer has been cleared from session
         $this->assertNull(session('captcha_answer'));
     }
+
+    public function test_cannot_submit_collaboration_with_invalid_name_format(): void
+    {
+        session(['captcha_answer' => 12]);
+
+        $response = $this->postJson(route('kolaborasi.store'), [
+            'nama' => 'Joko <script>alert("xss")</script>',
+            'whatsapp' => '081234567890',
+            'email' => 'joko@gmail.com',
+            'tujuan' => 'Kerjasama program kajian Subuh Akbar.',
+            'captcha' => 12,
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['nama']);
+    }
+
+    public function test_cannot_submit_collaboration_with_invalid_whatsapp_format(): void
+    {
+        session(['captcha_answer' => 12]);
+
+        $response = $this->postJson(route('kolaborasi.store'), [
+            'nama' => 'Joko Widodo',
+            'whatsapp' => '12345', // Invalid format (doesn't start with 08, 628, +628)
+            'email' => 'joko@gmail.com',
+            'tujuan' => 'Kerjasama program kajian Subuh Akbar.',
+            'captcha' => 12,
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['whatsapp']);
+    }
 }

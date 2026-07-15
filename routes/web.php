@@ -6,6 +6,7 @@ use App\Http\Controllers\Console\ArticleController;
 use App\Http\Controllers\Console\ArticleOldController;
 use App\Http\Controllers\Console\BoardMemberController;
 use App\Http\Controllers\Console\CategoryController;
+use App\Http\Controllers\Console\CollaborationController as ConsoleCollaborationController;
 use App\Http\Controllers\Console\DashboardController;
 use App\Http\Controllers\Console\GalleryController;
 use App\Http\Controllers\Console\HaditsController;
@@ -62,6 +63,8 @@ Route::prefix('console')->name('console.')->group(function () {
         Route::resource('categories', CategoryController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('tags', TagController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('article-old', ArticleOldController::class)->only(['index', 'show']);
+        Route::resource('collaborations', ConsoleCollaborationController::class)->only(['index', 'show', 'destroy']);
+        Route::patch('collaborations/{collaboration}/status', [ConsoleCollaborationController::class, 'updateStatus'])->name('collaborations.update-status');
         Route::post('article-old/fetch', [ArticleOldController::class, 'fetch'])->name('article-old.fetch');
         Route::post('article-old/copy', [ArticleOldController::class, 'copyToArticles'])->name('article-old.copy');
         Route::delete('galleries/{gallery}/images/{image}', [GalleryController::class, 'deleteImage'])->name('galleries.delete-image');

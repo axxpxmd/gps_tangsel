@@ -15,7 +15,7 @@
                 Tonton Kegiatan Kami
             </h2>
             <p class="text-gray-500 leading-relaxed">
-                Saksikan dokumentasi kegiatan GPS TangSel melalui kanal YouTube kami.
+                Saksikan dokumentasi kegiatan GPS TANGSEL melalui kanal YouTube kami.
             </p>
         </div>
 

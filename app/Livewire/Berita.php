@@ -8,7 +8,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Title('Berita & Artikel — GPS TangSel')]
+#[Title('Berita & Artikel — GPS TANGSEL')]
 class Berita extends Component
 {
     use WithPagination;

@@ -3,7 +3,7 @@
         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
             <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/></svg>
         </div>
-        <div><h3 class="text-sm font-bold text-gray-900">Informasi Hadits</h3><p class="text-[11px] text-gray-400">Lengkapi data hadits pilihan GPS TangSel</p></div>
+        <div><h3 class="text-sm font-bold text-gray-900">Informasi Hadits</h3><p class="text-[11px] text-gray-400">Lengkapi data hadits pilihan GPS TANGSEL</p></div>
     </div>
 
     <div class="p-6 sm:p-8 space-y-6">

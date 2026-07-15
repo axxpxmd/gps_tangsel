@@ -12,7 +12,7 @@
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 sm:mb-6">
                 Galeri Kegiatan<br>
-                <span class="text-gradient-gold">GPS TangSel</span>
+                <span class="text-gradient-gold">GPS TANGSEL</span>
             </h1>
             <p class="text-white/70 leading-relaxed text-sm sm:text-base lg:text-lg max-w-xl mx-auto px-2">
                 Dokumentasi perjalanan dakwah dan kegiatan sosial GPS Tangerang Selatan.
@@ -138,7 +138,7 @@
             <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
         <div class="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center" onclick="event.stopPropagation()">
-            <img src="" alt="Galeri GPS TangSel" class="w-full h-auto max-h-[90vh] object-contain rounded-2xl shadow-2xl" id="lightbox-img">
+            <img src="" alt="Galeri GPS TANGSEL" class="w-full h-auto max-h-[90vh] object-contain rounded-2xl shadow-2xl" id="lightbox-img">
         </div>
     </div>
 </div>

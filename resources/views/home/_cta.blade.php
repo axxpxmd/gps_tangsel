@@ -29,7 +29,7 @@
                 Kami bergerak bukan hanya untuk hari ini, tapi untuk warisan kebaikan bagi generasi mendatang.
             </p>
             <div class="mt-10">
-                <img src="{{ asset('logo-gps.png') }}" alt="GPS TangSel" class="w-16 h-16 mx-auto rounded-2xl mb-4 ring-2 ring-white/20">
+                <img src="{{ asset('logo-gps.png') }}" alt="GPS TANGSEL" class="w-16 h-16 mx-auto rounded-2xl mb-4 ring-2 ring-white/20">
                  <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-2">
                     Masjid Kuat,
                 </h2>

@@ -8,7 +8,7 @@
         </div>
         <div>
             <h3 class="text-sm font-bold text-gray-900">Informasi Partner</h3>
-            <p class="text-[11px] text-gray-400">Lengkapi data mitra kolaborasi GPS TangSel</p>
+            <p class="text-[11px] text-gray-400">Lengkapi data mitra kolaborasi GPS TANGSEL</p>
         </div>
     </div>
 

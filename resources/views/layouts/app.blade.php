@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="@yield('meta_description', 'Gerakan Pejuang Subuh (GPS) Tangerang Selatan — Mengajak masyarakat istiqomah shalat subuh berjamaah di masjid.')">
 
-    <title>@yield('title', 'Beranda') — GPS TangSel</title>
+    <title>@yield('title', 'Beranda') — GPS TANGSEL</title>
 
     <link rel="icon" href="{{ asset('logo-gps.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">

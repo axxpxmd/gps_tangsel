@@ -6,7 +6,7 @@ use App\Models\Gallery;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Galeri — GPS TangSel')]
+#[Title('Galeri — GPS TANGSEL')]
 class Galeri extends Component
 {
     public $selectedAlbum = '';

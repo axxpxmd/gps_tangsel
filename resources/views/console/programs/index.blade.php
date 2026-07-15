@@ -9,7 +9,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <div>
             <h2 class="text-lg font-extrabold text-gray-900">Program</h2>
-            <p class="text-xs text-gray-400 mt-0.5">Kelola program unggulan GPS TangSel</p>
+            <p class="text-xs text-gray-400 mt-0.5">Kelola program unggulan GPS TANGSEL</p>
         </div>
         <a href="{{ route('console.programs.create') }}" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200 w-full sm:w-auto">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

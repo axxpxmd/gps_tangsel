@@ -77,7 +77,7 @@
                     <div class="flex flex-col sm:flex-row items-center gap-5 sm:gap-6">
                         <div class="relative flex-shrink-0">
                             <div class="absolute -inset-1.5  to-primary/10 rounded-3xl blur-sm"></div>
-                            <img src="{{ asset('qris-gps-tangsel.png') }}" alt="QRIS GPS TangSel" class="relative w-40 sm:w-44 lg:w-52 h-auto rounded-2xl" loading="lazy">
+                            <img src="{{ asset('qris-gps-tangsel.png') }}" alt="QRIS GPS TANGSEL" class="relative w-40 sm:w-44 lg:w-52 h-auto rounded-2xl" loading="lazy">
                         </div>
                         <div class="flex-1 w-full text-center sm:text-left">
                             <div class="space-y-2.5 sm:space-y-3">

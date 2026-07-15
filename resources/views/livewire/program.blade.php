@@ -13,7 +13,7 @@
             </div>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
                 Program Unggulan<br>
-                <span class="text-gradient-gold">GPS TangSel</span>
+                <span class="text-gradient-gold">GPS TANGSEL</span>
             </h1>
             <p class="text-white/70 leading-relaxed text-base lg:text-lg">
                 Lima program utama yang menjadi pilar gerakan kami dalam memakmurkan masjid dan melayani masyarakat Tangerang Selatan.

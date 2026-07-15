@@ -6,7 +6,7 @@ use App\Models\BoardMember;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Pengurus — GPS TangSel')]
+#[Title('Pengurus — GPS TANGSEL')]
 class Pengurus extends Component
 {
     public function render()

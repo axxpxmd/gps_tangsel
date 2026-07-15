@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>Login — CMS GPS TangSel</title>
+    <title>Login — CMS GPS TANGSEL</title>
 
     <link rel="icon" href="{{ asset('logo-gps.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,7 +100,7 @@
 
         <div class="relative text-center px-6 lg:px-8 xl:px-10 max-w-lg animate-fade-in-left">
             <div class="inline-flex items-center justify-center w-20 h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-2xl lg:rounded-3xl bg-white/10 backdrop-blur-sm ring-4 ring-white/[0.08] shadow-2xl shadow-black/30 mb-6 lg:mb-8 xl:mb-10 relative">
-                <img src="{{ asset('logo-gps.png') }}" alt="GPS TangSel" class="w-14 h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-xl lg:rounded-2xl relative z-10">
+                <img src="{{ asset('logo-gps.png') }}" alt="GPS TANGSEL" class="w-14 h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 rounded-xl lg:rounded-2xl relative z-10">
                 <div class="absolute inset-0 rounded-2xl lg:rounded-3xl bg-gradient-to-br from-gold/20 to-transparent"></div>
             </div>
 
@@ -119,22 +119,23 @@
     </div>
 
     {{-- Right Panel — Login Form --}}
-    <div class="flex-1 flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-12">
+    <div class="flex-1 flex items-center justify-center px-4 sm:px-6 md:px-12 lg:px-8 xl:px-12 py-6 sm:py-8 md:py-12 bg-[#F5F5F5]">
         <div class="w-full max-w-sm sm:max-w-md lg:max-w-[420px]">
 
             {{-- Mobile/Tablet Logo --}}
             <div class="lg:hidden text-center mb-6 sm:mb-8 md:mb-10">
                 <div class="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary-light mb-3 sm:mb-4">
-                    <img src="{{ asset('logo-gps.png') }}" alt="GPS TangSel" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl">
+                    <img src="{{ asset('logo-gps.png') }}" alt="GPS TANGSEL" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl">
                 </div>
-                <h1 class="text-lg sm:text-xl font-extrabold text-gray-900">GPS TangSel</h1>
+                <h1 class="text-lg sm:text-xl font-extrabold text-gray-900">GPS TANGSEL</h1>
                 <p class="text-xs text-gray-400 mt-1">Content Management System</p>
             </div>
 
             {{-- Heading --}}
             <div class="mb-6 sm:mb-8 text-center animate-fade-in">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Selamat Datang</h2>
-                <p class="text-xs sm:text-sm text-gray-400 mt-1.5 sm:mt-2">Masuk untuk mengelola konten website.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-dawn-night tracking-tight">Selamat Datang Kembali</h2>
+                <p class="text-xs sm:text-sm text-gray-500 mt-1.5 sm:mt-2">Silakan masuk untuk mengelola portal GPS TANGSEL.</p>
+                <div class="w-8 h-1 bg-gradient-to-r from-primary to-gold rounded-full mx-auto mt-3"></div>
             </div>
 
             {{-- Error Alert --}}
@@ -153,7 +154,7 @@
             @endif
 
             {{-- Card --}}
-            <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-gray-200/60 border border-gray-100 p-4 sm:p-6 md:p-8 animate-fade-in-up"
+            <div class="bg-white/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl shadow-xl shadow-slate-200/50 border border-white/60 p-4 sm:p-6 md:p-8 animate-fade-in-up"
                 x-data="{
                     showPassword: false,
                     loading: false,
@@ -174,12 +175,12 @@
                             <label for="username" class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">Username</label>
                             <div class="relative group">
                                 <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-focus-within:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                                     </svg>
                                 </div>
                                 <input type="text" id="username" name="username" value="{{ old('username') }}" required autofocus
-                                    class="w-full pl-9 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-gray-50 focus:bg-white hover:border-gray-300"
+                                    class="w-full pl-9 sm:pl-12 pr-3 sm:pr-4 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all bg-gray-50 focus:bg-white hover:border-gray-300"
                                     placeholder="Masukkan username">
                             </div>
                         </div>
@@ -189,12 +190,12 @@
                             <label for="password" class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">Password</label>
                             <div class="relative group">
                                 <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
-                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-focus-within:text-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
                                     </svg>
                                 </div>
                                 <input :type="showPassword ? 'text' : 'password'" id="password" name="password" required
-                                    class="w-full pl-9 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-gray-50 focus:bg-white hover:border-gray-300"
+                                    class="w-full pl-9 sm:pl-12 pr-10 sm:pr-12 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all bg-gray-50 focus:bg-white hover:border-gray-300"
                                     placeholder="Masukkan password">
                                 <button type="button" @click="showPassword = !showPassword"
                                     class="absolute inset-y-0 right-0 pr-3 sm:pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors">
@@ -213,8 +214,8 @@
                     {{-- Captcha --}}
                     <div class="mt-4 sm:mt-5">
                         <label for="captcha" class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">Verifikasi Captcha</label>
-                        <div class="flex items-center gap-2 sm:gap-3">
-                            <div class="flex items-center gap-2 flex-1">
+                        <div class="flex items-center gap-2.5 sm:gap-3">
+                            <div class="flex items-center gap-2">
                                 <div class="px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-primary-light border border-primary/20 text-sm sm:text-base font-bold text-primary tracking-wider select-none whitespace-nowrap" x-text="captchaQuestion">{{ $captchaQuestion }}</div>
                                 <button type="button" @click="refreshCaptcha()" class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-primary-light transition-all" title="Refresh captcha">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -223,7 +224,7 @@
                                 </button>
                             </div>
                             <input type="number" id="captcha" name="captcha" required
-                                class="w-24 sm:w-28 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-gray-50 focus:bg-white hover:border-gray-300 text-center"
+                                class="w-24 sm:w-28 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all bg-gray-50 focus:bg-white hover:border-gray-300 text-center"
                                 placeholder="Jawab">
                         </div>
                         @error('captcha')
@@ -231,28 +232,21 @@
                         @enderror
                     </div>
 
-                    {{-- Remember Me --}}
-                    <div class="flex items-center justify-between mt-5 sm:mt-6 mb-5 sm:mb-6">
-                        <label class="flex items-center gap-2.5 sm:gap-3 cursor-pointer group">
-                            <input type="checkbox" name="remember"
-                                class="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] rounded-md border-gray-300 text-primary focus:ring-primary/30 focus:ring-offset-0 transition-all cursor-pointer">
-                            <span class="text-xs sm:text-sm text-gray-500 group-hover:text-gray-700 transition-colors">Ingat saya</span>
-                        </label>
-                    </div>
-
                     {{-- Submit Button --}}
-                    <button type="submit"
-                        class="w-full py-3 sm:py-3.5 bg-gradient-to-r from-primary to-primary-dark text-white text-xs sm:text-sm font-bold rounded-xl sm:rounded-2xl hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2 sm:gap-2.5 tracking-wide disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
-                        :disabled="loading">
-                        <svg x-show="!loading" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/>
-                        </svg>
-                        <svg x-show="loading" class="w-4 h-4 sm:w-5 sm:h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span x-text="loading ? 'Memproses...' : 'Masuk'"></span>
-                    </button>
+                    <div class="mt-6">
+                        <button type="submit"
+                            class="w-full py-3.5 bg-gradient-to-r from-primary to-primary-dark text-white text-xs sm:text-sm font-bold rounded-xl sm:rounded-2xl hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2 sm:gap-2.5 tracking-wide disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                            :disabled="loading">
+                            <svg x-show="!loading" class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/>
+                            </svg>
+                            <svg x-show="loading" class="w-4 h-4 sm:w-5 sm:h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span x-text="loading ? 'Memproses...' : 'Masuk'"></span>
+                        </button>
+                    </div>
                 </form>
             </div>
 

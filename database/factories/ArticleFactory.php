@@ -20,7 +20,7 @@ class ArticleFactory extends Factory
             'slug' => Str::slug($title),
             'excerpt' => fake()->paragraph(2),
             'content' => collect(fake()->paragraphs(6))->map(fn ($p) => "<p>{$p}</p>")->implode("\n"),
-            'image' => 'https://placehold.co/600x400/2F5FA3/F5E6B8?text=GPS+TangSel',
+            'image' => 'https://placehold.co/600x400/2F5FA3/F5E6B8?text=GPS+TANGSEL',
             'author' => fake()->name(),
             'read_time' => fake()->numberBetween(2, 8),
             'published_at' => fake()->dateTimeBetween('-3 months', 'now'),

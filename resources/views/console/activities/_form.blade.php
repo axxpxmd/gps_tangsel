@@ -5,7 +5,7 @@
         </div>
         <div>
             <h3 class="text-sm font-bold text-gray-900">Informasi Kegiatan</h3>
-            <p class="text-[11px] text-gray-400">Lengkapi data agenda kegiatan GPS TangSel</p>
+            <p class="text-[11px] text-gray-400">Lengkapi data agenda kegiatan GPS TANGSEL</p>
         </div>
     </div>
 

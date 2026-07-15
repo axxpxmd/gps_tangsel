@@ -9,7 +9,7 @@
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5 group" id="logo">
                     <div class="relative">
-                        <img src="{{ asset('logo-gps.png') }}" alt="Logo GPS TangSel" class="w-10 h-10 lg:w-11 lg:h-11 rounded-xl object-cover transition-all duration-300 group-hover:scale-105 ring-1 ring-white/20">
+                        <img src="{{ asset('logo-gps.png') }}" alt="Logo GPS TANGSEL" class="w-10 h-10 lg:w-11 lg:h-11 rounded-xl object-cover transition-all duration-300 group-hover:scale-105 ring-1 ring-white/20">
                         <span class="absolute -inset-0.5 rounded-xl bg-gradient-to-br from-gold/30 to-primary/20 opacity-0 group-hover:opacity-100 blur transition-opacity duration-300 -z-10"></span>
                     </div>
                     <span class="flex flex-col leading-none">
@@ -46,7 +46,7 @@
                                     </div>
                                     <div>
                                         <span class="block">Tentang Kami</span>
-                                        <span class="block text-[11px] text-gray-400 font-normal">Mengenal GPS TangSel</span>
+                                        <span class="block text-[11px] text-gray-400 font-normal">Mengenal GPS TANGSEL</span>
                                     </div>
                                 </a>
                                 <a href="{{ route('visi-misi') }}" wire:navigate class="flex items-center gap-3 px-5 py-3 text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 rounded-lg mx-1 transition-all duration-200">
@@ -68,7 +68,7 @@
                                     </div>
                                     <div>
                                         <span class="block">Pengurus</span>
-                                        <span class="block text-[11px] text-gray-400 font-normal">Tim inti GPS TangSel</span>
+                                        <span class="block text-[11px] text-gray-400 font-normal">Tim inti GPS TANGSEL</span>
                                     </div>
                                 </a>
                             </div>

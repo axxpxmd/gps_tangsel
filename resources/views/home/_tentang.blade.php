@@ -14,7 +14,7 @@
                 <span class="text-gradient-primary">Menguatkan Ukhuwah</span>
             </h2>
             <p class="text-gray-500 leading-relaxed text-base lg:text-lg">
-                Lahir dari kepedulian terhadap kondisi masjid yang sering kali sepi jemaah pada waktu shalat subuh, GPS TangSel menjadi wadah komunikasi antara Umara, Ulama, dan Ummat.
+                Lahir dari kepedulian terhadap kondisi masjid yang sering kali sepi jemaah pada waktu shalat subuh, GPS TANGSEL menjadi wadah komunikasi antara Umara, Ulama, dan Ummat.
             </p>
         </div>
 
@@ -29,10 +29,10 @@
                         <h3 class="text-sm font-bold text-gold-light uppercase tracking-wider">Latar Belakang</h3>
                     </div>
                     <p class="text-white/80 leading-relaxed mb-5 text-base lg:text-lg">
-                        Gerakan Pejuang Subuh Tangerang Selatan lahir dari keprihatinan terhadap kondisi masjid yang sepi jemaah pada waktu subuh. Sebagai gerakan yang dinamis, GPS TangSel aktif bergerak setiap pekan (hari Sabtu) dari masjid ke masjid di seluruh Tangerang Selatan.
+                        Gerakan Pejuang Subuh Tangerang Selatan lahir dari keprihatinan terhadap kondisi masjid yang sepi jemaah pada waktu subuh. Sebagai gerakan yang dinamis, GPS TANGSEL aktif bergerak setiap pekan (hari Sabtu) dari masjid ke masjid di seluruh Tangerang Selatan.
                     </p>
                     <p class="text-white/80 leading-relaxed mb-8 text-base lg:text-lg">
-                        Selain berfokus pada ibadah spiritual, GPS TangSel juga memiliki berbagai program sosial kemasyarakatan seperti pelayanan kesehatan gratis, distribusi bahan pangan, dan pengobatan Thibbun Nabawi.
+                        Selain berfokus pada ibadah spiritual, GPS TANGSEL juga memiliki berbagai program sosial kemasyarakatan seperti pelayanan kesehatan gratis, distribusi bahan pangan, dan pengobatan Thibbun Nabawi.
                     </p>
                     <div class="flex flex-wrap gap-4 sm:gap-6">
                         <div class="flex items-center gap-3 bg-white/10 border border-white/10 rounded-xl px-5 py-3">
@@ -69,7 +69,7 @@
                         <h4 class="text-sm font-bold text-primary uppercase tracking-wider">Visi</h4>
                     </div>
                     <p class="text-gray-600 leading-relaxed">
-                        Menjadi pusat informasi dan dokumentasi dakwah GPS TangSel yang kredibel, inspiratif, dan mudah diakses oleh seluruh elemen masyarakat.
+                        Menjadi pusat informasi dan dokumentasi dakwah GPS TANGSEL yang kredibel, inspiratif, dan mudah diakses oleh seluruh elemen masyarakat.
                     </p>
                 </div>
                 <div class="relative p-8 lg:p-10 rounded-2xl bg-gold/5 border border-gold/15 overflow-hidden">
@@ -95,7 +95,7 @@
                 <div class="lg:col-span-4">
                     <h3 class="text-sm font-bold text-gold uppercase tracking-wider mb-1">Pengurus Inti</h3>
                     <div class="w-8 h-0.5 bg-gradient-to-r from-gold to-amber-600 mb-4"></div>
-                    <p class="text-sm text-gray-400 leading-relaxed">Tim inti yang menggerakkan dakwah GPS TangSel.</p>
+                    <p class="text-sm text-gray-400 leading-relaxed">Tim inti yang menggerakkan dakwah GPS TANGSEL.</p>
                 </div>
                 <div class="lg:col-span-8">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6">

@@ -49,6 +49,6 @@ class BeritaShow extends Component
             'prayerSchedule' => $prayerTimes->today(),
             'nextActivity' => $nextActivity,
         ])->layout('layouts.app')
-            ->title($this->article->title.' — GPS TangSel');
+            ->title($this->article->title.' — GPS TANGSEL');
     }
 }

@@ -2,7 +2,7 @@
 <aside class="hidden lg:flex lg:flex-col w-64 bg-[#0164CA] border-r border-[#0164CA]/20 fixed inset-y-0 left-0 z-40">
     {{-- Brand --}}
     <a href="{{ route('console.dashboard') }}" class="flex items-center gap-3 px-5 h-16 border-b border-[#0164CA]/20 hover:bg-white/20 transition-colors duration-200">
-        <img src="{{ asset('logo-gps.png') }}" alt="GPS TangSel" class="w-9 h-9 rounded-xl object-cover">
+        <img src="{{ asset('logo-gps.png') }}" alt="GPS TANGSEL" class="w-9 h-9 rounded-xl object-cover">
         <div>
             <span class="text-sm font-extrabold text-white tracking-tight leading-tight">GPS TANGSEL</span>
             <span class="block text-[9px] text-white/70 tracking-[0.15em] uppercase">CMS Panel</span>
@@ -199,9 +199,9 @@
 <div class="lg:hidden fixed inset-y-0 left-0 z-40 w-72 bg-[#0164CA] border-r border-[#0164CA]/20 transform -translate-x-full transition-transform duration-300 ease-out shadow-2xl" id="mobile-sidebar">
     <div class="flex items-center justify-between px-5 h-16 border-b border-[#0164CA]/20">
         <div class="flex items-center gap-3">
-            <img src="{{ asset('logo-gps.png') }}" alt="GPS TangSel" class="w-9 h-9 rounded-xl object-cover">
+            <img src="{{ asset('logo-gps.png') }}" alt="GPS TANGSEL" class="w-9 h-9 rounded-xl object-cover">
             <div>
-                <span class="text-xs font-extrabold text-white leading-tight">GPS TangSel</span>
+                <span class="text-xs font-extrabold text-white leading-tight">GPS TANGSEL</span>
                 <span class="block text-[9px] text-white/70 tracking-[0.15em] uppercase">CMS Panel</span>
             </div>
         </div>

@@ -13,7 +13,7 @@
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 sm:mb-6">
                 Arah & Tujuan<br>
-                <span class="text-gradient-gold">GPS TangSel</span>
+                <span class="text-gradient-gold">GPS TANGSEL</span>
             </h1>
             <p class="text-white/70 leading-relaxed text-sm sm:text-base lg:text-lg max-w-xl mx-auto px-2">
                 Landasan gerakan dakwah subuh dalam membangun kepedulian sosial, persatuan umat, dan kebermanfaatan masyarakat melalui masjid.

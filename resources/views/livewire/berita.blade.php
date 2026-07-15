@@ -13,7 +13,7 @@
             </div>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
                 Kabar Terbaru<br>
-                <span class="text-gradient-gold">GPS TangSel</span>
+                <span class="text-gradient-gold">GPS TANGSEL</span>
             </h1>
             <p class="text-white/70 leading-relaxed text-base lg:text-lg max-w-2xl mx-auto">
                 Ikuti perkembangan kegiatan, pengumuman, dan dokumentasi gerakan Pejuang Subuh Tangerang Selatan.
@@ -35,7 +35,7 @@
                         </span>
                         <h2 class="text-2xl font-bold text-gray-900 tracking-tight">Telusuri Artikel</h2>
                     </div>
-                    <p class="text-sm text-gray-500">Temukan kabar, pengumuman, dan dokumentasi kegiatan GPS TangSel dengan mudah.</p>
+                    <p class="text-sm text-gray-500">Temukan kabar, pengumuman, dan dokumentasi kegiatan GPS TANGSEL dengan mudah.</p>
                 </div>
                 <div class="text-sm text-gray-500">
                     <span class="font-bold text-primary text-lg">{{ $articles->total() }}</span> artikel ditemukan

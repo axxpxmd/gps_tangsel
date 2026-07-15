@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>@yield('title', 'CMS') — GPS TangSel</title>
+    <title>@yield('title', 'CMS') — GPS TANGSEL</title>
 
     <link rel="icon" href="{{ asset('logo-gps.png') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">

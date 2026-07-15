@@ -15,7 +15,7 @@
             </div>
             <div>
                 <h2 class="text-base font-extrabold text-gray-900">Tambah Partner Baru</h2>
-                <p class="text-xs text-gray-400">Tambahkan mitra kolaborasi GPS TangSel</p>
+                <p class="text-xs text-gray-400">Tambahkan mitra kolaborasi GPS TANGSEL</p>
             </div>
         </div>
         <a href="{{ route('console.partners.index') }}" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-xl transition-colors duration-200">

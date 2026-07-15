@@ -90,7 +90,7 @@ class ArticleOldController extends Controller
                 'slug' => Str::slug($old->title),
                 'excerpt' => $strippedExcerpt,
                 'content' => $old->content,
-                'author' => 'GPS TangSel',
+                'author' => 'GPS TANGSEL',
                 'status' => $old->status === 'publish' ? 'publish' : 'draft',
                 'read_time' => 3,
                 'published_at' => $old->wp_created_at,

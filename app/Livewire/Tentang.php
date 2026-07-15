@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Tentang Kami — GPS TangSel')]
+#[Title('Tentang Kami — GPS TANGSEL')]
 class Tentang extends Component
 {
     public function render()

@@ -13,7 +13,7 @@
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-4 sm:mb-6">
                 Pengurus<br>
-                <span class="text-gradient-gold">GPS TangSel</span>
+                <span class="text-gradient-gold">GPS TANGSEL</span>
             </h1>
             <p class="text-white/70 leading-relaxed text-sm sm:text-base lg:text-lg max-w-xl mx-auto px-2">
                 Para pemangku amanah yang menggerakkan dakwah GPS Tangsel di Tangerang Selatan.

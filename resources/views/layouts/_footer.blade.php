@@ -8,8 +8,8 @@
             {{-- Brand --}}
             <div class="lg:col-span-1">
                 <div class="flex items-center gap-2.5 mb-4">
-                    <img src="{{ asset('logo-gps.png') }}" alt="Logo GPS TangSel" class="w-11 h-11 rounded-xl object-cover">
-                    <span class="text-xl font-extrabold tracking-tight">GPS TangSel</span>
+                    <img src="{{ asset('logo-gps.png') }}" alt="Logo GPS TANGSEL" class="w-11 h-11 rounded-xl object-cover">
+                    <span class="text-xl font-extrabold tracking-tight">GPS TANGSEL</span>
                 </div>
                 <p class="text-sm text-white/60 leading-relaxed mb-5">
                     Gerakan Pejuang Subuh Tangerang Selatan — Mengajak masyarakat istiqomah shalat subuh berjamaah di masjid.

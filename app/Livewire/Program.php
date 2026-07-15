@@ -6,7 +6,7 @@ use App\Models\Program as ProgramModel;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Title('Program Unggulan — GPS TangSel')]
+#[Title('Program Unggulan — GPS TANGSEL')]
 class Program extends Component
 {
     public function render()

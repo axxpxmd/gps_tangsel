@@ -3,7 +3,7 @@
 
 | Informasi Proyek | Detail |
 | --- | --- |
-| **Nama Proyek** | Portal Web GPS Tangerang Selatan (GPS TangSel) |
+| **Nama Proyek** | Portal Web GPS Tangerang Selatan (GPS TANGSEL) |
 | **Status Dokumen** | Draft / Proposal |
 | **Target Tanggal** | Q3 2026 |
 | **Penyusun** | Antigravity AI |
@@ -14,7 +14,7 @@
 
 **Gerakan Pejuang Subuh (GPS) Tangerang Selatan** lahir dari kepedulian terhadap kondisi masjid yang sering kali sepi jemaah pada waktu shalat subuh, khususnya di kalangan generasi muda. Komunitas dakwah ini bertujuan untuk mengajak masyarakat, terutama anak muda, untuk istiqomah melaksanakan shalat subuh berjamaah di masjid, sekaligus menjadi wadah komunikasi antara Umara (pemerintah), Ulama, dan Ummat.
 
-Sebagai gerakan yang dinamis, GPS TangSel aktif bergerak setiap pekan (hari Sabtu) dari masjid ke masjid di 7 kecamatan (54 kelurahan) se-Tangerang Selatan. Selain berfokus pada ibadah spiritual, GPS TangSel juga memiliki berbagai program sosial kemasyarakatan.
+Sebagai gerakan yang dinamis, GPS TANGSEL aktif bergerak setiap pekan (hari Sabtu) dari masjid ke masjid di 7 kecamatan (54 kelurahan) se-Tangerang Selatan. Selain berfokus pada ibadah spiritual, GPS TANGSEL juga memiliki berbagai program sosial kemasyarakatan.
 
 Untuk mempermudah koordinasi, penyebaran dakwah, transparansi program, dan dokumentasi kegiatan, diperlukan sebuah **Website Portal GPS Tangerang Selatan** yang representatif, modern, dan informatif.
 
@@ -25,7 +25,7 @@ Untuk mempermudah koordinasi, penyebaran dakwah, transparansi program, dan dokum
 *   **Visi**: Menjadi pusat informasi, komunikasi, dan dokumentasi dakwah Gerakan Pejuang Subuh Tangerang Selatan yang kredibel, inspiratif, dan mudah diakses oleh seluruh elemen masyarakat.
 *   **Misi**:
     1.  Mempublikasikan jadwal kegiatan Safari Subuh (S4) secara berkala.
-    2.  Menyebarluaskan artikel dakwah dan berita kegiatan sosial GPS TangSel.
+    2.  Menyebarluaskan artikel dakwah dan berita kegiatan sosial GPS TANGSEL.
     3.  Menampilkan galeri visual (foto/video) sebagai dokumentasi nyata gerakan di lapangan.
     4.  Menyediakan informasi kelembagaan yang transparan, legal, dan akuntabel.
     5.  Menjadi sarana interaksi bagi calon jemaah, relawan, donatur, dan pengurus masjid (DKM).
@@ -64,11 +64,11 @@ Portal ini akan memuat informasi resmi organisasi yang telah berbadan hukum:
 ### 5. Fitur Utama Website (Core Features)
 
 #### A. Profil Utama (Landing Page & About)
-*   **Latar Belakang & Sejarah**: Narasi pendirian GPS TangSel, pentingnya perjuangan shalat subuh, dan tantangan dakwah di 7 Kecamatan (54 Kelurahan).
+*   **Latar Belakang & Sejarah**: Narasi pendirian GPS TANGSEL, pentingnya perjuangan shalat subuh, dan tantangan dakwah di 7 Kecamatan (54 Kelurahan).
 *   **Struktur Organisasi**: Tampilan visual pengurus, pembina, pengawas, serta legalitas yayasan.
 *   **Program 40 Hari**: Halaman khusus edukasi mengenai disiplin shalat subuh berjamaah tanpa terputus untuk membentuk kebiasaan (*habit*) baru.
 
-#### B. Program Kerja GPS TangSel (Services/Programs Showcase)
+#### B. Program Kerja GPS TANGSEL (Services/Programs Showcase)
 1.  **S4 (Semangat Safari Sholat Subuh)**: Jadwal safari pekanan (setiap hari Sabtu) yang terintegrasi dengan Google Maps untuk menunjukkan lokasi masjid target di 7 Kecamatan.
 2.  **Puskesmas Cerdas Ceria**: Informasi pelayanan cek kesehatan gratis kerja sama dengan Dinas Kesehatan (Dinkes) Tangsel.
 3.  **Pasar Bahagia**: Publikasi kegiatan berbagi sayuran gratis ("Beli Gratis, Bayar Cukup dengan Doa").
@@ -117,3 +117,9 @@ Sesuai dengan standar pengembangan aplikasi yang berjalan saat ini, teknologi ya
 *   **Fase 5: Pembuatan Dashboard Admin & Autentikasi**
 *   **Fase 6: Pengujian (PHPUnit) & Optimasi SEO/Kinerja**
 *   **Fase 7: Deployment (Laravel Cloud / Shared Hosting)**
+
+
+aku sosmed gps tangsel 
+instagram = https://www.instagram.com/gps.tangselofficial
+youtube = https://www.youtube.com/@gpstangsel
+tiktok = https://www.tiktok.com/@gps_tangsel

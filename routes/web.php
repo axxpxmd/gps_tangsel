@@ -49,7 +49,8 @@ Route::get('/berita/{slug}', BeritaShow::class)->name('berita.show');
 
 Route::prefix('console')->name('console.')->group(function () {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
+    Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:login');
+    Route::get('/login/captcha', [LoginController::class, 'refreshCaptcha'])->name('login.captcha');
 
     Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

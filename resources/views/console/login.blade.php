@@ -153,7 +153,18 @@
             @endif
 
             {{-- Card --}}
-            <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-gray-200/60 border border-gray-100 p-4 sm:p-6 md:p-8 animate-fade-in-up" x-data="{ showPassword: false, loading: false }">
+            <div class="bg-white rounded-2xl sm:rounded-3xl shadow-lg shadow-gray-200/60 border border-gray-100 p-4 sm:p-6 md:p-8 animate-fade-in-up"
+                x-data="{
+                    showPassword: false,
+                    loading: false,
+                    captchaQuestion: '{{ $captchaQuestion }}',
+                    async refreshCaptcha() {
+                        const res = await fetch('{{ route('console.login.captcha') }}');
+                        const data = await res.json();
+                        this.captchaQuestion = data.question;
+                        document.getElementById('captcha').value = '';
+                    }
+                }">
                 <form action="{{ route('console.login') }}" method="POST" @submit="loading = true">
                     @csrf
 
@@ -197,6 +208,27 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
+
+                    {{-- Captcha --}}
+                    <div class="mt-4 sm:mt-5">
+                        <label for="captcha" class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">Verifikasi Captcha</label>
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="flex items-center gap-2 flex-1">
+                                <div class="px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-primary-light border border-primary/20 text-sm sm:text-base font-bold text-primary tracking-wider select-none whitespace-nowrap" x-text="captchaQuestion">{{ $captchaQuestion }}</div>
+                                <button type="button" @click="refreshCaptcha()" class="p-2 rounded-lg text-gray-400 hover:text-primary hover:bg-primary-light transition-all" title="Refresh captcha">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <input type="number" id="captcha" name="captcha" required
+                                class="w-24 sm:w-28 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border border-gray-200 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-gray-50 focus:bg-white hover:border-gray-300 text-center"
+                                placeholder="Jawab">
+                        </div>
+                        @error('captcha')
+                            <p class="text-[11px] sm:text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     {{-- Remember Me --}}

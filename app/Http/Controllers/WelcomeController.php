@@ -76,7 +76,7 @@ class WelcomeController extends Controller
                 'description' => $activity->description,
                 'color' => 'primary',
                 'icon' => 'mosque',
-                'image' => $activity->gambar_url ?? asset('poster.webp'),
+                'image' => $activity->gambar_url,
                 'latitude' => $activity->latitude,
                 'longitude' => $activity->longitude,
             ];

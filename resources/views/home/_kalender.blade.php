@@ -56,7 +56,7 @@
             <div class="lg:col-span-3 reveal" style="transition-delay: 100ms">
                 <div class="bg-white rounded-3xl shadow-xl shadow-black/10 overflow-hidden min-h-[22rem]">
                     {{-- Poster --}}
-                    <div class="relative aspect-[16/9] overflow-hidden bg-gray-100 cursor-pointer group/img" id="cal-image-wrapper">
+                    <div class="relative aspect-[16/9] overflow-hidden bg-gray-100 cursor-pointer group/img hidden" id="cal-image-wrapper">
                         <img src="{{ asset('poster.webp') }}" alt="GPS TangSel" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500" id="cal-detail-image">
                         <div class="absolute inset-0 bg-black/0 group-hover/img:bg-black/20 transition-colors duration-300 flex items-center justify-center">
                             <span class="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-xl px-4 py-2 text-sm font-semibold text-gray-700 flex items-center gap-2">
@@ -133,6 +133,16 @@
             }
 
             function renderCalendar() {
+                if (calMonthKeys.length === 0) {
+                    calMonthLabel.textContent = 'Tidak ada kegiatan';
+                    calEventCount.textContent = '0 kegiatan';
+                    calPrevBtn.disabled = true;
+                    calNextBtn.disabled = true;
+                    calGrid.innerHTML = '';
+                    renderEmptyDetail();
+                    return;
+                }
+
                 const monthKey = calMonthKeys[calCurrentIdx];
                 const [year, month] = monthKey.split('-').map(v => parseInt(v, 10));
                 const monthEvents = calEvents[monthKey] || [];
@@ -221,6 +231,8 @@
                 if (calDetailImage && events[0] && events[0].image) {
                     calDetailImage.parentElement.classList.remove('hidden');
                     calDetailImage.src = events[0].image;
+                } else {
+                    if (calDetailImage) calDetailImage.parentElement.classList.add('hidden');
                 }
 
                 let html = '';

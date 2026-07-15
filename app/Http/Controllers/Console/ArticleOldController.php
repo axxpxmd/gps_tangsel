@@ -93,6 +93,7 @@ class ArticleOldController extends Controller
                 'author' => 'GPS TangSel',
                 'status' => $old->status === 'publish' ? 'publish' : 'draft',
                 'read_time' => 3,
+                'published_at' => $old->wp_created_at,
                 'created_at' => $old->wp_created_at,
                 'updated_at' => $old->wp_modified_at,
             ]);
